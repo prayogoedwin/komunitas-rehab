@@ -123,8 +123,6 @@ class ProdukResource extends Resource
                 ->color('info')
                 ->toggleable(),
             
-           
-            
             TextColumn::make('poin')
                 ->label('Poin')
                 ->sortable()

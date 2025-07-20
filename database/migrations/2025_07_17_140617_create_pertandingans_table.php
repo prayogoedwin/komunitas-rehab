@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('pertandingans', function (Blueprint $table) {
             $table->id();
+            $table->integer('produk_id');
+            $table->string('varian')->nullable()->comment('Contoh: Warna, Rasa, dll');
+            $table->string('ukuran')->nullable()->comment('Contoh: S, M, L, 250ml, dll');
+            $table->integer('stok')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
