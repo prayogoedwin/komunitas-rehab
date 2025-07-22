@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Faq extends Model
 {
@@ -15,4 +16,15 @@ class Faq extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('faqs_data');
+        });
+
+        static::deleted(function () {
+            Cache::forget('faqs_data');
+        });
+    }
 }

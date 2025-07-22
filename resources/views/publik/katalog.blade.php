@@ -27,18 +27,18 @@
             <div class="form-group">
                 <select class="form-control" id="hasil">
                     <option selected disabled>PILIH TIPE PRODUK</option>
-                    <option value="holloway">FISIK</option>
-                    <option value="poirier">DIGITAL</option>
+                     @foreach($tipeProduks as $index => $tp)
+                    <option value="{{ $tp->id }}">{{ $tp->nama }}</option>
+                     @endforeach
                 </select>
             </div>
             
             <div class="form-group">
                 <select class="form-control" id="metode">
                     <option selected disabled>KATEGORI</option>
-                    <option value="ko">SOUVENIR</option>
-                    <option value="submisi">SPESIAL</option>
-                    <option value="keputusan">OFFICIAL</option>
-                    <option value="diskualifikasi">EKSLUSIF</option>
+                    @foreach($kategoriProduks as $index => $kp)
+                    <option value="{{ $kp->id }}">{{ $kp->nama }}</option>
+                    @endforeach
                 </select>
             </div>
             
@@ -46,7 +46,7 @@
                 <select class="form-control" id="ronde">
                     <option selected disabled>URUTKAN</option>
                     <option value="1">POIN RENDAH -> TINGGI</option>
-                    <option value="1">POIN TINGGI -> RENDAH</option>
+                    <option value="2">POIN TINGGI -> RENDAH</option>
                     <option value="3">TERBARU</option>
                     <option value="4">TERLAMA</option>
                 </select>

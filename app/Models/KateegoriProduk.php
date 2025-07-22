@@ -21,4 +21,15 @@ class KateegoriProduk extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('kategori_produk_data');
+        });
+
+        static::deleted(function () {
+            Cache::forget('kategori_produk_data');
+        });
+    }
 }

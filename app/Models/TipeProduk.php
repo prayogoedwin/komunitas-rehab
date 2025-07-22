@@ -21,4 +21,15 @@ class TipeProduk extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('tipe_produk_data');
+        });
+
+        static::deleted(function () {
+            Cache::forget('tipe_produk_data');
+        });
+    }
 }

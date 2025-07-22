@@ -16,4 +16,15 @@ class Informasi extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('cara_main');
+        });
+
+        static::deleted(function () {
+            Cache::forget('cara_main');
+        });
+    }
 }

@@ -18,45 +18,41 @@
     <div class="py-5 match">
     <div class="container">
       <div class="row">
+         @foreach($tontons as $index => $ton)
         <div class="col-md-6 col-lg-4">
           <div class="match-card">
             <img
-              src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
-              alt="Match 1"
+              src="{{ asset('storage/'.$ton->poster_pertand) }}"
+              alt="{{ $ton->judul }}"
               class="match-thumb"
             />
             <div class="match-body">
-              <h5>Final Championship 2025</h5>
-              <p>Rewatch: Fighter A vs Fighter B</p>
+              <h5 class="text-center">{{$ton->judul}}</h5>
+              {{-- <p>Rewatch: Fighter A vs Fighter B</p> --}}
               <a
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                href="{{$ton->url_nonton_1}}"
                 target="_blank"
                 class="btn btn-danger btn-block"
-                >Tonton Sekarang</a
+                >URL Tonton 1</a
+              >
+              <a
+                href="{{$ton->url_nonton_2}}"
+                target="_blank"
+                class="btn btn-danger btn-block"
+                >URL Tonton 2</a
+              >
+              <a
+                href="{{$ton->url_nonton_3}}"
+                target="_blank"
+                class="btn btn-danger btn-block"
+                >URL Tonton 3</a
               >
             </div>
           </div>
         </div>
+        @endforeach
 
-        <div class="col-md-6 col-lg-4">
-          <div class="match-card">
-            <img
-              src="https://img.youtube.com/vi/3GwjfUFyY6M/hqdefault.jpg"
-              alt="Match 2"
-              class="match-thumb"
-            />
-            <div class="match-body">
-              <h5>Semi Final 2</h5>
-              <p>Fighter C vs Fighter D</p>
-              <a
-                href="https://www.youtube.com/watch?v=3GwjfUFyY6M"
-                target="_blank"
-                class="btn btn-danger btn-block"
-                >Tonton Sekarang</a
-              >
-            </div>
-          </div>
-        </div>
+ 
 
         <!-- Tambah lebih banyak match jika perlu -->
       </div>

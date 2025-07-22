@@ -71,4 +71,9 @@ class Member extends Model implements Authenticatable
         return 'remember_token';
     }
 
+    public function tebakPertandingans()
+    {
+        return $this->hasMany(TebakPertandingan::class, 'member_id');
+    }
+
 }

@@ -39,7 +39,7 @@
 
     <!-- Section Button Tengah -->
     <section class="section-ranking text-center d-flex align-items-center justify-content-center bg-ranking-section">
-      <div style="margin: 40px 0">
+      <div style="margin: 50px 0">
         <a
           href="#fightList"
           class="btn btn-warning btn-lg text-uppercase font-weight-bold shadow">
@@ -49,13 +49,15 @@
     </section>
 
      <!-- Fight List Section (langsung tampil) -->
-    <div id="fightList" class="card-fight-wrapper mt-10 opacity-100">
+    <div id="fightList" class="card-fight-wrapper opacity-100" style="margin-top:20px; padding-bottom:30px">
+         {{-- <span>AAAAA</span> --}}
       {{-- <div class="trapezium-title">
         <span>Lihat Prediksi</span>
       </div>
       <div class="fighter-heading-wrapper">
         <p class="fighter-heading">🎯 Pilih Fightermu</p>
       </div> --}}
+    </div>
       
 
         

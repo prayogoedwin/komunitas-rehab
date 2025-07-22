@@ -48,4 +48,15 @@ class Kategori extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('kategori_data');
+        });
+
+        static::deleted(function () {
+            Cache::forget('kategori_data');
+        });
+    }
 }

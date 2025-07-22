@@ -5,6 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+
+use App\Models\Kategori;
+
+use App\Models\Faq;
+use App\Models\Pertandingan;
+use App\Models\TebakPertandingan;
+
+use App\Models\TipeProduk;
+use App\Models\KateegoriProduk;
+
+use App\Models\Informasi;
 
 class PublikController extends Controller {
 
@@ -13,15 +25,31 @@ class PublikController extends Controller {
   }
 
   public function caraMain() {
-    return view('publik.cara');
+    $expiration = env('REDIS_TIME', 86400);
+    $cara = Cache::remember('cara_data', $expiration, function () {
+        return Informasi::where('slug', 'cara_main')->first();
+    });
+    return view('publik.cara', compact('cara'));
   }
 
   public function faq() {
-    return view('publik.faq');
+
+    $expiration = env('REDIS_TIME', 86400);
+    $faqs = Cache::remember('faqs_data', $expiration, function () {
+        return Faq::all();
+    });
+    
+    return view('publik.faq', compact('faqs'));
+
   }
 
   public function tonton() {
-    return view('publik.tonton');
+
+    $expiration = env('REDIS_TIME', 86400);
+    $tontons = Cache::remember('tonton_data', $expiration, function () {
+        return Pertandingan::all();
+    });
+    return view('publik.tonton', compact('tontons'));
   }
 
   public function peringkat() {
@@ -33,7 +61,17 @@ class PublikController extends Controller {
   }
 
   public function katalog() {
-    return view('publik.katalog');
+
+    $expiration = env('REDIS_TIME', 86400);
+    $tipeProduks = Cache::remember('tipe_produk_data', $expiration, function () {
+        return TipeProduk::all();
+    });
+
+    $kategoriProduks = Cache::remember('kategori_produk_data', $expiration, function () {
+        return KateegoriProduk::all();
+    });
+
+    return view('publik.katalog', compact('tipeProduks','kategoriProduks'));
   }
 
    

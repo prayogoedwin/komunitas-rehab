@@ -77,7 +77,7 @@ class ProdukStokVarianResource extends Resource
                 TextColumn::make('stok')
                     ->label('Stok')
                     ->sortable()
-                    ->alignCenter(),
+                    ->alignCenter
                 
             ])
             ->filters([

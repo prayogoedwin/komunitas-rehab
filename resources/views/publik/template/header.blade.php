@@ -15,9 +15,11 @@
 
 <body>
     <!-- Navbar -->
-    <nav
+    {{-- <nav
       class="navbar navbar-expand-lg navbar-dark"
-      style="background-color: #000">
+      style="background-color: #000"> --}}
+
+      <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #000; z-index: 1030;">
       <div class="container">
        <a class="navbar-brand" href="{{ route('publik') }}">
         <img src="{{ asset('img/logo.png') }}" alt="GilaPrediksi" height="50">
