@@ -20,10 +20,16 @@ use App\Models\Informasi;
 use App\Models\Berita;
 use App\Models\Produk;
 
+use Illuminate\Support\Str;
+
 class PublikController extends Controller {
 
   public function index() {
-    return view('publik.main');
+    $expiration = env('REDIS_TIME', 86400);
+    $tontons = Cache::remember('tonton_data', $expiration, function () {
+        return Pertandingan::all();
+    });
+    return view('publik.main', compact('tontons'));
   }
 
   public function caraMain() {
@@ -75,24 +81,58 @@ class PublikController extends Controller {
       return view('publik.berita-detail', compact('berita'));
   }
 
-  public function katalog() {
+  public function katalog(Request $request)
+  {
+      $expiration = env('REDIS_TIME', 86400);
 
-    $expiration = env('REDIS_TIME', 86400);
-    $tipeProduks = Cache::remember('tipe_produk_data', $expiration, function () {
-        return TipeProduk::all();
-    });
+      $tipeProduks = Cache::remember('tipe_produk_data', $expiration, function () {
+          return TipeProduk::all();
+      });
 
-    $kategoriProduks = Cache::remember('kategori_produk_data', $expiration, function () {
-        return KateegoriProduk::all();
-    });
+      $kategoriProduks = Cache::remember('kategori_produk_data', $expiration, function () {
+          return KateegoriProduk::all();
+      });
 
-    $produks = Cache::remember('produk_data', $expiration, function () {
-    return Produk::with(['kategori', 'tipe'])
-        ->where('status', 1)
-        ->get();
-    });
+      // Ambil semua produk dari cache
+      $produks = Cache::remember('produk_data', $expiration, function () {
+          return Produk::with(['kategori', 'tipe'])
+              ->where('status', 1)
+              ->get();
+      });
 
-    return view('publik.katalog', compact('tipeProduks','kategoriProduks','produks'));
+      // Filter berdasarkan form input
+      if ($request->filled('tipe_id')) {
+          $produks = $produks->where('tipe_produk', $request->tipe_id);
+      }
+
+      if ($request->filled('kategori_id')) {
+          $produks = $produks->where('kategori_produk', $request->kategori_id);
+      }
+
+      if ($request->filled('q')) {
+          $produks = $produks->filter(function ($item) use ($request) {
+              return Str::contains(Str::lower($item->nama), Str::lower($request->q));
+          });
+      }
+
+      if ($request->filled('sort')) {
+          switch ($request->sort) {
+              case 1:
+                  $produks = $produks->sortBy('poin');
+                  break;
+              case 2:
+                  $produks = $produks->sortByDesc('poin');
+                  break;
+              case 3:
+                  $produks = $produks->sortByDesc('created_at');
+                  break;
+              case 4:
+                  $produks = $produks->sortBy('created_at');
+                  break;
+          }
+      }
+
+      return view('publik.katalog', compact('tipeProduks', 'kategoriProduks', 'produks'));
   }
 
    

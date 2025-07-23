@@ -23,43 +23,45 @@
       <div class="container">
 
          <!-- Formulir Prediksi -->
-        <div class="catalog-form">
-            <div class="form-group">
-                <select class="form-control" id="hasil">
-                    <option selected disabled>PILIH TIPE PRODUK</option>
-                     @foreach($tipeProduks as $index => $tp)
-                    <option value="{{ $tp->id }}">{{ $tp->nama }}</option>
-                     @endforeach
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <select class="form-control" id="metode">
-                    <option selected disabled>KATEGORI</option>
-                    @foreach($kategoriProduks as $index => $kp)
-                    <option value="{{ $kp->id }}">{{ $kp->nama }}</option>
-                    @endforeach
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <select class="form-control" id="ronde">
-                    <option selected disabled>URUTKAN</option>
-                    <option value="1">POIN RENDAH -> TINGGI</option>
-                    <option value="2">POIN TINGGI -> RENDAH</option>
-                    <option value="3">TERBARU</option>
-                    <option value="4">TERLAMA</option>
-                </select>
-            </div>
+        <form method="GET" class="catalog-form">
+          <div class="form-group">
+              <select class="form-control" name="tipe_id">
+                  <option selected disabled>PILIH TIPE PRODUK</option>
+                  @foreach($tipeProduks as $tp)
+                      <option value="{{ $tp->id }}" {{ request('tipe_id') == $tp->id ? 'selected' : '' }}>{{ $tp->nama }}</option>
+                  @endforeach
+              </select>
+          </div>
 
-            <div class="form-group">
-                <input name="pencarian" class="form-control" placeholder="Cari by nama">
-            </div>
+          <div class="form-group">
+              <select class="form-control" name="kategori_id">
+                  <option selected disabled>KATEGORI</option>
+                  @foreach($kategoriProduks as $kp)
+                      <option value="{{ $kp->id }}" {{ request('kategori_id') == $kp->id ? 'selected' : '' }}>{{ $kp->nama }}</option>
+                  @endforeach
+              </select>
+          </div>
 
-            <div class="form-group">
-                 <button class="btn btn-success">Filter</button>
-            </div>
-        </div>
+          <div class="form-group">
+              <select class="form-control" name="sort">
+                  <option selected disabled>URUTKAN</option>
+                  <option value="1" {{ request('sort') == 1 ? 'selected' : '' }}>POIN RENDAH → TINGGI</option>
+                  <option value="2" {{ request('sort') == 2 ? 'selected' : '' }}>POIN TINGGI → RENDAH</option>
+                  <option value="3" {{ request('sort') == 3 ? 'selected' : '' }}>TERBARU</option>
+                  <option value="4" {{ request('sort') == 4 ? 'selected' : '' }}>TERLAMA</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+              <input type="text" name="q" class="form-control" placeholder="Cari by nama" value="{{ request('q') }}">
+          </div>
+
+          <div class="form-group d-flex gap-2">
+              <button class="btn btn-success" type="submit">Filter</button>
+              &nbsp;
+              <a href="{{ route('katalog') }}" class="btn btn-secondary">Reset</a>
+          </div>
+      </form>
         
         <div class="row">
 
