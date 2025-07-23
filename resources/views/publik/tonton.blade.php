@@ -18,7 +18,7 @@
     <div class="py-5 match">
     <div class="container">
       <div class="row">
-         @foreach($tontons as $index => $ton)
+        @foreach($tontons as $index => $ton)
         <div class="col-md-6 col-lg-4">
           <div class="match-card">
             <img

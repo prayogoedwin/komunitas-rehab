@@ -62,52 +62,10 @@
         </div>
         
         <div class="row">
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/a8/8c/4a/a88c4ab39fc036cde36e52705a7072fb.jpg"
-                  alt="Item 1"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital A</h5>
-                <p>Deskripsi singkat A</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 500 Poin
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/0e/a6/01/0ea6018541f559956d9a3eca86f1fd80.jpg"
-                  alt="Item 2"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital B</h5>
-                <p>Deskripsi singkat B</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 750 Poin
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
+         @foreach($produks as $index => $prd)
+          <div class="col-6 col-md-4 col-lg-2 mb-4 catalog-item" data-kategori="digital">
             <div class="catalog-card">
               <div class="image-wrapper">
                 <img
@@ -116,98 +74,18 @@
                 />
               </div>
               <div class="card-body">
-                <h5>Item Digital C</h5>
-                <p>Deskripsi singkat C</p>
+                <h5>{{ $prd->nama }}</h5>
+                <p>{{ $prd->tipe->nama }} - {{ $prd->kategori->nama }}</p>
+         
                 <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 1000 Poin
+                  Tukar {{ $prd->poin }} Poin
                 </button>
               </div>
             </div>
           </div>
+        @endforeach
 
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg"
-                  alt="Item 3"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital C</h5>
-                <p>Deskripsi singkat C</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 1000 Poin
-                </button>
-              </div>
-            </div>
-          </div>
-
-         <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg"
-                  alt="Item 3"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital C</h5>
-                <p>Deskripsi singkat C</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 1000 Poin
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg"
-                  alt="Item 3"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital C</h5>
-                <p>Deskripsi singkat C</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 1000 Poin
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="col-6 col-md-4 col-lg-2 mb-4 catalog-item"
-            data-kategori="digital"
-          >
-            <div class="catalog-card">
-              <div class="image-wrapper">
-                <img
-                  src="https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg"
-                  alt="Item 3"
-                />
-              </div>
-              <div class="card-body">
-                <h5>Item Digital C</h5>
-                <p>Deskripsi singkat C</p>
-                <button class="btn btn-primary btn-sm btn-block">
-                  Tukar 1000 Poin
-                </button>
-              </div>
-            </div>
-          </div>
+         
 
 
         </div>

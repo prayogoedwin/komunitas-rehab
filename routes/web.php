@@ -24,6 +24,7 @@ Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
 Route::get('/match', [PublikController::class, 'tonton'])->name('tonton');
 Route::get('/leaderboard', [PublikController::class, 'peringkat'])->name('peringkat');
 Route::get('/news', [PublikController::class, 'berita'])->name('berita');
+Route::get('/news/{id}', [PublikController::class, 'berita_detail'])->name('berita.detail');
 Route::get('/catalog', [PublikController::class, 'katalog'])->name('katalog');
 
 Route::get('/login', function() {

@@ -13,7 +13,11 @@ class ListTebakPertandingans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Actions\CreateAction::make(),
+             Actions\CreateAction::make()
+                ->url(fn () => TebakPertandinganResource::getUrl('create', [
+                    'pertandingan_id' => request()->input('tableFilters.pertandingan_id.value'),
+                ])),
         ];
     }
 }

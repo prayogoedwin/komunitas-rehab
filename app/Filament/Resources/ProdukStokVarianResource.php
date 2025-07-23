@@ -16,6 +16,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Components\SelectFilter;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Illuminate\Http\Request;
+use Filament\Tables\Actions;
 
 
 class ProdukStokVarianResource extends Resource
@@ -33,14 +35,17 @@ class ProdukStokVarianResource extends Resource
     protected static ?string $pluralModelLabel = 'Varian & Stok';
 
     public static function form(Form $form): Form
-    {
+    {   
+        
         return $form
             ->schema([
                 Select::make('produk_id')
                     ->relationship('produk', 'nama')
                     ->required()
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->default(fn () => request()->input('produk_id')) // isi otomatis dari query
+                    ->disabled(fn () => request()->has('produk_id')), // disable kalau dari URL
                 TextInput::make('varian')
                     ->label('Varian (misal: S, M, L)')
                     ->maxLength(255),
@@ -77,7 +82,7 @@ class ProdukStokVarianResource extends Resource
                 TextColumn::make('stok')
                     ->label('Stok')
                     ->sortable()
-                    ->alignCenter
+                    ->alignCenter(),
                 
             ])
             ->filters([

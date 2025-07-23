@@ -13,7 +13,11 @@ class ListProdukStokVarians extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Actions\CreateAction::make(),
+              Actions\CreateAction::make()
+                ->url(fn () => ProdukStokVarianResource::getUrl('create', [
+                    'produk_id' => request()->input('tableFilters.produk_id.value'),
+                ])),
         ];
     }
 }

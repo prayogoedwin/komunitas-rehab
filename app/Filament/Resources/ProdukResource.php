@@ -79,6 +79,7 @@ class ProdukResource extends Resource
                     ->disk('public') // PASTIKAN INI ADA
                     ->image()
                     ->directory('produk-fotos') // Folder penyimpanan
+                    ->preserveFilenames(false) // <-- Biar nama file diacak (hash)
                     ->maxSize(2048) // 2MB
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('16:9')

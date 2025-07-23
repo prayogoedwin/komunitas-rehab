@@ -54,7 +54,10 @@ class TebakPertandinganResource extends Resource
                         ->relationship('pertandingan', 'judul')
                         ->searchable()
                         ->preload()
-                        ->required(),
+                        ->required()
+                        ->default(fn () => request()->input('pertandingan_id')) // isi otomatis dari query
+                        ->disabled(fn () => request()->has('pertandingan_id')), // disable kalau dari URL
+                    
                 ]),
                 
             // Bagian lainnya tetap sama seperti sebelumnya...

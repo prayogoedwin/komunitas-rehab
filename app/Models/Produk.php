@@ -38,6 +38,7 @@ class Produk extends Model
             // }
             // Hapus semua varian terkait (soft delete)
             $produk->variants()->delete();
+            Cache::forget('produk_data');
         });
 
         // Hapus file lama saat foto diupdate
@@ -45,7 +46,10 @@ class Produk extends Model
             if ($produk->isDirty('foto') && $produk->getOriginal('foto')) {
                 Storage::disk('public')->delete($produk->getOriginal('foto'));
             }
+            Cache::forget('produk_data');
         });
+
+        
 
         
     }

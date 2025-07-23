@@ -17,6 +17,8 @@ use App\Models\TipeProduk;
 use App\Models\KateegoriProduk;
 
 use App\Models\Informasi;
+use App\Models\Berita;
+use App\Models\Produk;
 
 class PublikController extends Controller {
 
@@ -57,7 +59,20 @@ class PublikController extends Controller {
   }
 
   public function berita() {
-    return view('publik.berita');
+
+    $expiration = env('REDIS_TIME', 86400);
+    $beritas = Cache::remember('beritas_data', $expiration, function () {
+        return Berita::all();
+    });
+    
+    return view('publik.berita', compact('beritas'));
+  }
+
+  public function berita_detail($id)
+  {
+      $berita = Berita::where('id', $id)->firstOrFail();
+
+      return view('publik.berita-detail', compact('berita'));
   }
 
   public function katalog() {
@@ -71,7 +86,13 @@ class PublikController extends Controller {
         return KateegoriProduk::all();
     });
 
-    return view('publik.katalog', compact('tipeProduks','kategoriProduks'));
+    $produks = Cache::remember('produk_data', $expiration, function () {
+    return Produk::with(['kategori', 'tipe'])
+        ->where('status', 1)
+        ->get();
+    });
+
+    return view('publik.katalog', compact('tipeProduks','kategoriProduks','produks'));
   }
 
    
