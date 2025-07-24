@@ -1,8 +1,9 @@
 @extends('publik.template.publik')
 
 @section('content')
-{{-- di isi konten --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  {{-- di isi konten --}}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
    <style>
 
@@ -134,50 +135,26 @@
 
    </style>
 
-
      <!-- Login Card -->
   <div class="login">
     <div class="login-card">
-      <h2 id="formTitle">Register</h2>
+      <h2 id="formTitle">Reset Password</h2>
 
       <!-- Login Form -->
       <div id="loginForm" class="form-section active">
-
-        <a href="{{ route('member.social.login', 'facebook') }}" class="btn btn-facebook btn-custom">
-          <i class="fab fa-facebook"></i>&nbsp;&nbsp;
-          Login with Google
-        </a>
-
-        <a href="{{ route('member.social.login', 'google') }}" class="btn btn-email btn-custom">
-          <i class="fab fa-google"></i>&nbsp;&nbsp;
-          Login with Google
-        </a>
-
-       <div class="text-center text-muted mb-2">atau masuk manual</div>
-       <form method="POST" action="{{ route('member.register.submit') }}">
-          @if($errors->any())
-            <div class="alert alert-danger">
-              <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-            </div>
-          @endif
-          @csrf
-          <input type="hidden" name="recaptcha_token" id="recaptcha_token" />
-
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nama Anda"
-               name="name"
-              required
-            />
+        @if($errors->any())
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
           </div>
-
-          <div class="form-group mt-3">
+        @endif
+        <form method="POST" action="{{ route('member.password.email') }}">
+            @csrf
+            {{-- <input type="email" name="email" placeholder="Email Member" required> --}}
+            <div class="form-group">
             <input
               type="email"
               class="form-control"
@@ -186,35 +163,13 @@
               required
             />
           </div>
-        
-          <div class="form-group mt-3">
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Kata Sandi"
-              name="password" 
-              required
-            />
-          </div>
           <br/>
-          <button type="submit" class="btn btn-submit btn-custom">Daftar</button>
+
+            <button type="submit" class="btn btn-submit btn-custom">Kirim Link Reset Password</button>
         </form>
-
-        <div class="link-switch">
-          Sudah Punya Akun?
-          <a href="{{ route('member.login') }}">Login Sekarang</a>
-        </div>
       </div>
-
-      <!-- Tombol Test User -->
-      {{-- <a href="user.html" class="mt-3 btn-test-user btn-custom">
-        <i class="fas fa-user-astronaut mr-2"></i> Masuk sebagai Test User
-      </a> --}}
     </div>
   </div>
-    
-
-
 @endsection
 
 @push('js')

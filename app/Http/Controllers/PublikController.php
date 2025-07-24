@@ -27,7 +27,7 @@ class PublikController extends Controller {
   public function index() {
     $expiration = env('REDIS_TIME', 86400);
     $tontons = Cache::remember('tonton_data', $expiration, function () {
-        return Pertandingan::all();
+        return Pertandingan::where('status', 1)->get();
     });
     return view('publik.main', compact('tontons'));
   }

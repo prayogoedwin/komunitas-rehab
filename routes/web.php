@@ -31,11 +31,21 @@ Route::get('/login', function() {
     return redirect()->route('member.login');
 })->name('login');
 
+Route::get('/test-email', function () {
+    \Illuminate\Support\Facades\Mail::raw('Ini hanya test email', function ($message) {
+        $message->to('gilaprediksi88@gmail.com')
+            ->subject('Test Email');
+    });
+    return 'Email dikirim';
+});
+
 
 
 
 // Login Member
 Route::prefix('member')->group(function() {
+
+  Route::post('/prediksi/{id}', [PrediksiController::class, 'store']);
 
   Route::get('/login/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name('member.social.login');
         

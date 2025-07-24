@@ -24,6 +24,7 @@
 
          <!-- Formulir Prediksi -->
         <form method="GET" class="catalog-form">
+          @csrf
           <div class="form-group">
               <select class="form-control" name="tipe_id">
                   <option selected disabled>PILIH TIPE PRODUK</option>
@@ -61,7 +62,7 @@
               &nbsp;
               <a href="{{ route('katalog') }}" class="btn btn-secondary">Reset</a>
           </div>
-      </form>
+        </form>
         
         <div class="row">
 

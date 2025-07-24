@@ -21,11 +21,37 @@ class MemberResetPasswordController extends Controller
     // Proses reset password
     public function reset(Request $request)
     {
-        $request->validate([
+       
+
+         if(env('RECAPTCHA_V2') == 1){
+        $credentials = $request->validate([
+          'name' => 'required',
+          'email' => 'required|email|unique:members',
+          'password' => 'required|min:8|confirmed',
+          'recaptcha_token' => 'required'
+        ]);
+        // Verifikasi token dengan Google
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->recaptcha_token,
+            'remoteip' => $request->ip(),
+        ]);
+
+        $result = $response->json();
+
+        if (!($result['success'] ?? false) || ($result['score'] ?? 0) < 0.5) {
+            return back()->withErrors(['email' => 'Verifikasi keamanan gagal.']);
+        }
+
+      }else{
+
+         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
+
+      }
 
         $status = Password::broker('members')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

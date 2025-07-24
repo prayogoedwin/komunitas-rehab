@@ -155,7 +155,24 @@
 
        <div class="text-center text-muted mb-2">atau masuk manual</div>
        <form method="POST" action="{{ route('member.login.submit') }}">
+        @if($errors->any())
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
           @csrf
+          <input type="hidden" name="recaptcha_token" id="recaptcha_token" />
           <div class="form-group">
             <input
               type="email"
@@ -183,6 +200,10 @@
           Belum punya akun?
           <a href="{{ route('member.register') }}">Daftar Sekarang</a>
         </div>
+        <div class="link-switch">
+          Lupa password?
+          <a href="{{ route('member.password.request') }}">Reset Password?</a>
+        </div>
       </div>
 
       <!-- Tombol Test User -->
@@ -198,4 +219,12 @@
 
 @push('js')
   {{-- path path js --}}
+<script src="https://www.google.com/recaptcha/api.js?render=6LdYxo0rAAAAABFf45sqd6cD1p9E9S6BpUG2ItM5"></script>
+<script>
+  grecaptcha.ready(function () {
+    grecaptcha.execute('6LdYxo0rAAAAABFf45sqd6cD1p9E9S6BpUG2ItM5', { action: 'login' }).then(function (token) {
+      document.getElementById('recaptcha_token').value = token;
+    });
+  });
+</script>
 @endpush

@@ -13,11 +13,36 @@ class MemberRegisterController extends Controller {
   }
 
   public function register(Request $request) {
-    $request->validate([
-      'name' => 'required',
-      'email' => 'required|email|unique:members',
-      'password' => 'required|min:8|confirmed',
-    ]);
+
+    if(env('RECAPTCHA_V2') == 1){
+        $credentials = $request->validate([
+          'name' => 'required',
+          'email' => 'required|email|unique:members',
+          'password' => 'required|min:8',
+          'recaptcha_token' => 'required'
+        ]);
+        // Verifikasi token dengan Google
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->recaptcha_token,
+            'remoteip' => $request->ip(),
+        ]);
+
+        $result = $response->json();
+
+        if (!($result['success'] ?? false) || ($result['score'] ?? 0) < 0.5) {
+            return back()->withErrors(['email' => 'Verifikasi keamanan gagal.']);
+        }
+
+      }else{
+
+        $request->validate([
+          'name' => 'required',
+          'email' => 'required|email|unique:members',
+          'password' => 'required|min:8',
+        ]);
+
+      }
 
     Member::create([
       'name' => $request->name,

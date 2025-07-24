@@ -107,7 +107,7 @@ return [
         ],
         'members' => [
             'provider' => 'members',
-            'table' => 'member_password_reset_tokens', // Tabel custom
+            'table' => 'password_reset_tokens', // Tabel custom
             'expire' => 60,
             'throttle' => 60,
             'email' => 'emails.member_password_reset', // Template khusus member

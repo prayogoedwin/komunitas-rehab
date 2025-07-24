@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 
 
 class Member extends Model implements Authenticatable
 {
-    use HasFactory, SoftDeletes, AuthenticatableTrait;
+    use HasFactory, SoftDeletes, AuthenticatableTrait, CanResetPasswordTrait;
     protected $table = 'members';
 
     protected $fillable = [
@@ -74,6 +75,11 @@ class Member extends Model implements Authenticatable
     public function tebakPertandingans()
     {
         return $this->hasMany(TebakPertandingan::class, 'member_id');
+    }
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
     }
 
 }
