@@ -132,27 +132,95 @@ class TebakPertandinganResource extends Resource
         ]);
 }
     public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('pertandingan_id')
+{
+    return $table
+        ->columns([
+            Tables\Columns\TextColumn::make('member.name')
+                ->label('Member')
+                ->searchable()
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('pertandingan.judul')
+                ->label('Pertandingan')
+                ->searchable()
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('tebak_pemenang_id')
+                ->label('ID Pemenang')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('tebak_pemenang')
+                ->label('Nama Pemenang')
+                ->sortable(),
+
+            Tables\Columns\IconColumn::make('status_tebak_pemenang')
+                ->label('Benar?')
+                ->boolean(),
+
+            Tables\Columns\TextColumn::make('poin_tebak_pemenang')
+                ->label('Poin Pemenang')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('tebak_metode')
+                ->label('Metode')
+                ->sortable(),
+
+            Tables\Columns\IconColumn::make('status_tebak_metode')
+                ->label('Metode Benar?')
+                ->boolean(),
+
+            Tables\Columns\TextColumn::make('poin_tebak_metode')
+                ->label('Poin Metode')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('tebak_ronde')
+                ->label('Ronde')
+                ->sortable(),
+
+            Tables\Columns\IconColumn::make('status_tebak_ronde')
+                ->label('Ronde Benar?')
+                ->boolean(),
+
+            Tables\Columns\TextColumn::make('poin_tebak_ronde')
+                ->label('Poin Ronde')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('poin_all')
+                ->label('Total Poin')
+                ->sortable(),
+
+            Tables\Columns\IconColumn::make('update_poin_to_profil')
+                ->label('Sudah Update ke Profil?')
+                ->boolean(),
+
+            Tables\Columns\TextColumn::make('created_at')
+                ->label('Dibuat')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+        ])
+        ->filters([
+            Tables\Filters\SelectFilter::make('pertandingan_id')
                 ->label('Pertandingan')
                 ->relationship('pertandingan', 'judul')
                 ->searchable()
                 ->preload(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+
+            Tables\Filters\SelectFilter::make('member_id')
+                ->label('Member')
+                ->relationship('member', 'name')
+                ->searchable()
+                ->preload(),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]),
+        ]);
+}
 
     public static function getRelations(): array
     {

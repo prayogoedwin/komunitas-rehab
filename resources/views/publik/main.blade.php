@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- Formulir Prediksi -->
-                <form class="" data-id="{{ $ton->id }}">
+                <form class="prediction-form" data-id="{{ $ton->id }}">
                     @csrf
                     <div class="prediction-form">
                     <div class="form-group">
@@ -186,12 +186,20 @@
                 .then(response => response.json())
                 .then(data => {
                     alert(data.message || 'Prediksi berhasil!');
-                    // bisa update UI jika ingin (misalnya update persentase)
+                    // TODO: Update UI kalau perlu (misalnya % progress)
                 })
                 .catch(err => {
                     alert('Terjadi kesalahan saat mengirim prediksi.');
                     console.error(err);
                 });
+            });
+        });
+
+        // RESET tombol khusus (jika tidak pakai <button type="reset">)
+        document.querySelectorAll('.prediction-reset-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const form = this.closest('form');
+                form.reset();
             });
         });
     </script>

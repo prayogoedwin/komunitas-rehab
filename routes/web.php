@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\SocialLoginController;
 
 
 use App\Http\Controllers\PublikController;
+use App\Http\Controllers\Member\PrediksiMember;
+
+
 
 
 // Route::get('/', function () {
@@ -67,8 +70,9 @@ Route::prefix('member')->group(function() {
   Route::post('password/reset', [MemberResetPasswordController::class, 'reset'])->name('member.password.update');
   
   // Logout & Dashboard (dengan middleware)
-  Route::get('/logout', [MemberLoginController::class, 'logout'])->name('member.logout');
+  Route::post('/logout', [MemberLoginController::class, 'logout'])->name('member.logout');
 
+  Route::post('/prediksi/{id}', [PrediksiMember::class, 'store']);
 
   Route::get('/dashboard', [MemberLoginController::class, 'dashboard']) ->middleware('auth:member')->name('member.dashboard');
  

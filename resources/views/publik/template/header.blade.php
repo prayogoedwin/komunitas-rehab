@@ -36,12 +36,12 @@
           >Login</a
          > --}}
 
-            @auth('member')
-              <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.dashboard') }}">Akun</a>
-              <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.logout') }}">Logout</a>
-            @else
-            <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.login') }}">Login</a>
-            @endauth
+        @auth('member')
+          <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.dashboard') }}">Akun</a>
+          <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.logout') }}">Logout</a>
+        @else
+        <a class="btn btn-outline-light d-lg-none ml-aut" href="{{ route('member.login') }}">Login</a>
+        @endauth
 
         <div class="collapse navbar-collapse" id="navbarMain" >
           <ul class="navbar-nav mx-auto text-center">
@@ -49,13 +49,14 @@
               <a class="nav-link" href="{{ route('publik') }}">Beranda</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('prediksi') }}">Prediksi Sekarang</a>
+              <a class="nav-link" href="{{ route('prediksi') }}">Prediksi </a>
+              {{-- <a class="nav-link" style="color:#FEC107 !important" href="{{ route('prediksi') }}">Prediksi</a> --}}
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('tonton') }}">Tonton Pertandingan</a>
+              <a class="nav-link" href="{{ route('tonton') }}">Pertandingan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('peringkat') }}">Pangkat Peringkat</a>
+              <a class="nav-link" href="{{ route('peringkat') }}">Peringkat</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('cara') }}">Cara Bermain</a>

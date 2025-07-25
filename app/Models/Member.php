@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
-
+use Illuminate\Support\Facades\Cache;
 
 class Member extends Model implements Authenticatable
 {
