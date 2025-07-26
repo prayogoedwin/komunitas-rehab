@@ -3,28 +3,26 @@
 @section('content')
   {{-- di isi konten --}}
 
-      <!-- Hero -->
-   <div id="ufcCarousel" class="carousel slide" data-ride="carousel">
+<!-- Hero -->
+<div id="ufcCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indikator -->
     <ul class="carousel-indicators">
-        <li data-target="#ufcCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#ufcCarousel" data-slide-to="1"></li>
+        @foreach ($banners as $index => $banner)
+            <li data-target="#ufcCarousel" data-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></li>
+        @endforeach
     </ul>
 
     <!-- Slide -->
     <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('https://pbs.twimg.com/media/C0oYhv2VQAAHXAO.jpg')">
-            {{-- <div class="carousel-caption d-none d-md-block">
-                <h3>Conor McGregor</h3>
-                <p>McGregor memegang sabuk juara UFC</p>
-            </div> --}}
-        </div>
-        <div class="carousel-item" style="background-image: url('https://images.slivcdn.com/videoasset_images/ufc2023_1_landscape_thumb.jpg')">
-            {{-- <div class="carousel-caption d-none d-md-block">
-                <h3>UFC 2023</h3>
-                <p>Pertandingan UFC seru tahun 2023</p>
-            </div> --}}
-        </div>
+        @foreach ($banners as $index => $banner)
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ asset('storage/'.$banner->foto) }}'); background-size: cover; background-position: center;">
+                {{-- Optional caption --}}
+                {{-- <div class="carousel-caption d-none d-md-block">
+                    <h3>{{ $banner->judul }}</h3>
+                    <p>{{ $banner->deskripsi }}</p>
+                </div> --}}
+            </div>
+        @endforeach
     </div>
 
     <!-- Kontrol Navigasi -->

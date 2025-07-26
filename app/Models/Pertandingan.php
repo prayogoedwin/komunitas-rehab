@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+
 
 class Pertandingan extends Model
 {
@@ -38,6 +40,7 @@ class Pertandingan extends Model
     }
 
     protected $fillable = [
+        'judul',
         'is_special',
         'kategori',
         'pemain_1_id',

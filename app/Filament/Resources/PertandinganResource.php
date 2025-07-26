@@ -54,8 +54,7 @@ class PertandinganResource extends Resource
                 ->schema([
                     TextInput::make('judul')
                         ->label('Judul Pertandingan)')
-                        ->default(null)
-                        ->readonly(),
+                        ->default(null),
                     Toggle::make('is_special')
                         ->label('Pertandingan Spesial?')
                         ->inline(false),
@@ -313,6 +312,7 @@ class PertandinganResource extends Resource
                 ])
                 ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

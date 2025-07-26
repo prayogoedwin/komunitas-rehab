@@ -29,22 +29,48 @@
             <div class="match-body">
               <h5 class="text-center">{{$ton->judul}}</h5>
               {{-- <p>Rewatch: Fighter A vs Fighter B</p> --}}
-              <a
-                href="{{$ton->url_nonton_1}}"
-                target="_blank"
-                class="btn btn-danger btn-block"
-                >URL Tonton 1</a
-              >
+
+            @php
+                $isEmpty = $ton->url_nonton_1 == '';
+                $btnClass = $isEmpty ? 'btn-dark text-muted' : 'btn-danger';
+                $btnStyle = $isEmpty ? 'color: #888;' : '';
+                $btnHref = $isEmpty ? '#' : $ton->url_nonton_1;
+            @endphp
+            <a
+              href="{{$ton->url_nonton_1}}"
+              target="_blank"
+             class="btn {{ $btnClass }} btn-block"
+              style="{{ $btnStyle }} {{ $isEmpty ? 'pointer-events: none;' : '' }}"
+            >
+              URL Tonton 1
+            </a>
+
+             @php
+                $isEmpty2 = $ton->url_nonton_2 == '';
+                $btnClass2 = $isEmpty2 ? 'btn-dark text-muted' : 'btn-danger';
+                $btnStyle2 = $isEmpty2 ? 'color: #888;' : '';
+                $btnHref2 = $isEmpty2 ? '#' : $ton->url_nonton_2;
+            @endphp
+
               <a
                 href="{{$ton->url_nonton_2}}"
                 target="_blank"
-                class="btn btn-danger btn-block"
+                class="btn {{ $btnClass2 }} btn-block"
+                style="{{ $btnStyle2 }} {{ $isEmpty2 ? 'pointer-events: none;' : '' }}"
                 >URL Tonton 2</a
               >
+
+               @php
+                $isEmpty3 = $ton->url_nonton_3 == '';
+                $btnClass3 = $isEmpty3 ? 'btn-dark text-muted' : 'btn-danger';
+                $btnStyle3 = $isEmpty3 ? 'color: #888;' : '';
+                $btnHref3 = $isEmpty3 ? '#' : $ton->url_nonton_3;
+            @endphp
               <a
                 href="{{$ton->url_nonton_3}}"
                 target="_blank"
-                class="btn btn-danger btn-block"
+                class="btn {{ $btnClass3 }} btn-block"
+                style="{{ $btnStyle3 }} {{ $isEmpty3 ? 'pointer-events: none;' : '' }}"
                 >URL Tonton 3</a
               >
             </div>

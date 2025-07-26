@@ -68,6 +68,7 @@ class BeritaResource extends Resource
                     ->dateTime('d M Y H:i') // Format: 22 Jul 2025 14:30
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

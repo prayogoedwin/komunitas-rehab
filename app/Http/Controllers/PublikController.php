@@ -19,6 +19,7 @@ use App\Models\KateegoriProduk;
 use App\Models\Informasi;
 use App\Models\Berita;
 use App\Models\Produk;
+use App\Models\Banner;
 
 use Illuminate\Support\Str;
 
@@ -29,7 +30,12 @@ class PublikController extends Controller {
     $tontons = Cache::remember('tonton_data', $expiration, function () {
         return Pertandingan::where('status', 1)->get();
     });
-    return view('publik.main', compact('tontons'));
+
+    $banners = Cache::remember('banner_data', $expiration, function () {
+        return Banner::where('status', 1)->get();
+    });
+
+    return view('publik.main', compact('tontons', 'banners'));
   }
 
   public function caraMain() {

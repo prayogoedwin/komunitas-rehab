@@ -113,6 +113,7 @@ class MemberResource extends Resource
                     ->falseColor('danger'),
 
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

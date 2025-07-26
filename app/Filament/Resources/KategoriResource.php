@@ -62,6 +62,7 @@ class KategoriResource extends Resource
                     ->formatStateUsing(fn (int $state): string => $state ? 'ON' : 'OFF')
                     ->color(fn (int $state): string => $state ? 'success' : 'danger'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
