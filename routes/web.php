@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\SocialLoginController;
 
 use App\Http\Controllers\PublikController;
 use App\Http\Controllers\Member\PrediksiMember;
+use App\Http\Controllers\Member\DashboardMember;
 
 
 
@@ -48,6 +49,10 @@ Route::get('/test-email', function () {
 // Login Member
 Route::prefix('member')->group(function() {
 
+  // web.php
+  Route::post('/prediksi_sekekarang/{id}', [PrediksiMember::class, 'store_server'])->name('prediksi.store');
+  Route::get('/prediksi_batal/{id_prediksi}', [PrediksiMember::class, 'delete_prediksi_server'])->name('prediksi.delete');
+
   Route::post('/prediksi/{id}', [PrediksiController::class, 'store']);
 
   Route::get('/login/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name('member.social.login');
@@ -74,7 +79,7 @@ Route::prefix('member')->group(function() {
 
   Route::post('/prediksi/{id}', [PrediksiMember::class, 'store']);
 
-  Route::get('/dashboard', [MemberLoginController::class, 'dashboard']) ->middleware('auth:member')->name('member.dashboard');
+  Route::get('/dashboard', [DashboardMember::class, 'index']) ->middleware('auth:member')->name('member.dashboard');
  
 });
 

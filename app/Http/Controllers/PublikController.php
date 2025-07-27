@@ -21,15 +21,36 @@ use App\Models\Berita;
 use App\Models\Produk;
 use App\Models\Banner;
 
+use App\Models\Member;
+
 use Illuminate\Support\Str;
 
 class PublikController extends Controller {
 
   public function index() {
     $expiration = env('REDIS_TIME', 86400);
-    $tontons = Cache::remember('tonton_data', $expiration, function () {
-        return Pertandingan::where('status', 1)->get();
-    });
+    
+    
+    if (Auth::guard('member')->check()) {
+
+        $memberId = Auth::guard('member')->id();
+        $tontons = Cache::remember('tonton_data_member:' . $memberId, $expiration, function () use ($memberId) {
+            return Pertandingan::where('status', 1)
+                ->with(['tebakPertandingans' => function ($query) use ($memberId) {
+                    $query->where('member_id', $memberId);
+                }])
+                ->get();
+        });
+
+    }else{
+
+        $tontons = Cache::remember('tonton_data', $expiration, function () {
+            return Pertandingan::where('status', 1)->get();
+        });
+    }
+
+    
+
 
     $banners = Cache::remember('banner_data', $expiration, function () {
         return Banner::where('status', 1)->get();
@@ -67,7 +88,16 @@ class PublikController extends Controller {
   }
 
   public function peringkat() {
-    return view('publik.peringkat');
+    $expiration = env('REDIS_TIME', 86400);
+    // Data TOP MEMBERS (ditambahkan di sini)
+    $members = Cache::remember('top_members', $expiration, function () {
+        return Member::where('poin_terkini', '!=', 0)
+            ->orderBy('poin_terkini', 'DESC') // Urutkan poin tertinggi di atas
+            ->limit(100) // Batasi 100 member
+            ->get();
+    });
+
+    return view('publik.peringkat', compact('members'));
   }
 
   public function berita() {

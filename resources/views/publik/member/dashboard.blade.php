@@ -23,8 +23,8 @@
                             <div class="rotate">
                                 <i class="fa fa-user fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Users</h6>
-                            <h1 class="display-4">134</h1>
+                            <h6 class="text-uppercase">Memprediksi</h6>
+                            <h1 class="">{{ $totalPrediksi }} kali</h1>
                         </div>
                     </div>
                 </div>
@@ -34,8 +34,8 @@
                             <div class="rotate">
                                 <i class="fa fa-list fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Posts</h6>
-                            <h1 class="display-4">87</h1>
+                            <h6 class="text-uppercase">Poin Terkini</h6>
+                            <h1 class="">{{ $member->poin_terkini ?? 0 }}</h1>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,9 @@
                             <div class="rotate">
                                 <i class="fa fa-twitter fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Tweets</h6>
-                            <h1 class="display-4">125</h1>
+                            <h6 class="text-uppercase">Join Pada</h6>
+                            {{-- <h1 class="display-4">{{ $member->created_at }}</h1> --}}
+                            <h2>{{ $member->created_at->format('d F Y') }}</h2>
                         </div>
                     </div>
                 </div>
@@ -56,9 +57,20 @@
                             <div class="rotate">
                                 <i class="fa fa-share fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Shares</h6>
-                            <h1 class="display-4">36</h1>
-                        </div>
+                            <h6 class="text-uppercase">Tipe akun</h6>
+                            @php
+                                $tipeAkunLabel = match($member->tipe_akun ?? 0) {
+                                    0 => 'Newbie',
+                                    1 => 'Middle',
+                                    2 => 'Pro',
+                                    3 => 'Elite',
+                                    4 => 'Legend',
+                                    default => 'Unknown',
+                                };
+                            @endphp
+
+                            <h2 class="">{{ $tipeAkunLabel }}</h1>
+                                                    </div>
                     </div>
                 </div>
             </div>
