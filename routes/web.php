@@ -14,6 +14,8 @@ use App\Http\Controllers\PublikController;
 use App\Http\Controllers\Member\PrediksiMember;
 use App\Http\Controllers\Member\DashboardMember;
 
+use App\Http\Controllers\CacheController;
+
 
 
 
@@ -42,6 +44,9 @@ Route::get('/test-email', function () {
     });
     return 'Email dikirim';
 });
+
+Route::middleware('auth')->get('/backend/clear-cache', [CacheController::class, 'clearAll']);
+
 
 
 

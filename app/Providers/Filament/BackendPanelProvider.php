@@ -42,8 +42,9 @@ class BackendPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
+                \App\Filament\Resources\ClearCacheWidgetResource\Widgets\ClearCacheWidget::class,
             ])
-             ->navigationGroups([
+            ->navigationGroups([
                 'Pengguna', // Grup default Filament
                 'Pertandingan', // Grup custom
                 'Katalog', // Grup custom
@@ -52,6 +53,7 @@ class BackendPanelProvider extends PanelProvider
                
                 // Urutan grup sesuai kebutuhan
             ])
+           
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

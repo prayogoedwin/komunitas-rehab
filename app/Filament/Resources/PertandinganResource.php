@@ -4,7 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PertandinganResource\Pages;
 use App\Filament\Resources\PertandinganResource\RelationManagers;
+
 use App\Models\Pertandingan;
+use App\Models\TebakPertandingan;
+use App\Models\Member;
+
 use App\Models\Kategori;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -29,6 +33,8 @@ use Filament\Forms\Components\Textarea;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Filament\Resources\TebakPertandinganResource;
+
+use Filament\Tables\Actions\Action;
 
 use Livewire\TemporaryUploadedFile;
 
@@ -260,7 +266,11 @@ class PertandinganResource extends Resource
             TextColumn::make('judul')
                 ->label('Judul')
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->formatStateUsing(function ($state, $record) {
+                    return $record->pemenang != 0 ? '✅ ' . $state : $state;
+                })
+                ->color(fn ($record) => $record->pemenang != 0 ? 'success' : null),
 
             IconColumn::make('is_special')
                 ->label('Special')
@@ -317,7 +327,12 @@ class PertandinganResource extends Resource
                 //
             ])
             ->actions([
+
+                            
                 
+
+                Tables\Actions\EditAction::make(),
+
                 Tables\Actions\Action::make('tebakanMember')
                 ->label('Tebakan')
                 ->icon('heroicon-o-archive-box')
@@ -326,10 +341,28 @@ class PertandinganResource extends Resource
                     'tableFilters[pertandingan_id][value]' => $record->id
                 ])),
 
-                Tables\Actions\EditAction::make(),
+
+                Action::make('tentukanPemenang')
+                    ->label('Tentukan')
+                    ->icon('heroicon-o-trophy')
+                    ->form(fn ($record) => self::getTentukanPemenangForm($record))
+                    ->fillForm(function ($record) {
+                        return [
+                            'pemenang' => $record->pemenang,
+                            'pemenang_poin' => $record->pemenang_poin,
+                            'metode_menang' => $record->metode_menang,
+                            'metode_menang_poin' => $record->metode_menang_poin,
+                            'ronde' => $record->ronde,
+                            'ronde_poin' => $record->ronde_poin,
+                        ];
+                    })
+                    ->action(fn (array $data, $record) => self::handleTentukanPemenang($data, $record))
+                    ->modalHeading('Tentukan Hasil Pertandingan')
+                    ->color('danger'),
+                
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
@@ -350,4 +383,127 @@ class PertandinganResource extends Resource
             'edit' => Pages\EditPertandingan::route('/{record}/edit'),
         ];
     }
+
+    public static function getTentukanPemenangForm($record): array
+    {
+        return [
+            Section::make('Hasil Pertandingan')
+                ->schema([
+                    Forms\Components\Select::make('pemenang')
+                        ->label('Pemenang')
+                        ->options([
+                            0 => 'Belum Ada',
+                            1 => $record->pemain_1_nama ?? 'Pemain 1',
+                            2 => $record->pemain_2_nama ?? 'Pemain 2',
+                        ])
+                        ->default(0),
+
+                    Forms\Components\TextInput::make('pemenang_poin')
+                        ->label('Poin Pemenang')
+                        ->numeric()
+                        ->default(0),
+
+                    Forms\Components\Select::make('metode_menang')
+                        ->label('Metode Menang')
+                        ->options([
+                            0 => 'KO/TKO',
+                            1 => 'Submission',
+                            2 => 'Decision',
+                            3 => 'Diskualifikasi',
+                            4 => 'Tanpa Kontes',
+                        ])
+                        ->default(0),
+
+                    Forms\Components\TextInput::make('metode_menang_poin')
+                        ->label('Poin Metode Menang')
+                        ->numeric()
+                        ->default(0),
+
+                    Forms\Components\TextInput::make('ronde')
+                        ->label('Ronde')
+                        ->numeric()
+                        ->default(0),
+
+                    Forms\Components\TextInput::make('ronde_poin')
+                        ->label('Poin Ronde')
+                        ->numeric()
+                        ->default(0),
+                ]),
+        ];
+    }
+
+    // public static function handleTentukanPemenang(array $data, $record): void
+    // {
+    //     $record->update([
+    //         'pemenang' => $data['pemenang'],
+    //         'pemenang_poin' => $data['pemenang_poin'],
+    //         'metode_menang' => $data['metode_menang'],
+    //         'metode_menang_poin' => $data['metode_menang_poin'],
+    //         'ronde' => $data['ronde'],
+    //         'ronde_poin' => $data['ronde_poin'],
+    //     ]);
+    // }
+
+    public static function handleTentukanPemenang(array $data, $record): void
+    {
+        // Update data pertandingan
+        $record->update([
+            'pemenang' => $data['pemenang'],
+            'pemenang_poin' => $data['pemenang_poin'],
+            'metode_menang' => $data['metode_menang'],
+            'metode_menang_poin' => $data['metode_menang_poin'],
+            'ronde' => $data['ronde'],
+            'ronde_poin' => $data['ronde_poin'],
+        ]);
+
+        // Ambil semua tebakan terkait pertandingan
+        $tebakans = \App\Models\TebakPertandingan::where('pertandingan_id', $record->id)->get();
+
+        foreach ($tebakans as $tebakan) {
+
+             // === Penilaian Pemenang Menang ===
+            if ($tebakan->tebak_pemenang_id == $data['pemenang']) {
+                $tebakan->status_tebak_pemenang = 1;
+                $tebakan->poin_tebak_pemenang = $data['pemenang_poin'];
+            } else {
+                $tebakan->status_tebak_pemenang = 2;
+                $tebakan->poin_tebak_pemenang = 0;
+            }
+
+            // === Penilaian Metode Menang ===
+            if ($tebakan->tebak_metode == $data['metode_menang']) {
+                $tebakan->status_tebak_metode = 1;
+                $tebakan->poin_tebak_metode = $data['metode_menang_poin'];
+            } else {
+                $tebakan->status_tebak_metode = 2;
+                $tebakan->poin_tebak_metode = 0;
+            }
+
+            // === Penilaian Ronde ===
+            if ($tebakan->tebak_ronde == $data['ronde']) {
+                $tebakan->status_tebak_ronde = 1;
+                $tebakan->poin_tebak_ronde = $data['ronde_poin'];
+            } else {
+                $tebakan->status_tebak_ronde = 2;
+                $tebakan->poin_tebak_ronde = 0;
+            }
+
+            // Hitung total poin
+            $tebakan->poin_all =
+                $tebakan->poin_tebak_pemenang +
+                $tebakan->poin_tebak_metode +
+                $tebakan->poin_tebak_ronde;
+
+
+            $tebakan->save();
+
+            // Tambahkan poin ke Member
+            $member = \App\Models\Member::find($tebakan->member_id);
+            if ($member) {
+                $member->poin_terkini += $tebakan->poin_all;
+                $member->save();
+            }
+        }
+    }
+
 }
