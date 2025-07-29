@@ -29,7 +29,10 @@
         <div class="card card-default card-body">
                          <ul id="tabsJustified" class="nav nav-tabs nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" href="" data-target="#tab1" data-toggle="tab">Peringkat Anda: (Tidak Ada)</a>
+                                <a class="nav-link active" href="" data-target="#tab1" data-toggle="tab">Global</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-target="#tab2" data-toggle="tab">Bulanan</a>
                             </li>
                         </ul> 
                         <!--/tabs-->
@@ -59,6 +62,31 @@
                                 </table>
                               </div>
 
+                            </div>
+
+                            <div class="tab-pane " id="tab2">
+
+                              <div class="table-container">
+                                <table id="userTable" class="table table-striped table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Peringkat</th>
+                                        <th>Nama Pengguna</th>
+                                        <th class="text-center">Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($members_monthly as $mm)
+                                  <tr>
+                                      <td class="text-center">{{ $loop->iteration }}</td>
+                                      <td><img src="https://www.gravatar.com/avatar/1?d=identicon&s={{ $mm->id }} " class="rounded-circle me-2" alt="Avatar"> {{ $mm->name }} </td>
+                                      <td class="text-center"><i class="fas fa-star" style="color:gold" >&nbsp;&nbsp;</i>{{ $mm->poin_terkini }}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                                </table>
+                              </div>
+                               
                             </div>
                             
                         </div>

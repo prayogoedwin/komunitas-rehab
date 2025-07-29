@@ -72,21 +72,63 @@
             <div class="catalog-card">
               <div class="image-wrapper">
                 <img
-                  src="https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg"
-                  alt="Item 3"
+                  src="{{ asset('storage/'.$prd->foto) }}"
+                  alt="{{ $prd->nama }}"
                 />
               </div>
               <div class="card-body">
                 <h5>{{ $prd->nama }}</h5>
                 <p>{{ $prd->tipe->nama }} - {{ $prd->kategori->nama }}</p>
          
-                <button class="btn btn-primary btn-sm btn-block">
+                {{-- <button class="btn btn-primary btn-sm btn-block">
+                  Tukar {{ $prd->poin }} Poin
+                </button> --}}
+
+                <button 
+                  type="button"
+                  class="btn btn-primary btn-sm btn-block btn-tukar"
+                  data-id="{{ $prd->id }}"
+                  data-nama="{{ $prd->nama }}"
+                  data-kategori="{{ $prd->kategori->nama }}"
+                  data-tipe="{{ $prd->tipe->nama }}"
+                  data-foto="{{ asset('storage/'.$prd->foto) }}"
+                >
                   Tukar {{ $prd->poin }} Poin
                 </button>
+
               </div>
             </div>
           </div>
         @endforeach
+
+        <div class="modal fade" id="modalProdukDetail" tabindex="-1" aria-labelledby="produkModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form id="formTukarPoin">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="produkModalLabel">Detail Produk</h5>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body text-center">
+                  <img id="modalGambarProduk" class="img-fluid mb-3" />
+                  <h5 id="modalNamaProduk"></h5>
+                  <p id="modalKategoriProduk"></p>
+
+                  <div class="mb-3">
+                    <label for="varianSelect">Pilih Varian</label>
+                    <select name="produk_stok_varian_id" id="varianSelect" class="form-control"></select>
+                  </div>
+
+                  <input type="hidden" id="produkId" name="produk_id" />
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Tukar Poin</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
 
          
 
@@ -102,6 +144,10 @@
     </div>
     </section>
 
+
+
+
+
    
 
 
@@ -109,4 +155,40 @@
 
 @push('js')
   {{-- path path js --}}
+
+<script>
+$(document).on('click', '.btn-tukar', function () {
+  console.log('Tombol diklik');
+    let button = $(this);
+
+    let produkId = button.data('id');
+    let nama = button.data('nama');
+    let kategori = button.data('kategori');
+    let tipe = button.data('tipe');
+    let foto = button.data('foto');
+
+    $('#modalNamaProduk').text(nama);
+    $('#modalKategoriProduk').text(`${tipe} - ${kategori}`);
+    $('#produkId').val(produkId);
+
+    // Ganti gambar produk jika tersedia
+    // $('#modalGambarProduk').attr('src', 'https://i.pinimg.com/736x/66/01/1f/66011ff61578dabeae5e5d8603d846cf.jpg');
+    $('#modalGambarProduk').attr('src', foto || '{{ asset('img/logo.png') }}');
+
+
+    $.get(`/produk/${produkId}/varians`, function (res) {
+        $('#varianSelect').empty().append('<option selected disabled>Pilih Varian</option>');
+        res.forEach(item => {
+            let label = `${item.varian} - (${item.ukuran}) - (stok: ${item.stok})`;
+            let disabled = item.stok < 1 ? 'disabled' : '';
+            $('#varianSelect').append(`<option value="${item.id}" ${disabled}>${label}</option>`);
+        });
+    });
+
+    // Tampilkan modal
+    let modal = new bootstrap.Modal(document.getElementById('modalProdukDetail'));
+    modal.show();
+});
+</script>
+
 @endpush

@@ -30,5 +30,7 @@
 {{-- <script src="stylesheet" href="{{ asset('_frontend/bootstrap4/js/jquery.min.js') }}"></script>
 <script src="stylesheet" href="{{ asset('_frontend/bootstrap4/js/bootstrap.min.js') }}"></script> --}}
 <!-- JS yang diperlukan Bootstrap agar navbar toggle berfungsi -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

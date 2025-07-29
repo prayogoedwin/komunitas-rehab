@@ -47,6 +47,9 @@ Route::get('/test-email', function () {
 
 Route::middleware('auth')->get('/backend/clear-cache', [CacheController::class, 'clearAll']);
 
+Route::get('/produk/{id}/varians', [DashboardMember::class, 'getVarians']);
+Route::post('/cek-poin', [DashboardMember::class, 'cekPoin'])->name('cek-poin');
+
 
 
 

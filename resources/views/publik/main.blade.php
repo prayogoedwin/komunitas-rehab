@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                @endif
 
                   <form class="prediction-form"  
                         method="POST" 
@@ -204,6 +204,24 @@
                                 $persen_2_jago = 0;
                             }
                         @endphp
+
+                     <div class="fighters-container">
+                    <div class="fighter">
+                        <img src="{{ asset('storage/'.$ton->pemain_1_foto) }}" 
+                            alt="{{$ton->pemain_1_nama}}" class="fighter-image">
+                        <h2 class="fighter-name">{{$ton->pemain_1_nama}}</h2>
+                    
+                    </div>
+                    
+                   <div class="vs-badge">VS</div>
+                   
+                    
+                    <div class="fighter">
+                        <img src="{{ asset('storage/'.$ton->pemain_2_foto) }}" 
+                            alt="{{$ton->pemain_2_nama}}" class="fighter-image">
+                        <h2 class="fighter-name">{{$ton->pemain_2_nama}}</h2>
+                    </div>
+                </div>
 
                     <form class="prediction-form" data-id="{{ $ton->id }}">
                         @csrf

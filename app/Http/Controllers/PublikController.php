@@ -97,7 +97,19 @@ class PublikController extends Controller {
             ->get();
     });
 
-    return view('publik.peringkat', compact('members'));
+    // Data TOP MEMBERS bulanan (yang pernah tebak pertandingan)
+    $members_monthly = Cache::remember('top_members_monthly', $expiration, function () {
+    return Member::whereHas('tebakPertandingans', function ($query) {
+            $query->whereMonth('created_at', now()->month)
+                  ->whereYear('created_at', now()->year);
+        })
+        ->where('poin_terkini', '!=', 0)
+        ->orderBy('poin_terkini', 'DESC')
+        ->limit(100)
+        ->get();
+    });
+
+    return view('publik.peringkat', compact('members', 'members_monthly'));
   }
 
   public function berita() {
