@@ -107,7 +107,7 @@
               <form id="formTukarPoin">
                 <div class="modal-header">
                   <h5 class="modal-title" id="produkModalLabel">Detail Produk</h5>
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">X</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body text-center">
                   <img id="modalGambarProduk" class="img-fluid mb-3" />

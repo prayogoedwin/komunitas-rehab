@@ -35,7 +35,7 @@ class ProdukResource extends Resource
 
      //setting letak grup menu
     protected static ?string $navigationGroup = 'Katalog';
-    protected static ?int $navigationSort = 3; // Urutan setelah Kategori
+    protected static ?int $navigationSort = 2; // Urutan setelah Kategori
 
     // Label
     protected static ?string $modelLabel = 'Produk';

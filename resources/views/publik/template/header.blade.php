@@ -84,7 +84,10 @@
                 {{ Auth::guard('member')->user()->name }}
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ route('member.dashboard') }}">Akun</a>
+                <a class="dropdown-item" href="{{ route('member.dashboard') }}">Profil</a>
+                <a class="dropdown-item" href="{{ route('member.dashboard') }}">Dashboard</a>
+                <a class="dropdown-item" href="{{ route('member.dashboard') }}">Riwayat Prediksi</a>
+                <a class="dropdown-item" href="{{ route('member.dashboard') }}">Riwayat Tukar Poin</a>
                 <a class="dropdown-item" href="{{ route('member.logout') }}">Logout</a>
               </div>
             </div>

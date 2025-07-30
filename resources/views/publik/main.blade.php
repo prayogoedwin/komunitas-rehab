@@ -171,6 +171,8 @@
                                 <div class="percentage-circle left">{{$persen_1_jago}}%</div>
                                 @auth('member')
                                     
+                                 @if($ton->pemenang == 0)
+                                   
                                     @if(empty($tebakPemenang))
                                       <button type="submit" class="btn btn-success">PREDIKSI SEKARANG</button>
                                     @else
@@ -179,9 +181,11 @@
                                         class="btn btn-circle btn-danger">
                                         Batalkan Prediksi
                                     </a>
-                                      {{-- <button type="submit" class="btn btn-circle btn-danger">BATALKAN PREDIKSI</button> --}}
-                                   
+                                      
                                     @endif
+                                 @else
+                                        <button type="button" class="btn btn-circle btn-warning">PERTANDINGAN SELESAI</button>
+                                 @endif
                                 @else
                                     <a class="prediction-btn" href="{{ route('member.login') }}">PREDIKSI SEKARANG</a>
                                 @endauth
@@ -264,11 +268,15 @@
                         <div class="prediction-container">
                             <div class="prediction-btn-container">
                                 <div class="percentage-circle left">{{$persen_1_jago}}%</div>
+                               
                                 @auth('member')
+                                 @if($ton->pemenang == 0)
                                     <button type="submit" class="prediction-btn">PREDIKSI SEKARANG</button>
+                                 @endif
                                 @else
                                     <a class="prediction-btn" href="{{ route('member.login') }}">PREDIKSI SEKARANG</a>
                                 @endauth
+                              
                                 <div class="percentage-circle right">{{$persen_1_jago}}%</div>
                             </div>
                         </div>
