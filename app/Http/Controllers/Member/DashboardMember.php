@@ -71,4 +71,50 @@ class DashboardMember extends Controller
             return response()->json(['success' => false, 'message' => 'Maaf, poin Anda tidak cukup']);
         }
     }
+    
+    public function riwayatPrediksi(){
+        $expiration = env('REDIS_TIME', 86400);
+
+        if (Auth::guard('member')->check()) {
+
+            $memberId = Auth::guard('member')->id();
+
+            $tontons = Cache::remember('tonton_data', $expiration, function () {
+            return Pertandingan::where('status', 1)->get();
+            });
+
+            return view('member.riwayat-prediksi', compact('tontons'));
+        }
+    }
+
+    public function riwayatTukarPoin(){
+        $expiration = env('REDIS_TIME', 86400);
+
+        if (Auth::guard('member')->check()) {
+
+            $memberId = Auth::guard('member')->id();
+
+            $tontons = Cache::remember('tonton_data', $expiration, function () {
+            return Pertandingan::where('status', 1)->get();
+            });
+
+            return view('member.riwayat-poin', compact('tontons'));
+        }
+    }
+
+    public function profilMember(){
+        $expiration = env('REDIS_TIME', 86400);
+
+        if (Auth::guard('member')->check()) {
+
+            $memberId = Auth::guard('member')->id();
+
+            $expiration = env('REDIS_TIME', 86400);
+            $cara = Cache::remember('cara_data', $expiration, function () {
+                return Informasi::where('slug', 'cara_main')->first();
+            });
+
+            return view('member.profil', compact('cara'));
+        }
+    }
 }
