@@ -65,8 +65,6 @@ class MemberResource extends Resource
                 TextInput::make('whatsapp')
                     ->label('No Whatsapp')
                     ->integer() // Menggantikan numeric() untuk bilangan bulat
-                    ->minValue(0)
-                    ->maxValue(15)
                     ->default(0),
                 TextInput::make('poin')
                     ->label('Poin Member')
