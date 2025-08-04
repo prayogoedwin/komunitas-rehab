@@ -64,7 +64,6 @@ class MemberResource extends Resource
                     ->dehydrated(false), // Jangan simpan ke database
                 TextInput::make('whatsapp')
                     ->label('No Whatsapp')
-                    ->integer() // Menggantikan numeric() untuk bilangan bulat
                     ->default(0),
                 TextInput::make('poin')
                     ->label('Poin Member')
