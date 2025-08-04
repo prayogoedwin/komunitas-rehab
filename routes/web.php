@@ -83,7 +83,7 @@ Route::prefix('member')->group(function() {
   Route::post('password/reset', [MemberResetPasswordController::class, 'reset'])->name('member.password.update');
   
   // Logout & Dashboard (dengan middleware)
-  Route::post('/logout', [MemberLoginController::class, 'logout'])->name('member.logout');
+  Route::get('/logout', [MemberLoginController::class, 'logout'])->name('member.logout');
 
   Route::post('/prediksi/{id}', [PrediksiMember::class, 'store']);
 

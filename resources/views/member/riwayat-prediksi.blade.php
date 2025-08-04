@@ -3,6 +3,8 @@
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 @section('content')
   {{-- di isi konten --}}
     
@@ -44,16 +46,31 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">Peringkat</th>
-                                        <th>Nama Pengguna</th>
-                                        <th class="text-center">Poin</th>
+                                        <th>Pertandingan</th>
+                                        <th>Tebak Pemenang</th>
+                                        <th>Tebak Metode</th>
+                                        <th>Tebak Ronde</th>
+                                        <th>Poin</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($tontons as $ton)
+                                  @foreach($tebakans as $tbk)
                                   <tr>
                                       <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td><img src="https://www.gravatar.com/avatar/1?d=identicon&s={{ $ton->id }} " class="rounded-circle me-2" alt="Avatar"> {{ $ton->judul }} </td>
-                                      <td class="text-center"><i class="fas fa-star" style="color:gold" >&nbsp;&nbsp;</i>{{ $ton->status }}</td>
+                                      <td>{{ $tbk->pertandingan->judul }}</td>
+                                      <td>{{ $tbk->tebak_pemenang }}</td>
+                                      <td>{{ $tbk->tebak_metode }}</td>
+                                      <td>{{ $tbk->tebak_ronde }}</td>
+                                      <td>{{ $tbk->poin_all }}</td>
+                                      <td class="text-center">
+                                          @if($tbk->status_tebak_pemenang == 1)
+                                              <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
+                                          @else
+                                              <span class="text-muted">-</span>
+                                          @endif
+                                      </td>
+                                      
                                   </tr>
                                   @endforeach
                                 </tbody>

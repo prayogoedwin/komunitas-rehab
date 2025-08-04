@@ -43,17 +43,45 @@
                                 <table id="userTable" class="table table-striped table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Peringkat</th>
-                                        <th>Nama Pengguna</th>
-                                        <th class="text-center">Poin</th>
+                                        <th class="text-center">No</th>
+                                        <th>Pesanan</th>
+                                        <th class="text-center">Ukuran</th>
+                                        <th class="text-center">Status Order</th>
+                                        <th class="text-center">Status Kirim</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($tontons as $ton)
+                                  @foreach($orders as $ord)
                                   <tr>
                                       <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td><img src="https://www.gravatar.com/avatar/1?d=identicon&s={{ $ton->id }} " class="rounded-circle me-2" alt="Avatar"> {{ $ton->judul }} </td>
-                                      <td class="text-center"><i class="fas fa-star" style="color:gold" >&nbsp;&nbsp;</i>{{ $ton->status }}</td>
+                                      <td class="text-center">{{ $ord->varian }}</td>
+                                      <td class="text-center">{{ $ord->ukuran }}</td>
+                                      <td class="text-center">
+                                        @php
+                                            $statusOrderLabels = [
+                                                0 => ['label' => 'Menunggu', 'class' => 'secondary'],
+                                                1 => ['label' => 'Diproses', 'class' => 'primary'],
+                                                2 => ['label' => 'Selesai', 'class' => 'success'],
+                                                3 => ['label' => 'Ditolak', 'class' => 'danger'],
+                                            ];
+                                            $so = $statusOrderLabels[$ord->status_order] ?? ['label' => 'Tidak Diketahui', 'class' => 'dark'];
+                                        @endphp
+                                        <span class="badge bg-{{ $so['class'] }}">{{ $so['label'] }}</span>
+                                    </td>
+                                      <td class="text-center">
+                                        @php
+                                            $statusKirimLabels = [
+                                                0 => ['label' => 'Belum Dikirim', 'class' => 'warning'],
+                                                1 => ['label' => 'Sudah Dikirim', 'class' => 'success'],
+                                            ];
+                                            $sk = $statusKirimLabels[$ord->status_kirim] ?? ['label' => 'Tidak Diketahui', 'class' => 'dark'];
+                                        @endphp
+                                        <span class="badge bg-{{ $sk['class'] }}">{{ $sk['label'] }}</span>
+
+                                        @if($ord->status_kirim == 1 && !empty($ord->resi))
+                                            <br><small class="text-muted">Resi: {{ $ord->resi }}</small>
+                                        @endif
+                                    </td>
                                   </tr>
                                   @endforeach
                                 </tbody>

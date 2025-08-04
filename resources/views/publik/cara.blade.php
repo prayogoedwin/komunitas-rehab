@@ -13,7 +13,7 @@
       </div>
 
       <div class="text-center">
-        <a href="{{ route('publik') }}" class="btn btn-main">Kembali ke Beranda</a>
+        <a href="{{ route('publik') }}" class="btn btn-warning">Kembali ke Beranda</a>
       </div>
     </div>
 

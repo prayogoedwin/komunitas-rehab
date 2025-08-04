@@ -11,6 +11,7 @@ use App\Models\Member;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 
 
 use App\Models\ProdukStokVarian;
@@ -29,7 +30,7 @@ class DashboardMember extends Controller
             // Ambil data member, termasuk kolom poin_terkini
             $member = Member::find($memberId);
 
-            return view('publik.member.dashboard', [
+            return view('member.dashboard', [
                 'totalPrediksi' => $totalPrediksi,
                 'member' => $member,
             ]);
@@ -39,9 +40,22 @@ class DashboardMember extends Controller
     }
 
 
+    // public function getVarians($id)
+    // {
+    //     $varians = ProdukStokVarian::where('produk_id', $id)->get(['id', 'varian', 'ukuran', 'stok']);
+    //     return response()->json($varians);
+    // }
+
     public function getVarians($id)
     {
-        $varians = ProdukStokVarian::where('produk_id', $id)->get(['id', 'varian', 'ukuran', 'stok']);
+        $cacheKey = 'produk_varians_' . $id;
+        $expiration = now()->addMinutes(60); // atau sesuaikan durasi caching
+
+        $varians = Cache::remember($cacheKey, $expiration, function () use ($id) {
+            return ProdukStokVarian::where('produk_id', $id)
+                ->get(['id', 'varian', 'ukuran', 'stok']);
+        });
+
         return response()->json($varians);
     }
     
@@ -74,33 +88,26 @@ class DashboardMember extends Controller
         }
     }
     
-    public function riwayatPrediksi(){
-        $expiration = env('REDIS_TIME', 86400);
-
+    public function riwayatPrediksi()
+    {
         if (Auth::guard('member')->check()) {
-
             $memberId = Auth::guard('member')->id();
+            $tebakans = TebakPertandingan::with('pertandingan')
+                        ->where('member_id', $memberId)
+                        ->orderBy('id', 'desc')
+                        ->limit(50)
+                        ->get();
 
-            $tontons = Cache::remember('tonton_data', $expiration, function () {
-            return Pertandingan::where('status', 1)->get();
-            });
-
-            return view('member.riwayat-prediksi', compact('tontons'));
+            return view('member.riwayat-prediksi', compact('tebakans'));
         }
     }
 
+
     public function riwayatTukarPoin(){
-        $expiration = env('REDIS_TIME', 86400);
-
         if (Auth::guard('member')->check()) {
-
             $memberId = Auth::guard('member')->id();
-
-            $tontons = Cache::remember('tonton_data', $expiration, function () {
-            return Pertandingan::where('status', 1)->get();
-            });
-
-            return view('member.riwayat-poin', compact('tontons'));
+            $orders = Order::where('member_id', $memberId)->orderBy('id', 'desc')->get();
+            return view('member.riwayat-poin', compact('orders'));
         }
     }
 
@@ -153,6 +160,16 @@ class DashboardMember extends Controller
         $poinSatuan = $produkVarian->produk->poin ?? 0;
         $poinTotal = $poinSatuan * $jumlah;
 
+        // Cek apakah poin cukup
+        if ($member->poin_terkini < $poinTotal) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Poin Anda tidak cukup untuk menukar produk ini.'
+            ]);
+        }
+
+        $alamat = $member->alamat.' ('.$member->whatsapp.')';
+
         // Simpan Order
         Order::create([
             'member_id' => $member->id,
@@ -163,11 +180,22 @@ class DashboardMember extends Controller
             'jumlah' => $jumlah,
             'poin_satuan' => $poinSatuan,
             'poin_total' => $poinTotal,
-            'alamat_pengiriman' => $member->alamat,
+            'alamat_pengiriman' => $alamat,
         ]);
 
         // Kurangi stok
         $produkVarian->decrement('stok', $jumlah);
+
+        // Kurangi poin member
+        $member->decrement('poin_terkini', $poinTotal);
+
+        // Cache::forget('tipe_produk_data');
+        // Cache::forget('kategori_produk_data');
+        // Cache::forget('produk_data');
+
+        Cache::forget('produk_varians_' . $produkVarian->produk_id);
+
+       
 
         return response()->json([
             'status' => 'success',

@@ -93,7 +93,7 @@
     </div>
 
     <div class="text-center mt-4">
-      <a href="{{ route('publik') }}" class="btn btn-info">Kembali ke Beranda</a>
+      <a href="{{ route('publik') }}" class="btn btn-warning">Kembali ke Beranda</a>
       <button type="submit" class="btn btn-success" id="btnSimpan">Simpan Perubahan</button>
     </div>
   </form>

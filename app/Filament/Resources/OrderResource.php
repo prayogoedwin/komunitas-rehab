@@ -41,18 +41,39 @@ class OrderResource extends Resource
     {
         return $form
         ->schema([
+            
             Select::make('member_id')
                 ->label('Member')
-                ->relationship('member', 'name') // ganti 'nama' jika field lain
+                ->relationship('member', 'name') // Sesuaikan dengan nama kolom yang ingin ditampilkan
                 ->searchable()
-                ->required(),
+                ->required()
+                ->visible(fn (string $context) => $context === 'create'),
+
+            TextInput::make('member_id')
+                ->label('Member')
+                ->disabled()
+                ->dehydrated(false)
+                ->visible(fn (string $context) => $context === 'edit')
+                ->formatStateUsing(function ($state) {
+                    return optional(\App\Models\Member::find($state))->name ?? '-';
+                }),
 
             Select::make('produk_id')
                 ->label('Produk')
                 ->options(Produk::all()->pluck('nama', 'id'))
                 ->searchable()
                 ->required()
-                ->reactive(), // agar produk_id bisa diakses secara live
+                ->reactive()
+                ->visible(fn (string $context) => $context === 'create'),
+
+            TextInput::make('produk_id')
+                ->label('Produk')
+                ->disabled()
+                ->dehydrated(false)
+                ->visible(fn (string $context) => $context === 'edit')
+                ->formatStateUsing(function ($state) {
+                    return optional(Produk::find($state))->nama;
+                }),
 
             Select::make('produk_stok_varians_id')
                 ->label('Produk Varian')
@@ -62,15 +83,14 @@ class OrderResource extends Resource
 
                     return ProdukStokVarian::where('produk_id', $produkId)
                         ->get()
-                        ->mapWithKeys(function ($varian) {
-                            return [
-                                $varian->id => [
-                                    'label' => $varian->varian . ' (Stok: ' . $varian->stok . ')',
-                                    'disabled' => $varian->stok <= 0,
-                                ]
-                            ];
-                        })
+                        ->mapWithKeys(fn ($varian) => [
+                            $varian->id => $varian->varian . ' (Stok: ' . $varian->stok . ')',
+                        ])
                         ->toArray();
+                })
+                ->disableOptionWhen(function ($value) {
+                    $varian = ProdukStokVarian::find($value);
+                    return $varian && $varian->stok <= 0;
                 })
                 ->searchable()
                 ->required()
@@ -81,6 +101,17 @@ class OrderResource extends Resource
                         $set('varian', $varian->varian);
                         $set('ukuran', $varian->ukuran);
                     }
+                })
+                ->visible(fn (string $context) => $context === 'create'),
+
+            TextInput::make('produk_stok_varians_id')
+                ->label('Produk Varian')
+                ->disabled()
+                ->dehydrated(false)
+                ->visible(fn (string $context) => $context === 'edit')
+                ->formatStateUsing(function ($state) {
+                    $varian = ProdukStokVarian::find($state);
+                    return $varian ? $varian->varian . ' (Stok: ' . $varian->stok . ')' : '-';
                 }),
 
             TextInput::make('varian')
@@ -93,20 +124,24 @@ class OrderResource extends Resource
 
             TextInput::make('jumlah')
                 ->numeric()
-                ->required(),
+                ->required()
+                ->disabled(),
 
             TextInput::make('poin_satuan')
                 ->label('Poin/Satuan')
                 ->numeric()
-                ->required(),
+                ->required()
+                ->disabled(),
 
             TextInput::make('poin_total')
                 ->label('Total Poin')
                 ->numeric()
-                ->required(),
+                ->required()
+                ->disabled(),
 
             Textarea::make('alamat_pengiriman')
-                ->label('Alamat Pengiriman'),
+                ->label('Alamat Pengiriman')
+                ->disabled(),
 
             Select::make('status_order')
                 ->options([
@@ -114,21 +149,21 @@ class OrderResource extends Resource
                     1 => 'Diproses',
                     2 => 'Selesai',
                     3 => 'Ditolak',
-                ])
-                ->required(),
+                ]),
+              
 
             Select::make('status_kirim')
                 ->options([
                     0 => 'Belum Dikirim',
                     1 => 'Sudah Dikirim',
-                ])
-                ->required(),
+                ]),
+              
 
             TextInput::make('resi')
                 ->label('No. Resi'),
 
             FileUpload::make('foto')
-                    ->label('Foto Produk')
+                    ->label('Foto Produk Saat Dikirim')
                     ->disk('public') // PASTIKAN INI ADA
                     ->image()
                     ->directory('order-fotos') // Folder penyimpanan
@@ -139,8 +174,8 @@ class OrderResource extends Resource
                     ->imageResizeTargetWidth('800')
                     ->imageResizeTargetHeight('600')
                     ->columnSpanFull()
-                    ->required(fn (string $context): bool => $context === 'create') // Hanya required saat create
-                    ->required(),
+                    ->required(fn (string $context): bool => $context === 'create'), // Hanya required saat create
+                    
         ]);
     }
 

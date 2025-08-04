@@ -98,7 +98,7 @@
 
        <!-- Tombol Kembali -->
     <div class="text-center my-4">
-      <a href="{{ route('publik') }}" class="btn btn-secondary btn-sm"
+      <a href="{{ route('publik') }}" class="btn btn-warning btn-sm"
         >← Kembali ke Beranda</a
       >
     </div>
