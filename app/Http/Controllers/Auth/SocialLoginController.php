@@ -30,6 +30,7 @@ class SocialLoginController extends Controller
             [
                 'name' => $socialUser->getName(),
                 'provider' => $provider,
+                'status' => 1,
                 'provider_id' => $socialUser->getId(),
                 'password' => bcrypt(uniqid()), // Password acak
             ]
