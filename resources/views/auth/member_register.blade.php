@@ -143,10 +143,10 @@
       <!-- Login Form -->
       <div id="loginForm" class="form-section active">
 
-        <a href="{{ route('member.social.login', 'facebook') }}" class="btn btn-facebook btn-custom">
+        {{-- <a href="{{ route('member.social.login', 'facebook') }}" class="btn btn-facebook btn-custom">
           <i class="fab fa-facebook"></i>&nbsp;&nbsp;
           Login with Google
-        </a>
+        </a> --}}
 
         <a href="{{ route('member.social.login', 'google') }}" class="btn btn-email btn-custom">
           <i class="fab fa-google"></i>&nbsp;&nbsp;
