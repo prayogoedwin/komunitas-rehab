@@ -47,18 +47,18 @@ class User extends Authenticatable
         ];
     }
 
-    protected static function booted()
-    {
-        static::creating(function ($user) {
-            if ($user->password) {
-                $user->password = Hash::make($user->password);
-            }
-        });
+    // protected static function booted()
+    // {
+    //     static::creating(function ($user) {
+    //         if ($user->password) {
+    //             $user->password = Hash::make($user->password);
+    //         }
+    //     });
 
-        static::updating(function ($user) {
-            if ($user->isDirty('password')) {
-                $user->password = Hash::make($user->password);
-            }
-        });
-    }
+    //     static::updating(function ($user) {
+    //         if ($user->isDirty('password')) {
+    //             $user->password = Hash::make($user->password);
+    //         }
+    //     });
+    // }
 }
