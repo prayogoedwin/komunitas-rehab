@@ -89,6 +89,7 @@ Route::prefix('member')->group(function() {
 
   Route::get('/dashboard', [DashboardMember::class, 'index']) ->middleware('auth:member')->name('member.dashboard');
   Route::get('/profil', [DashboardMember::class, 'profilMember']) ->middleware('auth:member')->name('member.profil');
+  Route::post('/profil_update', [DashboardMember::class, 'updateProfil']) ->middleware('auth:member')->name('member.profil_update');
 
   Route::get('/riwayat_prdiksi', [DashboardMember::class, 'riwayatPrediksi']) ->middleware('auth:member')->name('member.riwayatprdiksi');
   Route::get('/riwayat_tukar_poin', [DashboardMember::class, 'riwayatTukarPoin']) ->middleware('auth:member')->name('member.riwayatpoin');

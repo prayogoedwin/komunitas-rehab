@@ -111,12 +111,9 @@ class DashboardMember extends Controller
 
             $memberId = Auth::guard('member')->id();
 
-            $expiration = env('REDIS_TIME', 86400);
-            $cara = Cache::remember('cara_data', $expiration, function () {
-                return Informasi::where('slug', 'cara_main')->first();
-            });
+            $profil = Member::where('id', $memberId)->first();
 
-            return view('member.profil', compact('cara'));
+            return view('member.profil', compact('profil'));
         }
     }
 
@@ -133,6 +130,13 @@ class DashboardMember extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Alamat masih kosong, mohon isi terlebih dahulu di halaman profil Anda.'
+            ]);
+        }
+
+        if (!$member->whatsapp ||$member->whatsapp == 0) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Whatsapp masih kosong / 0, mohon isi terlebih dahulu di halaman profil Anda.'
             ]);
         }
 
@@ -170,4 +174,36 @@ class DashboardMember extends Controller
             'message' => 'Berhasil menukar poin.'
         ]);
     }
-}
+
+    public function updateProfil(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'name' => 'nullable|string|max:255',
+            'password' => 'nullable|string|min:5',
+            'whatsapp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string|max:255',
+        ]);
+
+        $member_auth = Auth::guard('member')->user();
+        $member = Member::findOrFail($request->id);
+
+        // Update hanya jika user sesuai dengan yang login
+        if ($member_auth->id != $request->id ) {
+            abort(403, 'Akses tidak sah');
+        }
+
+        $member->name = $request->name;
+        $member->whatsapp = $request->whatsapp;
+        $member->alamat = $request->alamat;
+
+        // Cek jika password input bukan bintang-bintang (masking UI)
+        if ($request->password && $request->password !== '******') {
+            $member->password = Hash::make($request->password);
+        }
+
+        $member->save();
+
+        return redirect()->route('member.profil')->with('success', 'Profil berhasil diperbarui.');
+    }
+ }
