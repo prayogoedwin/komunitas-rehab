@@ -62,6 +62,7 @@ class MemberLoginController extends Controller {
       if (Auth::guard('member')->attempt([
           'email' => $request->email,
           'password' => $request->password,
+          'status' => 1,
       ])) {
           return redirect()->intended('/');
       }
