@@ -40,9 +40,13 @@ class BackendPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                \App\Filament\Widgets\WebInfoWidget::class,
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\MaintenanceToggle::class,
+               
                 \App\Filament\Resources\ClearCacheWidgetResource\Widgets\ClearCacheWidget::class,
+              
             ])
             ->navigationGroups([
                 'Pengguna', // Grup default Filament

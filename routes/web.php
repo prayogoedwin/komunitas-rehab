@@ -16,6 +16,8 @@ use App\Http\Controllers\Member\DashboardMember;
 
 use App\Http\Controllers\CacheController;
 
+use App\Middleware\CheckMaintenanceMode;
+
 
 
 
@@ -23,32 +25,40 @@ use App\Http\Controllers\CacheController;
 //     return view('welcome');
 // });
 
-Route::get('/', [PublikController::class, 'index'])->name('publik');
-Route::get('/howtoplay', [PublikController::class, 'caraMain'])->name('cara');
-Route::get('/faq', [PublikController::class, 'faq'])->name('faq');
-Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
-Route::get('/match', [PublikController::class, 'tonton'])->name('tonton');
-Route::get('/leaderboard', [PublikController::class, 'peringkat'])->name('peringkat');
-Route::get('/news', [PublikController::class, 'berita'])->name('berita');
-Route::get('/news/{id}', [PublikController::class, 'berita_detail'])->name('berita.detail');
-Route::get('/catalog', [PublikController::class, 'katalog'])->name('katalog');
+Route::middleware(CheckMaintenanceMode::class)->group(function () {
 
-Route::get('/login', function() {
-    return redirect()->route('member.login');
-})->name('login');
+    Route::get('/', [PublikController::class, 'index'])->name('publik');
+    Route::get('/howtoplay', [PublikController::class, 'caraMain'])->name('cara');
+    Route::get('/faq', [PublikController::class, 'faq'])->name('faq');
+    Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
+    Route::get('/match', [PublikController::class, 'tonton'])->name('tonton');
+    Route::get('/leaderboard', [PublikController::class, 'peringkat'])->name('peringkat');
+    Route::get('/news', [PublikController::class, 'berita'])->name('berita');
+    Route::get('/news/{id}', [PublikController::class, 'berita_detail'])->name('berita.detail');
+    Route::get('/catalog', [PublikController::class, 'katalog'])->name('katalog');
 
-Route::get('/test-email', function () {
-    \Illuminate\Support\Facades\Mail::raw('Ini hanya test email', function ($message) {
-        $message->to('gilaprediksi88@gmail.com')
-            ->subject('Test Email');
+    Route::get('/login', function() {
+        return redirect()->route('member.login');
+    })->name('login');
+
+    Route::get('/test-email', function () {
+        \Illuminate\Support\Facades\Mail::raw('Ini hanya test email', function ($message) {
+            $message->to('gilaprediksi88@gmail.com')
+                ->subject('Test Email');
+        });
+        return 'Email dikirim';
     });
-    return 'Email dikirim';
+
+    Route::middleware('auth')->get('/backend/clear-cache', [CacheController::class, 'clearAll']);
+
+    Route::get('/produk/{id}/varians', [DashboardMember::class, 'getVarians']);
+    Route::post('/cek-poin', [DashboardMember::class, 'cekPoin'])->name('cek-poin');
+
 });
 
-Route::middleware('auth')->get('/backend/clear-cache', [CacheController::class, 'clearAll']);
-
-Route::get('/produk/{id}/varians', [DashboardMember::class, 'getVarians']);
-Route::post('/cek-poin', [DashboardMember::class, 'cekPoin'])->name('cek-poin');
+Route::get('/maintenance', function () {
+    return view('maintenance');
+});
 
 
 
