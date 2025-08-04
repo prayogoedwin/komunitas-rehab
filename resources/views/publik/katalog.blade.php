@@ -191,4 +191,32 @@ $(document).on('click', '.btn-tukar', function () {
 });
 </script>
 
+<script>
+$('#formTukarPoin').on('submit', function (e) {
+    e.preventDefault();
+
+    const formData = $(this).serialize();
+
+    $.ajax({
+        url: "{{ route('member.tukarpoin') }}",
+        method: "POST",
+        data: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        success: function (res) {
+            if (res.status === 'error') {
+                alert(res.message);
+            } else {
+                alert('Berhasil tukar poin!');
+                location.reload(); // Atau tutup modal saja
+            }
+        },
+        error: function (xhr) {
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+        }
+    });
+});
+</script>
+
 @endpush

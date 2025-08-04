@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Password;
 use App\Models\TebakPertandingan;
 use App\Models\Pertandingan;
 use App\Models\Member;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+
 
 use App\Models\ProdukStokVarian;
 use App\Models\Produk;
@@ -116,5 +118,56 @@ class DashboardMember extends Controller
 
             return view('member.profil', compact('cara'));
         }
+    }
+
+    public function tukarPoin(Request $request)
+    {
+        $request->validate([
+            'produk_id' => 'required|integer',
+            'produk_stok_varian_id' => 'required|integer',
+        ]);
+
+        $member = Auth::guard('member')->user();
+
+        if (!$member->alamat) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Alamat masih kosong, mohon isi terlebih dahulu di halaman profil Anda.'
+            ]);
+        }
+
+        $produkVarian = ProdukStokVarian::with('produk')->findOrFail($request->produk_stok_varian_id);
+
+        if ($produkVarian->stok < 1) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Stok varian ini telah habis.'
+            ]);
+        }
+
+        $jumlah = 1;
+        $poinSatuan = $produkVarian->produk->poin ?? 0;
+        $poinTotal = $poinSatuan * $jumlah;
+
+        // Simpan Order
+        Order::create([
+            'member_id' => $member->id,
+            'produk_stok_varians_id' => $produkVarian->id,
+            'produk_id' => $produkVarian->produk_id,
+            'varian' => $produkVarian->varian,
+            'ukuran' => $produkVarian->ukuran,
+            'jumlah' => $jumlah,
+            'poin_satuan' => $poinSatuan,
+            'poin_total' => $poinTotal,
+            'alamat_pengiriman' => $member->alamat,
+        ]);
+
+        // Kurangi stok
+        $produkVarian->decrement('stok', $jumlah);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil menukar poin.'
+        ]);
     }
 }

@@ -27,6 +27,7 @@ class Member extends Model implements Authenticatable
         'poin_terkini',
         'provider',
         'provider_id',
+        'alamat'
     ];
 
     protected $hidden = [
