@@ -31,6 +31,41 @@ class TipeProdukResource extends Resource
     protected static ?string $modelLabel = 'Tipe Produk';
     protected static ?string $pluralModelLabel = 'Tipe Produk';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view tipe_produks');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view tipe_produks');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view tipe_produks');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create tipe_produks');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit tipe_produks');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete tipe_produks');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete tipe_produks');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

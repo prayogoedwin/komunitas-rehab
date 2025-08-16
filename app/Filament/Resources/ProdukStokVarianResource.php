@@ -34,6 +34,42 @@ class ProdukStokVarianResource extends Resource
     protected static ?string $modelLabel = 'Varian & Stok';
     protected static ?string $pluralModelLabel = 'Varian & Stok';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view produk_stok_varians');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view produk_stok_varians');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view produk_stok_varians');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create produk_stok_varians');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit produk_stok_varians');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete produk_stok_varians');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete produk_stok_varians');
+    }
+
+
     public static function form(Form $form): Form
     {   
         

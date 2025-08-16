@@ -30,6 +30,41 @@ class KateegoriProdukResource extends Resource
     protected static ?string $modelLabel = 'Kategori Produk';
     protected static ?string $pluralModelLabel = 'Kategori Produk';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view kateegori_produks');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view kateegori_produks');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view kateegori_produks');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create kateegori_produks');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit kateegori_produks');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete kateegori_produks');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete kateegori_produks');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

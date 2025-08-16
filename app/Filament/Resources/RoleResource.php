@@ -24,6 +24,41 @@ class RoleResource extends Resource
     protected static ?string $modelLabel = 'Role Admin';
     protected static ?string $pluralModelLabel = 'Role Admin';
 
+      public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view roles');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view roles');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view roles');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create roles');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit roles');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete roles');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete roles');
+    }
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
@@ -35,6 +70,7 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('guard_name')
                     ->default('web')
                     ->required(),
+
 
                 Forms\Components\Fieldset::make('Permissions for this Role')
                     ->schema(
@@ -62,6 +98,10 @@ class RoleResource extends Resource
         return $groups;
     }
 
+    
+
+    
+
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
@@ -84,4 +124,7 @@ class RoleResource extends Resource
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
+
+
+    
 }

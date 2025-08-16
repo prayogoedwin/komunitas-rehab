@@ -18,6 +18,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
 
+
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -31,6 +32,41 @@ class UserResource extends Resource
     // Label
     protected static ?string $modelLabel = 'Admin';
     protected static ?string $pluralModelLabel = 'Admin';
+
+        public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view users');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view users');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view users');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create users');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit users');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete users');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete users');
+    }
 
     public static function form(Form $form): Form
     {
@@ -92,10 +128,10 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->modifyQueryUsing(function ($query) {
-                $query->where('email', '!=', 'supermario@localhost.com');
-            });
+            ]);
+            // ->modifyQueryUsing(function ($query) {
+            //     $query->where('email', '!=', 'supermario@localhost.com');
+            // });
     }
 
     public static function getRelations(): array

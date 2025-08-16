@@ -52,6 +52,41 @@ class PertandinganResource extends Resource
     protected static ?string $modelLabel = 'Data Pertandingan';
     protected static ?string $pluralModelLabel = 'Data Pertandingan';
 
+     public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view pertandingans');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view pertandingans');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view pertandingans');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create pertandingans');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit pertandingans');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete pertandingans');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete pertandingans');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

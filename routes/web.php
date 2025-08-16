@@ -115,3 +115,21 @@ Route::prefix('member')->group(function() {
 // if (Auth::guard('member')->check()) {
 //   // Member terautentikasi
 // }
+
+Route::get('/debug-permission', function () {
+    if (!auth()->check()) {
+        return 'Not logged in';
+    }
+    
+    $user = auth()->user();
+    
+    return [
+        'user_id' => $user->id,
+        'user_email' => $user->email,
+        'has_view_users' => $user->can('view users'),
+        'all_permissions' => $user->getAllPermissions()->pluck('name')->toArray(),
+        'user_roles' => $user->getRoleNames()->toArray(),
+        'guard_name' => $user->guard_name ?? 'no guard',
+        'auth_guard' => auth()->getDefaultDriver(),
+    ];
+})->middleware('auth');

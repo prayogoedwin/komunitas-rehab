@@ -37,6 +37,42 @@ class OrderResource extends Resource
     protected static ?string $modelLabel = 'Order';
     protected static ?string $pluralModelLabel = 'Order';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view orders');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view orders');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view orders');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create orders');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit orders');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete orders');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete orders');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form

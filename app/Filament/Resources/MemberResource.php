@@ -32,6 +32,41 @@ class MemberResource extends Resource
     protected static ?string $modelLabel = 'Member';
     protected static ?string $pluralModelLabel = 'Member';
 
+     public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view members');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view members');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view members');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create members');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit members');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete members');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete members');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

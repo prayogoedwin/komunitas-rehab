@@ -32,6 +32,41 @@ class InformasiResource extends Resource
     protected static ?string $modelLabel = 'Informasi';
     protected static ?string $pluralModelLabel = 'Informasi';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view informasis');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view informasis');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view informasis');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create informasis');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit informasis');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete informasis');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete informasis');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

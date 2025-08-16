@@ -34,6 +34,41 @@ class TebakPertandinganResource extends Resource
     protected static ?string $modelLabel = 'Tebakan Member';
     protected static ?string $pluralModelLabel = 'Tebakan Member';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view tebak_pertandingans');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view tebak_pertandingans');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view tebak_pertandingans');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create tebak_pertandingans');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit tebak_pertandingans');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete tebak_pertandingans');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete tebak_pertandingans');
+    }
+
    
     public static function form(Form $form): Form
 {
