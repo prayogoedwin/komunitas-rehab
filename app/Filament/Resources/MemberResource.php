@@ -17,6 +17,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class MemberResource extends Resource
 {
@@ -67,46 +69,69 @@ class MemberResource extends Resource
         return auth()->check() && auth()->user()->can('delete members');
     }
 
-    public static function form(Form $form): Form
+   public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                 TextInput::make('name')->required(),
-                 TextInput::make('email')
+                TextInput::make('name')->required(),
+                TextInput::make('email')
                     ->required()
-                    ->email() // Validasi format email
+                    ->email()
                     ->unique(
-                        table: 'members', // Ganti dengan nama tabel yang benar
+                        table: 'members',
                         column: 'email',
-                        ignoreRecord: true // Mengabaikan record saat ini saat edit
+                        ignoreRecord: true
                     ),
-                 TextInput::make('password')
-                    ->required()
-                    ->password() // Ubah menjadi input type password
-                    ->revealable() // Tambahkan tombol lihat/sembunyikan
-                    ->minLength(8) // Validasi panjang minimum
-                    ->confirmed() // Untuk fitur konfirmasi password
-                    ->rules(['nullable']) // Tidak wajib diisi saat edit
-                    ->dehydrated(fn ($state) => filled($state)) // Hindari hash jika kosong
-                    ->autocomplete('new-password') // Hindari autofill browser
-                    ->prefixIcon('heroicon-o-lock-closed'), // Tambahkan ikon
-                // Field konfirmasi password (opsional tapi disarankan)
-                TextInput::make('password_confirmation')
-                    ->requiredWith('password')
-                    ->password()
-                    ->revealable()
-                    ->label('Confirm Password')
-                    ->dehydrated(false), // Jangan simpan ke database
+                TextInput::make('password')
+                ->required(fn (string $operation): bool => $operation === 'create')
+                ->password()
+                ->revealable()
+                ->minLength(8)
+                ->confirmed()
+                ->rules(['nullable'])
+                ->dehydrated(fn ($state) => filled($state))
+                ->autocomplete('new-password')
+                ->prefixIcon('heroicon-o-lock-closed')
+                ->placeholder(fn (string $operation): string => 
+                    $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
+                ),
+            TextInput::make('password_confirmation')
+                ->requiredWith('password')
+                ->password()
+                ->revealable()
+                ->label('Confirm Password')
+                ->dehydrated(false)
+                ->placeholder(fn (string $operation): string => 
+                    $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
+                ),
                 TextInput::make('whatsapp')
                     ->label('No Whatsapp')
                     ->default(0),
-                TextInput::make('poin')
+                TextInput::make('poin_terkini')
                     ->label('Poin Member')
-                    ->readOnly() // Alternatif: non-editable tapi dengan style berbeda
-                    ->default(0)
-                    ->numeric()
-                    ->minValue(0)
-                    ->maxValue(1000000),
+                    ->readonly()
+                    ->default(0),
+
+                // Field tambahan_poin hanya muncul di edit
+                TextInput::make('tambahan_poin')
+                ->label('Tambahan Poin')
+                ->numeric()
+                ->placeholder('Masukkan tambahan poin')
+                ->hidden(fn (string $operation): bool => $operation === 'create')
+                ->afterStateUpdated(function (Get $get, Set $set, $state, $record) {
+                    if ($state !== null && $state !== '' && $record) {
+                        $originalPoin = $record->poin_terkini; // Poin asli dari database
+                        $tambahanPoin = (int) $state;
+                        $newTotal = $originalPoin + $tambahanPoin;
+                        $set('poin_terkini', $newTotal);
+                    } elseif (($state === null || $state === '') && $record) {
+                        // Jika field kosong, kembalikan ke poin asli
+                        $set('poin_terkini', $record->poin_terkini);
+                    }
+                })
+                ->live()
+                ->dehydrated(false), // Tidak disimpan ke database
+
                 Toggle::make('status')
                     ->label('Status'),
             ]);
@@ -174,4 +199,6 @@ class MemberResource extends Resource
             'edit' => Pages\EditMember::route('/{record}/edit'),
         ];
     }
+
+    
 }
