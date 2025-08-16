@@ -128,10 +128,10 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
-            // ->modifyQueryUsing(function ($query) {
-            //     $query->where('email', '!=', 'supermario@localhost.com');
-            // });
+            ])
+            ->modifyQueryUsing(function ($query) {
+                $query->where('email', '!=', 'supermario@localhost.com');
+            });
     }
 
     public static function getRelations(): array
