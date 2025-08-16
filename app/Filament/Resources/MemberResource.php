@@ -26,7 +26,7 @@ class MemberResource extends Resource
 
     //setting letak grup menu
     protected static ?string $navigationGroup = 'Pengguna';
-    protected static ?int $navigationSort = 2; // Urutan setelah Kategori
+    protected static ?int $navigationSort = 4; // Urutan setelah Kategori
 
     // Label
     protected static ?string $modelLabel = 'Member';

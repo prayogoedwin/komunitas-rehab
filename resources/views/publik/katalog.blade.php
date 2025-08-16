@@ -93,7 +93,7 @@
                   data-tipe="{{ $prd->tipe->nama }}"
                   data-foto="{{ asset('storage/'.$prd->foto) }}"
                 >
-                  Tukar {{ $prd->poin }} Poin
+                  Tukar {{ number_format($prd->poin) }} Poin
                 </button>
 
               </div>

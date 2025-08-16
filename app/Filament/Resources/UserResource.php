@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Select;
 
 class UserResource extends Resource
 {
@@ -25,7 +26,7 @@ class UserResource extends Resource
 
      //setting letak grup menu
     protected static ?string $navigationGroup = 'Pengguna';
-    protected static ?int $navigationSort = 1; // Urutan setelah Kategori
+    protected static ?int $navigationSort = 3; // Urutan setelah Kategori
 
     // Label
     protected static ?string $modelLabel = 'Admin';
@@ -35,8 +36,12 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
+                TextInput::make('name')->required()->columnSpanFull(),
                 TextInput::make('email')->required(),
+                Select::make('roles')
+                ->relationship('roles', 'name')
+                ->preload()
+                ->label('Roles'),
                 TextInput::make('password')
                 ->required()
                 ->password() // Ubah menjadi input type password
@@ -71,7 +76,11 @@ class UserResource extends Resource
                     ->label('Email')
                     ->searchable()
                     ->sortable(),
-            ])
+                TextColumn::make('roles.name')
+                    ->label('Role')
+                    ->getStateUsing(fn($record) => $record->roles->pluck('name')->join(', '))
+                    ->sortable(),
+                            ])
             ->defaultSort('created_at', 'desc')
             ->filters([
                 //
