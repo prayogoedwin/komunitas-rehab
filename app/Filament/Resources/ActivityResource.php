@@ -156,8 +156,32 @@ class ActivityResource extends Resource
                 //
             ])
             ->actions([
-                //Tables\Actions\ViewAction::make(),
-                //Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->modalHeading('Log Detail')
+                    ->modalContent(function ($record) {
+                        $properties = $record->properties?->toArray() ?? [];
+
+                        // bikin HTML table dari array
+                        $html = '<div class="space-y-2">';
+                        foreach ($properties as $key => $value) {
+                            $html .= '<div class="border-b pb-2">';
+                            $html .= "<strong class='text-sm text-gray-700 uppercase'>{$key}</strong>";
+
+                            if (is_array($value)) {
+                                $html .= '<pre class="text-xs bg-gray-100 p-2 rounded mt-1 overflow-x-auto" style="background-color:#000">' 
+                                    . json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) 
+                                    . '</pre>';
+                            } else {
+                                $html .= '<div class="text-sm text-gray-800">' . e($value) . '</div>';
+                            }
+
+                            $html .= '</div>';
+                        }
+                        $html .= '</div>';
+
+                        return new \Illuminate\Support\HtmlString($html);
+                    })
+                    ->modalWidth('2xl'),
             ])
             ->bulkActions([
                 //Tables\Actions\BulkActionGroup::make([
