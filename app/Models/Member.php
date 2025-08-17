@@ -12,9 +12,22 @@ use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use Illuminate\Support\Facades\Cache;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Member extends Model implements Authenticatable
 {
-    use HasFactory, SoftDeletes, AuthenticatableTrait, CanResetPasswordTrait;
+    use HasFactory, SoftDeletes, AuthenticatableTrait, CanResetPasswordTrait, LogsActivity;
+
+     public function getActivitylogOptions(): LogOptions
+        {
+            return LogOptions::defaults()
+                ->logAll() // Log semua atribut
+                ->logOnlyDirty() // Hanya log field yang berubah
+                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+                ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");
+        }
+
     protected $table = 'members';
 
     protected $fillable = [

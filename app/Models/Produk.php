@@ -10,9 +10,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Produk extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
+
+     public function getActivitylogOptions(): LogOptions
+        {
+            return LogOptions::defaults()
+                ->logAll() // Log semua atribut
+                ->logOnlyDirty() // Hanya log field yang berubah
+                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+                ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");
+        }
     protected $table = 'produks';
 
     protected $fillable = [

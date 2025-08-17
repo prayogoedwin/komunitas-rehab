@@ -17,7 +17,7 @@ class Kategori extends Model
      public function getActivitylogOptions(): LogOptions
         {
             return LogOptions::defaults()
-                ->logOnly(['nama', 'deskripsi', 'tambahan_pilihan', 'tipe_tambahan_pilihan']) // Field yang di-log
+                ->logAll() // Log semua atribut
                 ->logOnlyDirty() // Hanya log field yang berubah
                 ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
                 ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");

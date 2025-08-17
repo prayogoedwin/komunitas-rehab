@@ -7,10 +7,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 class Pertandingan extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogsActivity;
+
+     public function getActivitylogOptions(): LogOptions
+        {
+            return LogOptions::defaults()
+                ->logAll() // Log semua atribut
+                ->logOnlyDirty() // Hanya log field yang berubah
+                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+                ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");
+        }
 
     protected $table = 'pertandingans';
     protected $primaryKey = 'id';
