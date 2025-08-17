@@ -7,9 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Kategori extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
+
+     public function getActivitylogOptions(): LogOptions
+        {
+            return LogOptions::defaults()
+                ->logOnly(['nama', 'deskripsi', 'tambahan_pilihan', 'tipe_tambahan_pilihan']) // Field yang di-log
+                ->logOnlyDirty() // Hanya log field yang berubah
+                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+                ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");
+        }
 
     /**
      * The table associated with the model.
