@@ -20,7 +20,7 @@ class Faq extends Model
                  ->logAll() // Log semua atribut
                 ->logOnlyDirty() // Hanya log field yang berubah
                 ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
-                ->setDescriptionForEvent(fn(string $eventName) => "Category {$eventName}");
+                ->setDescriptionForEvent(fn(string $eventName) => "FAQ {$eventName}");
         }
 
 
