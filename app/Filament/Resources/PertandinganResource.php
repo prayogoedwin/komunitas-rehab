@@ -255,6 +255,11 @@ class PertandinganResource extends Resource
                         ->label('Poin Ronde')
                         ->numeric()
                         ->default(0),
+
+                    TextInput::make('bonus_poin')
+                        ->label('Bonus Poin (Biarkan tetap 0 jika tidak ada bonus poin)')
+                        ->numeric()
+                        ->default(0),
                 ])
                 ->columns(2),
                 
@@ -389,6 +394,7 @@ class PertandinganResource extends Resource
                             'metode_menang_poin' => $record->metode_menang_poin,
                             'ronde' => $record->ronde,
                             'ronde_poin' => $record->ronde_poin,
+                            'bonus_poin' => $record->bonus_poin,
                         ];
                     })
                     ->action(fn (array $data, $record) => self::handleTentukanPemenang($data, $record))
@@ -463,6 +469,11 @@ class PertandinganResource extends Resource
                         ->label('Poin Ronde')
                         ->numeric()
                         ->default(0),
+                    
+                    Forms\Components\TextInput::make('bonus_poin')
+                        ->label('Poin Bonus')
+                        ->numeric()
+                        ->default(0),
                 ]),
         ];
     }
@@ -489,6 +500,7 @@ class PertandinganResource extends Resource
             'metode_menang_poin' => $data['metode_menang_poin'],
             'ronde' => $data['ronde'],
             'ronde_poin' => $data['ronde_poin'],
+            'bonus_poin' => $data['bonus_poin'],
         ]);
 
         // Ambil semua tebakan terkait pertandingan
@@ -528,6 +540,14 @@ class PertandinganResource extends Resource
                 $tebakan->poin_tebak_pemenang +
                 $tebakan->poin_tebak_metode +
                 $tebakan->poin_tebak_ronde;
+
+            if (
+                $tebakan->status_tebak_pemenang == 1 &&
+                $tebakan->status_tebak_metode == 1 &&
+                $tebakan->status_tebak_ronde == 1
+            ) {
+                $tebakan->poin_all += $record->bonus_poin;
+            }
 
 
             $tebakan->save();
