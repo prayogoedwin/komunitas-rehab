@@ -11,7 +11,19 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         // Buat permission
-        $permissions = ['view users', 'create users', 'edit users', 'delete users'];
+        $permissions = [
+            'view roles', 'create roles', 'edit roles', 'delete roles',
+            'view permissions', 'create permissions', 'edit permissions', 'delete permissions',
+            'view users', 'create users', 'edit users', 'delete users',
+            'view activity_log', 'create activity_log', 'edit activity_log', 'delete activity_log',
+            'view members', 'create members', 'edit members', 'delete members',
+            'view banners', 'create banners', 'edit banners', 'delete banners',
+            'view faqs', 'create faqs', 'edit faqs', 'delete faqs',
+            'view informasis', 'create informasis', 'edit informasis', 'delete informasis',
+            'view beritas', 'create beritas', 'edit beritas', 'delete beritas',
+            'view kategoris', 'create kategoris', 'edit kategoris', 'delete kategoris',   
+        
+        ];
         foreach ($permissions as $perm) {
             Permission::firstOrCreate(['name' => $perm, 'guard_name' => 'web']);
         }
