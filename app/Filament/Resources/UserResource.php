@@ -130,7 +130,7 @@ class UserResource extends Resource
                 ]),
             ])
             ->modifyQueryUsing(function ($query) {
-                $query->where('email', '!=', 'supermario@localhost.com');
+                $query->where('email', '!=', 'superadmin@filament.com');
             });
     }
 
