@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
+      background: #fff;
       color: #ffffff;
       display: flex;
       flex-direction: column;
@@ -27,12 +27,12 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
-      color: #00bcd4;
+      color: #000;
     }
 
     p {
       font-size: 1.2rem;
-      color: #ccc;
+      color: #000;
     }
 
     .logo {
@@ -53,10 +53,9 @@
 </head>
 <body>
   <div class="container">
-    <img src="{{ asset('img/logo.png') }}" alt="gilaprediksi" class="logo" />
-    <h1>Situs Sedang Dalam Proses Maintenis</h1>
-    <p>Kami sedang memperbaiki situs ini.</p>
-    <p>Mohon kembali beberapa saat lagi. Terima kasih atas pengertian Anda.</p>
+    {{-- <img src="{{ asset('img/logo.png') }}" alt="filament-starter" class="logo" /> --}}
+    <h1>Maintenis</h1>
+    <p>Mohon Tunggu Sedang Perbaikan, Terima kasih.</p>
   </div>
 </body>
 </html>

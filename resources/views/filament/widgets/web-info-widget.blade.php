@@ -3,18 +3,19 @@
         <div class="flex items-center justify-between">
             {{-- Logo di kiri --}}
             <div class="flex items-center space-x-4">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-10 w-auto" />
+                {{-- <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-10 w-auto" /> --}}
+                FILAMENT STARTER
             </div>
 
             {{-- Versi di kanan --}}
             <div class="flex items-center space-x-6">
                 <div class="flex items-center space-x-1 text-sm text-gray-300">
-                    <x-heroicon-o-book-open class="w-4 h-4" />
-                    <span>Versi</span>
+                   
+                    <span>Versi: &nbsp;</span>
                 </div>
 
                 <div class="flex items-center space-x-1 text-sm text-gray-300">
-                    <x-heroicon-o-cog class="w-4 h-4" />
+              
                     <span>2.0.0 (Beta)</span>
                 </div>
             </div>

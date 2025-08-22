@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+
 class BackendPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -30,8 +31,9 @@ class BackendPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->brandLogo(asset('img/logo.png'))
-            ->brandLogoHeight('4rem') // Ubah sesuai kebutuhan (3rem, 4rem, dll)
+            ->brandName('FILAMENT-STARTER')
+            // ->brandLogo(asset('img/logo.png'))
+            // ->brandLogoHeight('4rem') // Ubah sesuai kebutuhan (3rem, 4rem, dll)
             ->favicon(asset('img/favicon_io/favicon.ico'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -40,11 +42,9 @@ class BackendPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                \App\Filament\Widgets\WebInfoWidget::class,
                 Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\WebInfoWidget::class,
                 \App\Filament\Widgets\MaintenanceToggle::class,
-               
                 \App\Filament\Resources\ClearCacheWidgetResource\Widgets\ClearCacheWidget::class,
               
             ])
