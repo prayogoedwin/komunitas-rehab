@@ -15,8 +15,8 @@ class PermissionResource extends Resource
      protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
      //setting letak grup menu
-    protected static ?string $navigationGroup = 'Pengguna';
-    protected static ?int $navigationSort = 2; // Urutan setelah Kategori
+    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?int $navigationSort = 3; // Urutan setelah Kategori
 
     // Label
     protected static ?string $modelLabel = 'Permission Admin';

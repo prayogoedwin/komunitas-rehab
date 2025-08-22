@@ -2,33 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
-class DatabaseSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Jalankan seeder untuk Role & Permission
-        $this->call([
-            RoleSeeder::class,
-            RolePermissionSeeder::class,
-        ]);
+        // Buat role jika belum ada
+        $roles = ['super_admin', 'admin'];
 
-        // Buat user Super Administrator
-        $user = User::updateOrCreate(
-            ['email' => 'superadmin@filament.com'],
-            [
-                'name' => 'Super Administrator',
-                'password' => Hash::make('password123'),
-            ]
-        );
+        foreach ($roles as $roleName) {
+            Role::firstOrCreate(
+                ['name' => $roleName, 'guard_name' => 'web']
+            );
+        }
 
-        // Assign role super_admin ke user ini
-        $user->assignRole('super_admin');
+        // Optional: kasih semua permission ke super_admin
+        $superAdmin = Role::where('name', 'super_admin')->first();
+        if ($superAdmin) {
+            $superAdmin->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        }
     }
 }

@@ -24,8 +24,8 @@ class KategoriResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
       //setting letak grup menu
-    protected static ?string $navigationGroup = 'Pertandingan';
-    protected static ?int $navigationSort = 1; // Urutan setelah Kategori
+    protected static ?string $navigationGroup = 'Web Setting';
+    protected static ?int $navigationSort = 5; // Urutan setelah Kategori
 
     // Label
     protected static ?string $modelLabel = 'Kategori';

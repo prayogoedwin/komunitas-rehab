@@ -20,6 +20,14 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+     //setting letak grup menu
+    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?int $navigationSort = 1; // Urutan setelah Kategori
+
+    // Label
+    protected static ?string $modelLabel = 'Log Admin';
+    protected static ?string $pluralModelLabel = 'Log Admin';
+
      public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view activity_log');

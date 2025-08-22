@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Jalankan seeder untuk Role & Permission
+        $this->call([
+            RoleSeeder::class,
+            RolePermissionSeeder::class,
         ]);
+
+        // Buat user Super Administrator
+        $user = User::updateOrCreate(
+            ['email' => 'superadmin@filament.com'],
+            [
+                'name' => 'Super Administrator',
+                'password' => Hash::make('password123'),
+            ]
+        );
+
+        // Assign role super_admin ke user ini
+        $user->assignRole('super_admin');
     }
 }

@@ -49,9 +49,8 @@ class BackendPanelProvider extends PanelProvider
               
             ])
             ->navigationGroups([
+                'Sistem', // Grup default Filament
                 'Pengguna', // Grup default Filament
-                'Pertandingan', // Grup custom
-                'Katalog', // Grup custom
                 'Web Setting', // Grup custom
                
                
