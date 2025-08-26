@@ -1,0 +1,352 @@
+@extends('publik.app')
+@section('content')
+    <!-- Forum Hero Section -->
+    <section class="forum-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Forum Komunitas Rehab</h1>
+                    <p class="lead">
+                        Ruang aman dan inklusif untuk berbagi pengalaman, motivasi, dan
+                        dukungan dalam perjalanan rehabilitasi.
+                    </p>
+                    <a href="#" class="btn btn-primary me-2">Bergabung Diskusi</a>
+                    <a href="#" class="btn btn-outline-primary">Lihat Panduan Forum</a>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Diskusi Komunitas" class="img-fluid rounded shadow" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Benefits Section -->
+    <section class="container my-5">
+        <h2 class="section-title text-center">
+            Mengapa Bergabung dengan Forum Kami?
+        </h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt fa-3x"></i>
+                    </div>
+                    <h3>Ruang Aman & Inklusif</h3>
+                    <p>
+                        Tempat yang nyaman bagi pasien, keluarga, dan pendamping untuk
+                        meningkatkan motivasi tanpa rasa khawatir.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping fa-3x"></i>
+                    </div>
+                    <h3>Dukungan Sosial</h3>
+                    <p>
+                        Membangun jaringan dukungan yang memperkuat semangat pasien dalam
+                        menjalani proses pemulihan.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments fa-3x"></i>
+                    </div>
+                    <h3>Diskusi Interaktif</h3>
+                    <p>
+                        Sarana diskusi antara pasien, tenaga kesehatan, dan masyarakat
+                        umum tentang rehabilitasi mandiri.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Categories Section -->
+    <section class="container my-5">
+        <h2 class="section-title">Kategori Forum</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="category-card card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-running fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 mb-0">Tips Latihan Mandiri</h3>
+                        </div>
+                        <p class="card-text">
+                            Diskusi tentang latihan harian, variasi gerakan, serta cara
+                            menyesuaikan latihan dengan kondisi tubuh.
+                        </p>
+                        <div class="mt-3">
+                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 245 diskusi</span>
+                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 563 partisipan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="category-card card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-tint fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 mb-0">Manajemen Nyeri & Aktivitas Harian</h3>
+                        </div>
+                        <p class="card-text">
+                            Saling berbagi pengalaman mengelola nyeri, kelelahan, tidur,
+                            nutrisi, dan aktivitas rumah tangga/kerja.
+                        </p>
+                        <div class="mt-3">
+                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 189 diskusi</span>
+                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 428 partisipan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="category-card card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-lightbulb fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 mb-0">Inspirasi & Motivasi</h3>
+                        </div>
+                        <p class="card-text">
+                            Kutipan, testimoni, kisah sukses, atau hal-hal kecil yang
+                            membantu menjaga semangat.
+                        </p>
+                        <div class="mt-3">
+                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 312 diskusi</span>
+                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 721 partisipan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="category-card card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-home fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 mb-0">Keluarga & Pendamping</h3>
+                        </div>
+                        <p class="card-text">
+                            Ruang bagi keluarga pasien untuk berbagi peran dan cara
+                            mendukung anggota keluarga yang sedang pulih.
+                        </p>
+                        <div class="mt-3">
+                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 156 diskusi</span>
+                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 342 partisipan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="category-card card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-user-md fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 mb-0">Tanya Ahli</h3>
+                        </div>
+                        <p class="card-text">
+                            Kolom tanya jawab terbatas dengan tenaga kesehatan/rehabilitasi
+                            yang bersedia menjadi moderator.
+                        </p>
+                        <div class="mt-3">
+                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 98 diskusi</span>
+                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 215 partisipan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Discussions Section -->
+    <section class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title mb-0">Diskusi Terbaru</h2>
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i> Diskusi Baru
+            </button>
+        </div>
+
+        <div class="forum-card">
+            <div class="d-flex align-items-start">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="User" class="user-avatar me-3" />
+                <div class="flex-grow-1">
+                    <h4 class="h5">
+                        Bagaimana mengatasi nyeri punggung setelah duduk lama?
+                    </h4>
+                    <p class="text-muted">
+                        Saya bekerja sebagai programmer dan sering duduk lebih dari 8 jam
+                        sehari. Akhir-akhir ini punggung bagian bawah sering terasa nyeri.
+                        Ada saran latihan atau posisi duduk yang baik?
+                    </p>
+                    <div class="d-flex flex-wrap align-items-center mt-3">
+                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Ahmad S.</span>
+                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 2 jam yang lalu</span>
+                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 14 balasan</span>
+                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 87 dilihat</span>
+                        <div class="ms-auto">
+                            <span class="tag">#nyeripunggung</span>
+                            <span class="tag">#latihan</span>
+                            <span class="tag">#ergonomi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forum-card">
+            <div class="d-flex align-items-start">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="User" class="user-avatar me-3" />
+                <div class="flex-grow-1">
+                    <h4 class="h5">Tips menghadapi kelelahan kronis pasca stroke</h4>
+                    <p class="text-muted">
+                        Ayah saya mengalami stroke 6 bulan lalu dan sekarang sering
+                        mengeluh kelelahan berat bahkan setelah aktivitas ringan. Apakah
+                        ini normal? Bagaimana cara mengatur energinya dengan baik?
+                    </p>
+                    <div class="d-flex flex-wrap align-items-center mt-3">
+                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Sari W.</span>
+                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 1 hari yang lalu</span>
+                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 9 balasan</span>
+                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 64 dilihat</span>
+                        <div class="ms-auto">
+                            <span class="tag">#strokepulih</span>
+                            <span class="tag">#kelelahan</span>
+                            <span class="tag">#manajemenenergi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forum-card">
+            <div class="d-flex align-items-start">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="User" class="user-avatar me-3" />
+                <div class="flex-grow-1">
+                    <h4 class="h5">
+                        Pengalaman menggunakan alat bantu jalan setelah operasi lutut
+                    </h4>
+                    <p class="text-muted">
+                        Saya baru saja menjalani operasi penggantian lutut dan sedang
+                        menggunakan walker. Ada tips untuk beradaptasi dengan alat bantu
+                        jalan? Kapan biasanya bisa beralih ke tongkat?
+                    </p>
+                    <div class="d-flex flex-wrap align-items-center mt-3">
+                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Budi R.</span>
+                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 2 hari yang lalu</span>
+                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 7 balasan</span>
+                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 53 dilihat</span>
+                        <div class="ms-auto">
+                            <span class="tag">#operasilutut</span>
+                            <span class="tag">#alatbantu</span>
+                            <span class="tag">#mobilitas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary">Lihat Semua Diskusi</a>
+        </div>
+    </section>
+
+    <!-- Member Features Section -->
+    <section class="py-5 my-5" style="background-color: #f0f8ff">
+        <div class="container">
+            <h2 class="section-title text-center">Fitur Anggota Forum</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-id-card fa-3x"></i>
+                        </div>
+                        <h3>Profil Anggota</h3>
+                        <p>
+                            Biodata singkat dengan informasi jenis kondisi dan lama
+                            pemulihan (opsional).
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit fa-3x"></i>
+                        </div>
+                        <h3>Posting & Balasan</h3>
+                        <p>
+                            Berbagi tulisan, gambar, atau tautan terkait pemulihan dan
+                            rehabilitasi.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-tags fa-3x"></i>
+                        </div>
+                        <h3>Tag & Pencarian</h3>
+                        <p>
+                            Memudahkan menemukan topik spesifik seperti #nyeripunggung,
+                            #tidur, #latihan.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-thumbs-up fa-3x"></i>
+                        </div>
+                        <h3>Like & Komentar</h3>
+                        <p>
+                            Fitur untuk mendorong interaksi positif antar anggota komunitas.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt fa-3x"></i>
+                        </div>
+                        <h3>Moderasi Aman</h3>
+                        <p>
+                            Aturan forum (netiket) agar tetap ramah, empatik, dan bebas
+                            stigma.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 mb-5" style="background-color: var(--secondary-color)">
+        <div class="container text-center py-4">
+            <h2 class="mb-4">Tertarik untuk Bergabung?</h2>
+            <p class="lead mb-4">
+                Dapatkan dukungan rehabilitasi yang Anda butuhkan dengan bergabung
+                bersama komunitas kami.
+            </p>
+            <a href="#" class="btn btn-primary me-3">Dukungan</a>
+            <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
+        </div>
+    </section>
+@endsection
