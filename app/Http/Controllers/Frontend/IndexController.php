@@ -27,7 +27,7 @@ class IndexController extends Controller
         $data = Cache::remember('forum', 86400, function () {
             return Forum::with('kategori', 'sender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->get();
         });
-        $kategori = Cache::remember('kategori', 86400, function () {
+        $kategori = Cache::remember('kategori_forum', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'forum')->get();
         });
         return view('publik.front.forum', compact('data', 'kategori'));
@@ -38,7 +38,7 @@ class IndexController extends Controller
         $data = Cache::remember('edukasi', 86400, function () {
             return Edukasi::with('kategori')->orderBy('created_at', 'desc')->get();
         });
-        $kategori = Cache::remember('kategori', 86400, function () {
+        $kategori = Cache::remember('kategori_edukasi', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'edukasi')->get();
         });
         return view('publik.front.education', compact('data', 'kategori'));
@@ -55,7 +55,7 @@ class IndexController extends Controller
         $data = Cache::remember('proyek', 86400, function () {
             return Proyek::with('kategori')->orderBy('created_at', 'desc')->get();
         });
-        $kategori = Cache::remember('kategori', 86400, function () {
+        $kategori = Cache::remember('kategori_proyek', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'proyek')->get();
         });
         return view('publik.front.proyek', compact('data', 'kategori'));
