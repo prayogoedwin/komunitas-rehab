@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Edukasi;
+use App\Models\KategoriMaster;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -24,7 +26,15 @@ class IndexController extends Controller
 
     public function edukasi()
     {
-        return view('publik.front.education');
+        $data = Edukasi::get();
+        $kategori = KategoriMaster::where('jenis_kategori', 'edukasi')->get();
+        return view('publik.front.education', compact('data', 'kategori'));
+    }
+
+    public function detailEdukasi($slug)
+    {
+        $data = Edukasi::with('kategori')->where('slug', $slug)->first();
+        return view('publik.front.detail-education', compact('data'));
     }
 
     public function proyek()

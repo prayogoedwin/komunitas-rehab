@@ -36,4 +36,19 @@ class KategoriMaster extends Model
             Cache::forget('kategori_halaman');
         });
     }
+
+    public function edukasi()
+    {
+        return $this->hasOne(Edukasi::class);
+    }
+
+    public function edukasis()
+    {
+        return $this->hasOne(Edukasi::class);
+    }
+
+    public function forum()
+    {
+        return $this->hasOne(Forum::class);
+    }
 }
