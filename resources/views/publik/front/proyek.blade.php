@@ -82,87 +82,44 @@
 
         <div class="row">
             <!-- Project Card 3 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="project-card card h-100">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Latihan Pernapasan" />
-                        <span class="card-status status-ongoing">Berjalan</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="h5 card-title">
-                            Workshop Teknik Pernapasan untuk Manajemen Stres
-                        </h3>
-                        <p class="card-text">
-                            Serangkaian workshop yang mengajarkan teknik pernapasan efektif
-                            untuk membantu mengelola stres dan kecemasan selama proses
-                            rehabilitasi.
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="project-stats"><i class="fas fa-users me-1"></i> 200 peserta</span>
-                            <span class="project-stats"><i class="far fa-calendar me-1"></i> Mei - Des 2023</span>
+            @foreach ($data as $item)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card card h-100">
+                        <div class="position-relative">
+                            <img src="{{ Storage::url($item->cover) }}" class="card-img-top" alt="Latihan Pernapasan" />
+                            @php
+                                if ($item->kategori->nama_kategori == 'berjalan') {
+                                    $status = 'ongoing';
+                                } elseif ($item->kategori->nama_kategori == 'akan datang') {
+                                    $status = 'upcoming';
+                                } else {
+                                    $status = 'completed';
+                                }
+                            @endphp
+                            <span class="card-status status-{{ $status }}">Berjalan</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5 card-title">
+                                {{ ucwords($item->judul) }}
+                            </h3>
+                            <p class="card-text">
+                                {{ $item->deskripsi_singkat }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="project-stats"><i class="fas fa-users me-1"></i> {{ $item->jumlah_peserta }}
+                                    peserta</span>
+                                <span class="project-stats"><i class="far fa-calendar me-1"></i>
+                                    {{ \Carbon\Carbon::parse($item->from_date)->format('d M Y') }} -
+                                    {{ \Carbon\Carbon::parse($item->to_date)->format('d M Y') }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-primary w-100">Detail Proyek</a>
                         </div>
                     </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="#" class="btn btn-primary w-100">Detail Proyek</a>
-                    </div>
                 </div>
-            </div>
-
-            <!-- Project Card 4 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="project-card card h-100">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1504814532849-cff240bbc503?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Aplikasi Mobile Rehab" />
-                        <span class="card-status status-upcoming">Akan Datang</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="h5 card-title">
-                            Pengembangan Aplikasi Mobile Rehabilitasi Mandiri
-                        </h3>
-                        <p class="card-text">
-                            Proyek pengembangan aplikasi mobile yang memudahkan anggota
-                            komunitas untuk mengakses program rehabilitasi secara mandiri di
-                            rumah.
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="project-stats"><i class="fas fa-users me-1"></i> Dalam pengembangan</span>
-                            <span class="project-stats"><i class="far fa-calendar me-1"></i> Sep - Des 2023</span>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="#" class="btn btn-primary w-100">Detail Proyek</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project Card 5 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="project-card card h-100">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Nutrisi untuk Pemulihan" />
-                        <span class="card-status status-completed">Selesai</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="h5 card-title">
-                            Program Edukasi Nutrisi untuk Proses Pemulihan
-                        </h3>
-                        <p class="card-text">
-                            Program edukasi tentang pentingnya nutrisi yang tepat selama
-                            proses rehabilitasi dengan panduan menu dan resep sehat.
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="project-stats"><i class="fas fa-users me-1"></i> 150 peserta</span>
-                            <span class="project-stats"><i class="far fa-calendar me-1"></i> Feb - Apr 2023</span>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="#" class="btn btn-primary w-100">Detail Proyek</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="text-center mt-4">

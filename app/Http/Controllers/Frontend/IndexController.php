@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Edukasi;
+use App\Models\Forum;
 use App\Models\KategoriMaster;
+use App\Models\Proyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
@@ -21,13 +24,23 @@ class IndexController extends Controller
 
     public function forum()
     {
-        return view('publik.front.forum');
+        $data = Cache::remember('forum', 86400, function () {
+            return Forum::with('kategori', 'sender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->get();
+        });
+        $kategori = Cache::remember('kategori', 86400, function () {
+            return KategoriMaster::where('jenis_kategori', 'forum')->get();
+        });
+        return view('publik.front.forum', compact('data', 'kategori'));
     }
 
     public function edukasi()
     {
-        $data = Edukasi::get();
-        $kategori = KategoriMaster::where('jenis_kategori', 'edukasi')->get();
+        $data = Cache::remember('edukasi', 86400, function () {
+            return Edukasi::with('kategori')->orderBy('created_at', 'desc')->get();
+        });
+        $kategori = Cache::remember('kategori', 86400, function () {
+            return KategoriMaster::where('jenis_kategori', 'edukasi')->get();
+        });
         return view('publik.front.education', compact('data', 'kategori'));
     }
 
@@ -39,7 +52,13 @@ class IndexController extends Controller
 
     public function proyek()
     {
-        return view('publik.front.proyek');
+        $data = Cache::remember('proyek', 86400, function () {
+            return Proyek::with('kategori')->orderBy('created_at', 'desc')->get();
+        });
+        $kategori = Cache::remember('kategori', 86400, function () {
+            return KategoriMaster::where('jenis_kategori', 'proyek')->get();
+        });
+        return view('publik.front.proyek', compact('data', 'kategori'));
     }
 
     public function dukungan()

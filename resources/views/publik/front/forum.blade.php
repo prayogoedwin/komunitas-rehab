@@ -70,106 +70,28 @@
     <section class="container my-5">
         <h2 class="section-title">Kategori Forum</h2>
         <div class="row">
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="category-card card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="fas fa-running fa-2x text-primary"></i>
+            @foreach ($kategori as $item)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="category-card card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                    <i class="fas fa-running fa-2x text-primary"></i>
+                                </div>
+                                <h3 class="h5 mb-0">{{ $item->nama_kategori }}</h3>
                             </div>
-                            <h3 class="h5 mb-0">Tips Latihan Mandiri</h3>
-                        </div>
-                        <p class="card-text">
-                            Diskusi tentang latihan harian, variasi gerakan, serta cara
-                            menyesuaikan latihan dengan kondisi tubuh.
-                        </p>
-                        <div class="mt-3">
-                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 245 diskusi</span>
-                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 563 partisipan</span>
+                            {{-- <p class="card-text">
+                                Diskusi tentang latihan harian, variasi gerakan, serta cara
+                                menyesuaikan latihan dengan kondisi tubuh.
+                            </p> --}}
+                            <div class="mt-3">
+                                <span class="forum-stats"><i class="fas fa-comments me-1"></i> 245 diskusi</span>
+                                <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 563 partisipan</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="category-card card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="fas fa-tint fa-2x text-primary"></i>
-                            </div>
-                            <h3 class="h5 mb-0">Manajemen Nyeri & Aktivitas Harian</h3>
-                        </div>
-                        <p class="card-text">
-                            Saling berbagi pengalaman mengelola nyeri, kelelahan, tidur,
-                            nutrisi, dan aktivitas rumah tangga/kerja.
-                        </p>
-                        <div class="mt-3">
-                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 189 diskusi</span>
-                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 428 partisipan</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="category-card card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="fas fa-lightbulb fa-2x text-primary"></i>
-                            </div>
-                            <h3 class="h5 mb-0">Inspirasi & Motivasi</h3>
-                        </div>
-                        <p class="card-text">
-                            Kutipan, testimoni, kisah sukses, atau hal-hal kecil yang
-                            membantu menjaga semangat.
-                        </p>
-                        <div class="mt-3">
-                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 312 diskusi</span>
-                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 721 partisipan</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="category-card card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="fas fa-home fa-2x text-primary"></i>
-                            </div>
-                            <h3 class="h5 mb-0">Keluarga & Pendamping</h3>
-                        </div>
-                        <p class="card-text">
-                            Ruang bagi keluarga pasien untuk berbagi peran dan cara
-                            mendukung anggota keluarga yang sedang pulih.
-                        </p>
-                        <div class="mt-3">
-                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 156 diskusi</span>
-                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 342 partisipan</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="category-card card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="fas fa-user-md fa-2x text-primary"></i>
-                            </div>
-                            <h3 class="h5 mb-0">Tanya Ahli</h3>
-                        </div>
-                        <p class="card-text">
-                            Kolom tanya jawab terbatas dengan tenaga kesehatan/rehabilitasi
-                            yang bersedia menjadi moderator.
-                        </p>
-                        <div class="mt-3">
-                            <span class="forum-stats"><i class="fas fa-comments me-1"></i> 98 diskusi</span>
-                            <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 215 partisipan</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -182,87 +104,35 @@
             </button>
         </div>
 
-        <div class="forum-card">
-            <div class="d-flex align-items-start">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                    alt="User" class="user-avatar me-3" />
-                <div class="flex-grow-1">
-                    <h4 class="h5">
-                        Bagaimana mengatasi nyeri punggung setelah duduk lama?
-                    </h4>
-                    <p class="text-muted">
-                        Saya bekerja sebagai programmer dan sering duduk lebih dari 8 jam
-                        sehari. Akhir-akhir ini punggung bagian bawah sering terasa nyeri.
-                        Ada saran latihan atau posisi duduk yang baik?
-                    </p>
-                    <div class="d-flex flex-wrap align-items-center mt-3">
-                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Ahmad S.</span>
-                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 2 jam yang lalu</span>
-                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 14 balasan</span>
-                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 87 dilihat</span>
-                        <div class="ms-auto">
-                            <span class="tag">#nyeripunggung</span>
-                            <span class="tag">#latihan</span>
-                            <span class="tag">#ergonomi</span>
+        @foreach ($data as $item)
+            <div class="forum-card">
+                <div class="d-flex align-items-start">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                        alt="User" class="user-avatar me-3" />
+                    <div class="flex-grow-1">
+                        <h4 class="h5">
+                            {{ $item->judul }}
+                        </h4>
+                        <p class="text-muted">
+                            {{ $item->deskripsi }}
+                        </p>
+                        <div class="d-flex flex-wrap align-items-center mt-3">
+                            <span class="forum-stats me-3"><i class="fas fa-user me-1"></i>
+                                {{ $item->sender->name }}</span>
+                            <span class="forum-stats me-3"><i
+                                    class="fas fa-clock me-1"></i>{{ $item->created_at->diffForHumans() }}</span>
+                            <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 14 balasan</span>
+                            <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 87 dilihat</span>
+                            <div class="ms-auto">
+                                <span class="tag">#nyeripunggung</span>
+                                <span class="tag">#latihan</span>
+                                <span class="tag">#ergonomi</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="forum-card">
-            <div class="d-flex align-items-start">
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                    alt="User" class="user-avatar me-3" />
-                <div class="flex-grow-1">
-                    <h4 class="h5">Tips menghadapi kelelahan kronis pasca stroke</h4>
-                    <p class="text-muted">
-                        Ayah saya mengalami stroke 6 bulan lalu dan sekarang sering
-                        mengeluh kelelahan berat bahkan setelah aktivitas ringan. Apakah
-                        ini normal? Bagaimana cara mengatur energinya dengan baik?
-                    </p>
-                    <div class="d-flex flex-wrap align-items-center mt-3">
-                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Sari W.</span>
-                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 1 hari yang lalu</span>
-                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 9 balasan</span>
-                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 64 dilihat</span>
-                        <div class="ms-auto">
-                            <span class="tag">#strokepulih</span>
-                            <span class="tag">#kelelahan</span>
-                            <span class="tag">#manajemenenergi</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="forum-card">
-            <div class="d-flex align-items-start">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                    alt="User" class="user-avatar me-3" />
-                <div class="flex-grow-1">
-                    <h4 class="h5">
-                        Pengalaman menggunakan alat bantu jalan setelah operasi lutut
-                    </h4>
-                    <p class="text-muted">
-                        Saya baru saja menjalani operasi penggantian lutut dan sedang
-                        menggunakan walker. Ada tips untuk beradaptasi dengan alat bantu
-                        jalan? Kapan biasanya bisa beralih ke tongkat?
-                    </p>
-                    <div class="d-flex flex-wrap align-items-center mt-3">
-                        <span class="forum-stats me-3"><i class="fas fa-user me-1"></i> Budi R.</span>
-                        <span class="forum-stats me-3"><i class="fas fa-clock me-1"></i> 2 hari yang lalu</span>
-                        <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 7 balasan</span>
-                        <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 53 dilihat</span>
-                        <div class="ms-auto">
-                            <span class="tag">#operasilutut</span>
-                            <span class="tag">#alatbantu</span>
-                            <span class="tag">#mobilitas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
         <div class="text-center mt-4">
             <a href="#" class="btn btn-outline-primary">Lihat Semua Diskusi</a>

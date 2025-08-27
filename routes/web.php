@@ -135,6 +135,7 @@ Route::get('/index', [IndexController::class, 'index'])->name('index');
 Route::get('about', [IndexController::class, 'about'])->name('about');
 Route::get('forum', [IndexController::class, 'forum'])->name('forum');
 Route::get('edukasi', [IndexController::class, 'edukasi'])->name('edukasi');
+Route::get('detail-edukasi/{slug}', [IndexController::class, 'detailEdukasi'])->name('detail-edukasi');
 Route::get('proyek', [IndexController::class, 'proyek'])->name('proyek');
 Route::get('dukungan', [IndexController::class, 'dukungan'])->name('dukungan');
 Route::get('gabung', [IndexController::class, 'gabung'])->name('gabung');
