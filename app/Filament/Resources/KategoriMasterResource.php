@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\KategoriMasterResource\Pages;
 use App\Filament\Resources\KategoriMasterResource\RelationManagers;
+use App\Models\JenisKategori;
 use App\Models\KategoriMaster;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,7 +34,9 @@ class KategoriMasterResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nama_kategori')->required(),
-                TextInput::make('jenis_kategori')->required(),
+                Select::make('jenis_kategori')
+                    ->options(JenisKategori::all()->pluck('nama', 'nama'))
+                    ->searchable()
             ]);
     }
 
