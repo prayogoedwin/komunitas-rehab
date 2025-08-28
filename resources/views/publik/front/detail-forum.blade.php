@@ -80,7 +80,19 @@
                                 <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
                                     alt="Dr. Maya W." class="comment-user-avatar">
                                 <div class="comment-user-info">
-                                    <div class="comment-user-name">{{ ucwords($item->user->name) }}</span>
+                                    <div class="comment-user-name">
+                                        @php
+                                            if ($item->is_admin_comment == 1) {
+                                                $user = App\Models\User::where('id', $item->user_id)->first();
+                                                $name = $user->name;
+                                                $label = true;
+                                            } else {
+                                                $name = $item->user->name;
+                                                $label = false;
+                                            }
+                                        @endphp
+                                        {{ ucwords($name) }}
+                                        </span>
                                     </div>
                                     <div class="comment-date"><i class="far fa-clock me-1"></i>
                                         {{ $item->created_at->diffForHumans() }}

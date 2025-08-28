@@ -29,6 +29,8 @@ class Comment extends Model
         'created_by',
         'updated_by',
         'deleted_by',
+        'is_admin_comment',
+        'is_show'
     ];
 
     protected static function booted()
@@ -37,7 +39,11 @@ class Comment extends Model
             Cache::forget('comment');
         });
 
-        static::deleted(function () {
+        static::deleted(function ($model) {
+            if (auth()->check()) {
+                $model->deleted_by = auth()->id();
+                $model->save();
+            }
             Cache::forget('comment');
         });
     }

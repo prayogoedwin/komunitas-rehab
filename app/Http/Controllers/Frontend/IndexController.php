@@ -46,7 +46,7 @@ class IndexController extends Controller
     public function detailForum(Forum $forum)
     {
         $comment = Cache::remember('comment', 86400, function () use ($forum) {
-            return Comment::with('user')->where('forum_id', $forum->id)->get();
+            return Comment::with('user')->where('forum_id', $forum->id)->where('is_show', 1)->orderBy('created_at', 'desc')->get();
         });
         return view('publik.front.detail-forum', compact('forum', 'comment'));
     }
@@ -57,7 +57,8 @@ class IndexController extends Controller
             'user_id' => Auth::guard('member')->id(),
             'forum_id' => $request->id_forum,
             'comment' => $request->comment,
-            'created_by' => Auth::guard('member')->id()
+            'created_by' => Auth::guard('member')->id(),
+            'is_show' => 1
         ]);
         return back();
     }
