@@ -1054,6 +1054,10 @@ body {
     color: #ff5757;
 }
 
+.btn-suka {
+    background-color: rgb(72, 72, 182);
+    color: white;
+}
 .comments-section {
     margin-top: 30px;
 }

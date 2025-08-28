@@ -62,6 +62,33 @@ class IndexController extends Controller
         return back();
     }
 
+    public function like($id)
+    {
+        $forum = Forum::findOrFail($id);
+        $userId = Auth::guard('member')->id();
+
+        // cek apakah user sudah like
+        $like = $forum->likes()->where('user_id', $userId)->first();
+
+        if ($like) {
+            // kalau sudah like → batalkan (unlike)
+            $like->delete();
+            $status = 'unliked';
+        } else {
+            // kalau belum like → tambahkan
+            $forum->likes()->create([
+                'user_id' => $userId,
+                'forum_id' => $id
+            ]);
+            $status = 'liked';
+        }
+
+        return response()->json([
+            'status' => $status,
+            'count' => $forum->likes()->count()
+        ]);
+    }
+
     public function edukasi()
     {
         $data = Cache::remember('edukasi', 86400, function () {

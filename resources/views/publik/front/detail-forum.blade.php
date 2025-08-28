@@ -37,13 +37,19 @@
                             <i class="far fa-comment"></i> {{ $forum->comment()->count() }} komentar
                         </div>
                         <div class="stat-item">
-                            <i class="far fa-thumbs-up"></i> 12 suka
+                            <i class="far fa-thumbs-up"></i> {{ $forum->likes()->count() }} suka
                         </div>
                     </div>
 
+                    @php
+                        $isLiked = $forum
+                            ->likes()
+                            ->where('user_id', Auth::guard('member')->id())
+                            ->exists();
+                    @endphp
                     <div class="action-buttons">
-                        <button class="btn-like">
-                            <i class="far fa-thumbs-up"></i> Suka
+                        <button class="btn-like {{ $isLiked ? 'btn-suka' : '' }}" data-id="{{ $forum->id }}">
+                            <i class="far fa-thumbs-up"></i> <span class="like-count">{{ $forum->likes()->count() }}</span>
                         </button>
                         <button class="btn-comment">
                             <i class="far fa-comment"></i> Komentar
@@ -57,7 +63,7 @@
                 <!-- Comments Section -->
                 <div class="comments-section">
                     <div class="comments-header">
-                        <h3>5 Komentar</h3>
+                        <h3>{{ $forum->comment()->count() }} Komentar</h3>
                         <div class="sort-comments">
                             <select class="form-select form-select-sm" style="width: auto;">
                                 <option>Terbaru</option>
@@ -87,9 +93,9 @@
                             </div>
 
                             <div class="comment-actions">
-                                <button class="comment-action-btn">
+                                {{-- <button class="comment-action-btn">
                                     <i class="far fa-thumbs-up"></i> 8
-                                </button>
+                                </button> --}}
                                 {{-- <button class="comment-action-btn">
                                 <i class="far fa-comment"></i> Balas
                             </button> --}}
@@ -162,3 +168,29 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $(document).on('click', '.btn-like', function() {
+            let forumId = $(this).data('id');
+            let btn = $(this);
+
+            $.ajax({
+                url: "{{ url('/forum') }}/" + forumId + "/like",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    forum_id: forumId
+                },
+                success: function(res) {
+                    // update angka like
+                    btn.find('.like-count').text(res.count);
+                    if (res.status === 'liked') {
+                        btn.addClass('btn-suka');
+                    } else {
+                        btn.removeClass('btn-suka');
+                    }
+                }
+            });
+        });
+    </script>
+@endpush

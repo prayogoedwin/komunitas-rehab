@@ -101,4 +101,9 @@ class Member extends Model implements Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

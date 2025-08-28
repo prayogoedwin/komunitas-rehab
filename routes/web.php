@@ -69,6 +69,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::get('gabung', [IndexController::class, 'gabung'])->name('gabung');
     Route::post('/forum/{id}/increment-view', [IndexController::class, 'incrementView'])
         ->name('forum.increment-view');
+    Route::post('/forum/{id}/like', [IndexController::class, 'like'])->name('forum.like');
 });
 
 Route::get('/maintenance', function () {
