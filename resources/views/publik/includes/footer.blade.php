@@ -20,18 +20,18 @@
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-4">Tautan Cepat</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Beranda</a></li>
-                        <li class="mb-2"><a href="#">Tentang Kami</a></li>
-                        <li class="mb-2"><a href="#">Forum</a></li>
-                        <li class="mb-2"><a href="#">Edukasi</a></li>
+                        <li class="mb-2"><a href="{{ route('index') }}">Beranda</a></li>
+                        <li class="mb-2"><a href="{{ route('about') }}">Tentang Kami</a></li>
+                        <li class="mb-2"><a href="{{ route('forum') }}">Forum</a></li>
+                        <li class="mb-2"><a href="{{ route('edukasi') }}">Edukasi</a></li>
+                        <li class="mb-2"><a href="{{ route('proyek') }}">Proyek</a></li>
+                        <li class="mb-2"><a href="#">Dukungan</a></li>
+                        <li class="mb-2"><a href="#">Bergabung</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-4">Layanan</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Proyek</a></li>
-                        <li class="mb-2"><a href="#">Dukungan</a></li>
-                        <li class="mb-2"><a href="#">Bergabung</a></li>
                         <li class="mb-2"><a href="#">FAQ</a></li>
                     </ul>
                 </div>
