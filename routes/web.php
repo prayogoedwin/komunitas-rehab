@@ -27,7 +27,10 @@ use App\Middleware\CheckMaintenanceMode;
 
 Route::middleware(CheckMaintenanceMode::class)->group(function () {
 
-    Route::get('/', [PublikController::class, 'index'])->name('publik');
+    // Route::get('/', [PublikController::class, 'index'])->name('publik');
+    Route::get('/', function () {
+        return redirect()->route('index');
+    })->name('publik');
     Route::get('/howtoplay', [PublikController::class, 'caraMain'])->name('cara');
     Route::get('/faq', [PublikController::class, 'faq'])->name('faq');
     Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
@@ -43,7 +46,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
 
     Route::get('/test-email', function () {
         \Illuminate\Support\Facades\Mail::raw('Ini hanya test email', function ($message) {
-            $message->to('gilaprediksi88@gmail.com')
+            $message->to('kodings56@gmail.com')
                 ->subject('Test Email');
         });
         return 'Email dikirim';

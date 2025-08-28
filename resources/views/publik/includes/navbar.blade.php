@@ -35,6 +35,34 @@
                     <a class="nav-link {{ Route::is('gabung') ? 'active' : '' }}"
                         href="{{ route('gabung') }}">Bergabung</a>
                 </li>
+                @if (Auth::guard('member')->check())
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::guard('member')->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+                            <li>
+                                <a class="dropdown-item {{ Route::is('member/profil') ? 'active' : '' }}"
+                                    href="{{ route('member.profil') }}">
+                                    Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item {{ Route::is('password.update') ? 'active' : '' }}"
+                                    href="">
+                                    Update Password
+                                </a>
+                            </li>
+                            <li>
+                                <form action="{{ route('member.logout') }}" class="d-inline">
+                                    {{-- @csrf --}}
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
