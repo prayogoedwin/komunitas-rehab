@@ -34,7 +34,7 @@ class MemberResource extends Resource
     protected static ?string $modelLabel = 'Member';
     protected static ?string $pluralModelLabel = 'Member';
 
-     public static function canAccess(): bool
+    public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view members');
     }
@@ -69,7 +69,7 @@ class MemberResource extends Resource
         return auth()->check() && auth()->user()->can('delete members');
     }
 
-   public static function form(Form $form): Form
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -83,27 +83,30 @@ class MemberResource extends Resource
                         ignoreRecord: true
                     ),
                 TextInput::make('password')
-                ->required(fn (string $operation): bool => $operation === 'create')
-                ->password()
-                ->revealable()
-                ->minLength(8)
-                ->confirmed()
-                ->rules(['nullable'])
-                ->dehydrated(fn ($state) => filled($state))
-                ->autocomplete('new-password')
-                ->prefixIcon('heroicon-o-lock-closed')
-                ->placeholder(fn (string $operation): string => 
-                    $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
-                ),
-            TextInput::make('password_confirmation')
-                ->requiredWith('password')
-                ->password()
-                ->revealable()
-                ->label('Confirm Password')
-                ->dehydrated(false)
-                ->placeholder(fn (string $operation): string => 
-                    $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
-                ),
+                    ->required(fn(string $operation): bool => $operation === 'create')
+                    ->password()
+                    ->revealable()
+                    ->minLength(8)
+                    ->confirmed()
+                    ->rules(['nullable'])
+                    ->dehydrated(fn($state) => filled($state))
+                    ->autocomplete('new-password')
+                    ->prefixIcon('heroicon-o-lock-closed')
+                    ->placeholder(
+                        fn(string $operation): string =>
+                        $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
+                    ),
+                TextInput::make('password_confirmation')
+                    ->requiredWith('password')
+                    ->password()
+                    ->revealable()
+                    ->label('Confirm Password')
+                    ->dehydrated(false)
+                    ->placeholder(
+                        fn(string $operation): string =>
+                        $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah password' : ''
+                    ),
+                TextInput::make('profesi')->required(),
                 TextInput::make('whatsapp')
                     ->label('No Whatsapp')
                     ->default(0),
@@ -114,23 +117,23 @@ class MemberResource extends Resource
 
                 // Field tambahan_poin hanya muncul di edit
                 TextInput::make('tambahan_poin')
-                ->label('Tambahan Poin')
-                ->numeric()
-                ->placeholder('Masukkan tambahan poin')
-                ->hidden(fn (string $operation): bool => $operation === 'create')
-                ->afterStateUpdated(function (Get $get, Set $set, $state, $record) {
-                    if ($state !== null && $state !== '' && $record) {
-                        $originalPoin = $record->poin_terkini; // Poin asli dari database
-                        $tambahanPoin = (int) $state;
-                        $newTotal = $originalPoin + $tambahanPoin;
-                        $set('poin_terkini', $newTotal);
-                    } elseif (($state === null || $state === '') && $record) {
-                        // Jika field kosong, kembalikan ke poin asli
-                        $set('poin_terkini', $record->poin_terkini);
-                    }
-                })
-                ->live()
-                ->dehydrated(false), // Tidak disimpan ke database
+                    ->label('Tambahan Poin')
+                    ->numeric()
+                    ->placeholder('Masukkan tambahan poin')
+                    ->hidden(fn(string $operation): bool => $operation === 'create')
+                    ->afterStateUpdated(function (Get $get, Set $set, $state, $record) {
+                        if ($state !== null && $state !== '' && $record) {
+                            $originalPoin = $record->poin_terkini; // Poin asli dari database
+                            $tambahanPoin = (int) $state;
+                            $newTotal = $originalPoin + $tambahanPoin;
+                            $set('poin_terkini', $newTotal);
+                        } elseif (($state === null || $state === '') && $record) {
+                            // Jika field kosong, kembalikan ke poin asli
+                            $set('poin_terkini', $record->poin_terkini);
+                        }
+                    })
+                    ->live()
+                    ->dehydrated(false), // Tidak disimpan ke database
 
                 Toggle::make('status')
                     ->label('Status'),
@@ -157,10 +160,10 @@ class MemberResource extends Resource
                     ->label('Poin')
                     ->sortable()
                     ->alignCenter()
-                    ->formatStateUsing(fn ($state) => number_format($state, 0) . ' poin')
+                    ->formatStateUsing(fn($state) => number_format($state, 0) . ' poin')
                     ->icon('heroicon-o-star')
                     ->iconColor('warning'),
-            
+
                 IconColumn::make('status')
                     ->label('Status')
                     ->boolean()
@@ -199,6 +202,4 @@ class MemberResource extends Resource
             'edit' => Pages\EditMember::route('/{record}/edit'),
         ];
     }
-
-    
 }

@@ -19,14 +19,14 @@ class Member extends Model implements Authenticatable
 {
     use HasFactory, SoftDeletes, AuthenticatableTrait, CanResetPasswordTrait, LogsActivity;
 
-     public function getActivitylogOptions(): LogOptions
-        {
-            return LogOptions::defaults()
-                ->logAll() // Log semua atribut
-                ->logOnlyDirty() // Hanya log field yang berubah
-                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
-                ->setDescriptionForEvent(fn(string $eventName) => "Member {$eventName}");
-        }
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll() // Log semua atribut
+            ->logOnlyDirty() // Hanya log field yang berubah
+            ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+            ->setDescriptionForEvent(fn(string $eventName) => "Member {$eventName}");
+    }
 
     protected $table = 'members';
 
@@ -40,7 +40,8 @@ class Member extends Model implements Authenticatable
         'poin_terkini',
         'provider',
         'provider_id',
-        'alamat'
+        'alamat',
+        'profesi'
     ];
 
     protected $hidden = [
@@ -95,5 +96,4 @@ class Member extends Model implements Authenticatable
     {
         return $this->email;
     }
-
 }
