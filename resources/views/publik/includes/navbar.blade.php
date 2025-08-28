@@ -9,8 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('index') ? 'active' : '' }}"
-                        href="i{{ route('index') }}">Beranda</a>
+                    <a class="nav-link {{ Route::is('index') ? 'active' : '' }}" href="{{ route('index') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang
