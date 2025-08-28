@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Edukasi;
 use App\Models\Forum;
 use App\Models\KategoriMaster;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
@@ -31,6 +33,33 @@ class IndexController extends Controller
             return KategoriMaster::where('jenis_kategori', 'forum')->get();
         });
         return view('publik.front.forum', compact('data', 'kategori'));
+    }
+
+    public function incrementView($id)
+    {
+        $forum = Forum::findOrFail($id);
+        $forum->increment('viewers');
+
+        return response()->json(['success' => true]);
+    }
+
+    public function detailForum(Forum $forum)
+    {
+        $comment = Cache::remember('comment', 86400, function () use ($forum) {
+            return Comment::with('user')->where('forum_id', $forum->id)->get();
+        });
+        return view('publik.front.detail-forum', compact('forum', 'comment'));
+    }
+
+    public function comment(Request $request)
+    {
+        Comment::create([
+            'user_id' => Auth::guard('member')->id(),
+            'forum_id' => $request->id_forum,
+            'comment' => $request->comment,
+            'created_by' => Auth::guard('member')->id()
+        ]);
+        return back();
     }
 
     public function edukasi()
@@ -59,6 +88,12 @@ class IndexController extends Controller
             return KategoriMaster::where('jenis_kategori', 'proyek')->get();
         });
         return view('publik.front.proyek', compact('data', 'kategori'));
+    }
+
+    public function detailProyek($slug)
+    {
+        $data = Proyek::with('kategori')->where('slug', $slug)->first();
+        return view('publik.front.detail-education', compact('data'));
     }
 
     public function dukungan()

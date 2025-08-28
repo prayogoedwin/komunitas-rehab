@@ -65,55 +65,10 @@
                 <div class="article-content">
                     {{-- <h2>Deskripsi Lengkap</h2> --}}
                     {!! $data->deskripsi !!}
-
-                    <div class="alert alert-info">
-                        <h4><i class="fas fa-lightbulb me-2"></i>Penting!</h4>
-                        <p class="mb-0">
-                            Sebelum memulai program latihan baru, terutama jika Anda
-                            memiliki kondisi medis tertentu, disarankan untuk berkonsultasi
-                            dengan profesional kesehatan terlebih dahulu.
-                        </p>
-                    </div>
-
-                    <!-- <h2>7 Latihan untuk Meredakan Nyeri Punggung Bawah</h2>
-                                                          <p>
-                                                            Berikut adalah 7 latihan yang telah terbukti efektif untuk
-                                                            membantu meredakan nyeri punggung bawah:
-                                                          </p>
-
-                                                          <div class="exercise-card">
-                                                            <h3 class="d-flex align-items-center">
-                                                              <span class="exercise-number">1</span>
-                                                              Knee-to-Chest Stretch
-                                                            </h3>
-                                                            <div class="row">
-                                                              <div class="col-md-6">
-                                                                <img
-                                                                  src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                                                  alt="Knee-to-Chest Stretch"
-                                                                  class="img-fluid rounded mb-3"
-                                                                />
-                                                              </div>
-                                                              <div class="col-md-6">
-                                                                <p>
-                                                                  <strong>Cara melakukan:</strong> Berbaring telentang dengan
-                                                                  lutut ditekuk dan kaki rata di lantai. Tarik satu lutut ke
-                                                                  arah dada, tahan selama 15-30 detik. Kembali ke posisi awal
-                                                                  dan ulangi dengan kaki lainnya. Lakukan 2-3 repetisi untuk
-                                                                  setiap kaki.
-                                                                </p>
-                                                                <p>
-                                                                  <strong>Manfaat:</strong> Meregangkan otot pinggul, pantat,
-                                                                  dan paha belakang yang dapat berkontribusi pada nyeri
-                                                                  punggung bawah.
-                                                                </p>
-                                                              </div>
-                                                            </div>
-                                                          </div> -->
                 </div>
 
                 <!-- Author Info -->
-                <div class="author-card">
+                {{-- <div class="author-card">
                     <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
                         alt="Dr. Amanda Sari" class="author-avatar" />
                     <div>
@@ -128,7 +83,7 @@
                             pendekatan holistik.
                         </p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -136,12 +91,14 @@
     <!-- Related Education Section -->
     <section class="related-section">
         <div class="container">
-            <h2 class="mb-4">Edukasi Terkait</h2>
-            <p class="lead text-center mb-5">
-                Temukan lebih banyak materi edukasi yang dapat membantu perjalanan
-                rehabilitasi Anda
-            </p>
+            <h2 class="mb-2">
+                @if (Request::is('detail-proyek/*'))
+                    Proyek Terkait
+                @else
+                    Edukasi Terkait
+                @endif
 
+            </h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="related-article card h-100">

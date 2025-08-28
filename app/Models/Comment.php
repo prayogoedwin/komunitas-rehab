@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Forum extends Model
+class Comment extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
@@ -18,34 +19,36 @@ class Forum extends Model
             ->logAll() // Log semua atribut
             ->logOnlyDirty() // Hanya log field yang berubah
             ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
-            ->setDescriptionForEvent(fn(string $eventName) => "Forum {$eventName}");
+            ->setDescriptionForEvent(fn(string $eventName) => "Comment {$eventName}");
     }
 
     protected $fillable = [
-        'judul',
-        'kategori_id',
-        'deskripsi',
+        'forum_id',
+        'user_id',
+        'comment',
         'created_by',
         'updated_by',
         'deleted_by',
-        'verified_at',
-        'verified_by',
-        'sender_id',
-        'viewers'
     ];
 
-    public function kategori()
+    protected static function booted()
     {
-        return $this->belongsTo(KategoriMaster::class);
+        static::saved(function () {
+            Cache::forget('comment');
+        });
+
+        static::deleted(function () {
+            Cache::forget('comment');
+        });
     }
 
-    public function sender()
+    public function forum()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Forum::class);
     }
 
-    public function comment()
+    public function user()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Member::class);
     }
 }

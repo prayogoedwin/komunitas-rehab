@@ -107,6 +107,8 @@ Route::prefix('member')->group(function () {
     Route::get('/riwayat_tukar_poin', [DashboardMember::class, 'riwayatTukarPoin'])->middleware('auth:member')->name('member.riwayatpoin');
 
     Route::post('/tukarpoin', [DashboardMember::class, 'tukarPoin'])->middleware('auth:member')->name('member.tukarpoin');
+
+    Route::post('comment', [IndexController::class, 'comment'])->middleware('auth:member')->name('member.comment');
 });
 
 // Route::get('/member/profile', [ProfileController::class, 'index'])
@@ -139,6 +141,10 @@ Route::get('about', [IndexController::class, 'about'])->name('about');
 Route::get('forum', [IndexController::class, 'forum'])->name('forum');
 Route::get('edukasi', [IndexController::class, 'edukasi'])->name('edukasi');
 Route::get('detail-edukasi/{slug}', [IndexController::class, 'detailEdukasi'])->name('detail-edukasi');
+Route::get('detail-proyek/{slug}', [IndexController::class, 'detailProyek'])->name('detail-proyek');
+Route::get('detail-forum/{forum}', [IndexController::class, 'detailForum'])->name('detail-forum');
 Route::get('proyek', [IndexController::class, 'proyek'])->name('proyek');
 Route::get('dukungan', [IndexController::class, 'dukungan'])->name('dukungan');
 Route::get('gabung', [IndexController::class, 'gabung'])->name('gabung');
+Route::post('/forum/{id}/increment-view', [IndexController::class, 'incrementView'])
+    ->name('forum.increment-view');

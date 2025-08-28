@@ -111,10 +111,12 @@
                         alt="User" class="user-avatar me-3" />
                     <div class="flex-grow-1">
                         <h4 class="h5">
-                            {{ $item->judul }}
+                            <a href="{{ route('detail-forum', $item->id) }}" style="text-decoration: none"
+                                class="forum-judul" data-id="{{ $item->id }}">{{ $item->judul }}</a>
                         </h4>
                         <p class="text-muted">
-                            {{ $item->deskripsi }}
+                            {{-- limit deskripsi --}}
+                            {{ Str::limit($item->deskripsi, 300) }}
                         </p>
                         <div class="d-flex flex-wrap align-items-center mt-3">
                             <span class="forum-stats me-3"><i class="fas fa-user me-1"></i>
@@ -220,3 +222,25 @@
         </div>
     </section>
 @endsection
+@push('js')
+    <script>
+        document.querySelectorAll('.forum-judul').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                let id = this.dataset.id;
+                let url = this.getAttribute('href');
+
+                fetch(`/forum/${id}/increment-view`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Content-Type": "application/json"
+                    }
+                }).then(() => {
+                    // redirect setelah increment
+                    window.location.href = url;
+                });
+            });
+        });
+    </script>
+@endpush

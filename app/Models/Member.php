@@ -96,4 +96,9 @@ class Member extends Model implements Authenticatable
     {
         return $this->email;
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

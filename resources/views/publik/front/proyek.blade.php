@@ -115,7 +115,8 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent">
-                            <a href="#" class="btn btn-primary w-100">Detail Proyek</a>
+                            <a href="{{ route('detail-proyek', $item->slug) }}" class="btn btn-primary w-100">Detail
+                                Proyek</a>
                         </div>
                     </div>
                 </div>

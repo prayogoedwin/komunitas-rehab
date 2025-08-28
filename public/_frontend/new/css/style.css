@@ -565,6 +565,12 @@ body {
     margin-bottom: 15px;
 }
 
+.form-title {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
 .form-control,
 .form-select {
     border-radius: 10px;
@@ -940,4 +946,238 @@ body {
     .thumbnail-image {
         height: 250px;
     }
+}
+
+.forum-detail-container {
+    padding: 30px 0;
+}
+
+.discussion-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.discussion-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    margin-left: 15px;
+}
+
+.user-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--dark-color);
+}
+
+.discussion-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.discussion-tags {
+    margin: 15px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: rgba(74, 149, 200, 0.1);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.discussion-stats {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.stat-item i {
+    margin-right: 5px;
+}
+.btn-like,
+.btn-comment,
+.btn-share {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-like:hover,
+.btn-comment:hover,
+.btn-share:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-like i,
+.btn-comment i,
+.btn-share i {
+    margin-right: 5px;
+}
+
+.btn-like.active {
+    background-color: rgba(255, 87, 87, 0.1);
+    border-color: rgba(255, 87, 87, 0.2);
+    color: #ff5757;
+}
+
+.comments-section {
+    margin-top: 30px;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.comment-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.comment-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-user-info {
+    margin-left: 12px;
+}
+
+.comment-user-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.comment-actions {
+    display: flex;
+    margin-top: 15px;
+}
+
+.comment-action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.comment-action-btn:hover {
+    color: var(--primary-color);
+}
+
+.comment-action-btn i {
+    margin-right: 5px;
+}
+
+.add-comment-form {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.related-discussions {
+    margin-top: 50px;
+}
+
+.related-header {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.related-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s;
+}
+
+.related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.related-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.related-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.related-meta span {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.related-meta i {
+    margin-right: 5px;
 }
