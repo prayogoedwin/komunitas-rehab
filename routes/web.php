@@ -27,10 +27,8 @@ use App\Middleware\CheckMaintenanceMode;
 
 Route::middleware(CheckMaintenanceMode::class)->group(function () {
 
-    // Route::get('/', [PublikController::class, 'index'])->name('publik');
-    Route::get('/', function () {
-        return redirect()->route('index');
-    })->name('publik');
+    Route::get('/cek', [PublikController::class, 'index'])->name('publik');
+    Route::get('/', [IndexController::class, 'index'])->name('index');
     Route::get('/howtoplay', [PublikController::class, 'caraMain'])->name('cara');
     Route::get('/faq', [PublikController::class, 'faq'])->name('faq');
     Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
@@ -57,7 +55,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::get('/produk/{id}/varians', [DashboardMember::class, 'getVarians']);
     Route::post('/cek-poin', [DashboardMember::class, 'cekPoin'])->name('cek-poin');
 
-    Route::get('/index', [IndexController::class, 'index'])->name('index');
+    // Route::get('/index', [IndexController::class, 'index'])->name('index');
     Route::get('about', [IndexController::class, 'about'])->name('about');
     Route::get('forum', [IndexController::class, 'forum'])->name('forum');
     Route::get('edukasi', [IndexController::class, 'edukasi'])->name('edukasi');
@@ -81,7 +79,7 @@ Route::get('/maintenance', function () {
 
 
 // Login Member
-Route::prefix('member')->group(function () {
+Route::middleware(CheckMaintenanceMode::class)->prefix('member')->group(function () {
 
     // web.php
     Route::post('/prediksi_sekekarang/{id}', [PrediksiMember::class, 'store_server'])->name('prediksi.store');
