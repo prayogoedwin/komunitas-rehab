@@ -32,7 +32,7 @@
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-4">Layanan</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">FAQ</a></li>
+                        <li class="mb-2"><a href="{{ route('faq') }}">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">

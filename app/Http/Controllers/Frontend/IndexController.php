@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Edukasi;
+use App\Models\Faq;
 use App\Models\Forum;
 use App\Models\KategoriMaster;
 use App\Models\Proyek;
@@ -132,5 +133,13 @@ class IndexController extends Controller
     public function gabung()
     {
         return view('publik.front.join');
+    }
+
+    public function faq()
+    {
+        $data = Cache::remember('faqs_data', 86400, function () {
+            return Faq::orderBy('created_at', 'desc')->get();
+        });
+        return view('publik.front.faq', compact('data'));
     }
 }

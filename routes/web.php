@@ -30,7 +30,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::get('/cek', [PublikController::class, 'index'])->name('publik');
     Route::get('/', [IndexController::class, 'index'])->name('index');
     Route::get('/howtoplay', [PublikController::class, 'caraMain'])->name('cara');
-    Route::get('/faq', [PublikController::class, 'faq'])->name('faq');
+    Route::get('/faq', [IndexController::class, 'faq'])->name('faq');
     Route::get('/#fightList', [PublikController::class, 'index'])->name('prediksi');
     Route::get('/match', [PublikController::class, 'tonton'])->name('tonton');
     Route::get('/leaderboard', [PublikController::class, 'peringkat'])->name('peringkat');
