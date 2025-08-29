@@ -99,6 +99,7 @@ Route::prefix('member')->group(function () {
     // Register Member
     Route::get('/register', [MemberRegisterController::class, 'showRegisterForm'])->name('member.register');
     Route::post('/register', [MemberRegisterController::class, 'register'])->name('member.register.submit');
+    Route::get('verifikasi/{id}', [MemberRegisterController::class, 'verif'])->name('member.verif');
 
     // Forgot Password
     Route::get('password/reset', [MemberForgotPasswordController::class, 'showLinkRequestForm'])->name('member.password.request');
