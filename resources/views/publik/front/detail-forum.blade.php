@@ -3,7 +3,7 @@
     <!-- Forum Detail Content -->
     <div class="container forum-detail-container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <!-- Discussion Post -->
                 <div class="discussion-card">
                     <div class="discussion-meta">
@@ -20,13 +20,6 @@
 
                     <div class="discussion-content">
                         {{ $forum->deskripsi }}
-                    </div>
-
-                    <div class="discussion-tags">
-                        <span class="tag">#nyeripunggung</span>
-                        <span class="tag">#ergonomi</span>
-                        <span class="tag">#latihan</span>
-                        <span class="tag">#pekerjaankantor</span>
                     </div>
 
                     <div class="discussion-stats">
@@ -51,10 +44,10 @@
                         <button class="btn-like {{ $isLiked ? 'btn-suka' : '' }}" data-id="{{ $forum->id }}">
                             <i class="far fa-thumbs-up"></i> <span class="like-count">{{ $forum->likes()->count() }}</span>
                         </button>
-                        <button class="btn-comment">
+                        {{-- <button class="btn-comment">
                             <i class="far fa-comment"></i> Komentar
-                        </button>
-                        <button class="btn-share">
+                        </button> --}}
+                        <button class="btn-share" id="btnShare">
                             <i class="fas fa-share"></i> Bagikan
                         </button>
                     </div>
@@ -135,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            {{-- <div class="col-lg-4">
                 <!-- Related Discussions -->
                 <div class="related-discussions">
                     <h4 class="related-header">Diskusi Terkait</h4>
@@ -176,12 +169,20 @@
                         <a href="forum.html" class="btn btn-outline-primary">Lihat Semua Diskusi</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
 @push('js')
     <script>
+        document.getElementById("btnShare").addEventListener("click", function() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert("URL berhasil disalin: " + url);
+            }).catch(err => {
+                console.error("Gagal menyalin: ", err);
+            });
+        });
         $(document).on('click', '.btn-like', function() {
             let forumId = $(this).data('id');
             let btn = $(this);

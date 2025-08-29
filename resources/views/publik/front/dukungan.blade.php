@@ -194,4 +194,169 @@
             </div>
         </div>
     </section>
+
+    <!-- Article Modal -->
+    <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="articleModalLabel">
+                        Kirim Artikel Anda
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="name" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Alamat Email</label>
+                                <input type="email" class="form-control" id="email" required />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="affiliation" class="form-label">Afiliasi (Opsional)</label>
+                            <input type="text" class="form-control" id="affiliation"
+                                placeholder="Contoh: Fisioterapis, Pasien, Keluarga Pasien, dll." />
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleTitle" class="form-label">Judul Artikel</label>
+                            <input type="text" class="form-control" id="articleTitle" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleCategory" class="form-label">Kategori Artikel</label>
+                            <select class="form-select" id="articleCategory" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="rehabilitasi">Rehabilitasi</option>
+                                <option value="gaya-hidup">Gaya Hidup Sehat</option>
+                                <option value="manajemen-nyeri">Manajemen Nyeri</option>
+                                <option value="motivasi">Motivasi</option>
+                                <option value="pengalaman">Pengalaman Pribadi</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleContent" class="form-label">Isi Artikel</label>
+                            <textarea class="form-control" id="articleContent" rows="6" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="references" class="form-label">Referensi (Opsional)</label>
+                            <textarea class="form-control" id="references" rows="3"
+                                placeholder="Sertakan referensi jika Anda mengutip data medis atau penelitian"></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required />
+                            <label class="form-check-label" for="agreeTerms">Saya setuju dengan syarat dan ketentuan
+                                pengiriman
+                                artikel</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-primary">Kirim Artikel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donationModalLabel">
+                        Dukung dengan Donasi
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-4">
+                            <h6 class="mb-3">Jenis Donasi</h6>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="donationType" id="oneTime"
+                                        value="one-time" checked />
+                                    <label class="form-check-label" for="oneTime">
+                                        Donasi Sekali
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="donationType" id="monthly"
+                                        value="monthly" />
+                                    <label class="form-check-label" for="monthly">
+                                        Donasi Bulanan
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="mb-3">Jumlah Donasi</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <input type="radio" class="btn-check" name="donationAmount" id="amount50"
+                                    autocomplete="off" value="50000" />
+                                <label class="btn btn-outline-primary" for="amount50">Rp 50.000</label>
+
+                                <input type="radio" class="btn-check" name="donationAmount" id="amount100"
+                                    autocomplete="off" value="100000" checked />
+                                <label class="btn btn-outline-primary" for="amount100">Rp 100.000</label>
+
+                                <input type="radio" class="btn-check" name="donationAmount" id="amount250"
+                                    autocomplete="off" value="250000" />
+                                <label class="btn btn-outline-primary" for="amount250">Rp 250.000</label>
+
+                                <input type="radio" class="btn-check" name="donationAmount" id="amount500"
+                                    autocomplete="off" value="500000" />
+                                <label class="btn btn-outline-primary" for="amount500">Rp 500.000</label>
+
+                                <input type="radio" class="btn-check" name="donationAmount" id="customAmount"
+                                    autocomplete="off" />
+                                <label class="btn btn-outline-primary" for="customAmount">Jumlah Lain</label>
+                            </div>
+                            <div class="mt-3" id="customAmountInput" style="display: none">
+                                <input type="number" class="form-control" placeholder="Masukkan jumlah donasi" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="donorName" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="donorName" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="donorEmail" class="form-label">Alamat Email</label>
+                                <input type="email" class="form-control" id="donorEmail" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="anonymous" />
+                            <label class="form-check-label" for="anonymous">Sembunyikan nama saya (donasi anonim)</label>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeDonation" required />
+                            <label class="form-check-label" for="agreeDonation">Saya setuju dengan syarat dan ketentuan
+                                donasi</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        Lanjutkan ke Pembayaran
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

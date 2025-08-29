@@ -85,10 +85,10 @@
                                 Diskusi tentang latihan harian, variasi gerakan, serta cara
                                 menyesuaikan latihan dengan kondisi tubuh.
                             </p> --}}
-                            <div class="mt-3">
-                                <span class="forum-stats"><i class="fas fa-comments me-1"></i> 245 diskusi</span>
+                            {{-- <div class="mt-3">
+                                <span class="forum-stats"><i class="fas fa-comments me-1"></i> {{  }} diskusi</span>
                                 <span class="forum-stats ms-3"><i class="fas fa-users me-1"></i> 563 partisipan</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -124,13 +124,10 @@
                                 {{ $item->sender->name }}</span>
                             <span class="forum-stats me-3"><i
                                     class="fas fa-clock me-1"></i>{{ $item->created_at->diffForHumans() }}</span>
-                            <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i> 14 balasan</span>
-                            <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> 87 dilihat</span>
-                            <div class="ms-auto">
-                                <span class="tag">#nyeripunggung</span>
-                                <span class="tag">#latihan</span>
-                                <span class="tag">#ergonomi</span>
-                            </div>
+                            <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i>
+                                {{ $item->comment()->count() }} balasan</span>
+                            <span class="forum-stats me-3"><i class="fas fa-eye me-1"></i> {{ $item->viewers }}
+                                dilihat</span>
                         </div>
                     </div>
                 </div>
