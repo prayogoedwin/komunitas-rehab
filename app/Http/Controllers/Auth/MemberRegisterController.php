@@ -46,6 +46,10 @@ class MemberRegisterController extends Controller
             ]);
         }
 
+        // dd($request->all());
+        if ($request->profesi_lainnya != null) {
+            $request->merge(['profesi' => $request->profesi_lainnya]);
+        }
         $member = Member::create([
             'name' => $request->name,
             'email' => $request->email,
