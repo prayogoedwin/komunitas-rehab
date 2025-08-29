@@ -17,23 +17,26 @@
                         <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <h5 class="mb-4">Tautan Cepat</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('index') }}">Beranda</a></li>
-                        <li class="mb-2"><a href="{{ route('about') }}">Tentang Kami</a></li>
-                        <li class="mb-2"><a href="{{ route('forum') }}">Forum</a></li>
-                        <li class="mb-2"><a href="{{ route('edukasi') }}">Edukasi</a></li>
-                        <li class="mb-2"><a href="{{ route('proyek') }}">Proyek</a></li>
-                        <li class="mb-2"><a href="#">Dukungan</a></li>
-                        <li class="mb-2"><a href="#">Bergabung</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5 class="mb-4">Layanan</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('faq') }}">FAQ</a></li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="{{ route('index') }}">Beranda</a></li>
+                                <li class="mb-2"><a href="{{ route('about') }}">Tentang Kami</a></li>
+                                <li class="mb-2"><a href="{{ route('forum') }}">Forum</a></li>
+                                <li class="mb-2"><a href="{{ route('edukasi') }}">Edukasi</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="{{ route('proyek') }}">Proyek</a></li>
+                                <li class="mb-2"><a href="{{ route('dukungan') }}">Dukungan</a></li>
+                                <li class="mb-2"><a href="{{ route('gabung') }}">Bergabung</a></li>
+                                <li class="mb-2"><a href="{{ route('faq') }}">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
                     <h5 class="mb-4">Kontak Kami</h5>
