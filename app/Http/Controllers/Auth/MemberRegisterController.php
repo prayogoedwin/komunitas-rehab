@@ -49,9 +49,10 @@ class MemberRegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status' => 1
         ]);
 
-        \Illuminate\Support\Facades\Mail::raw('Email Registrasi Berhasil. Silahkan klik link di bawah ini untuk verifikasi email Anda.' . route('member.verif', $member->id), function ($message) use ($request) {
+        \Illuminate\Support\Facades\Mail::raw('Email Registrasi Berhasil..', function ($message) use ($request) {
             $message->to($request->email)
                 ->subject('Registrasi Berhasil');
         });

@@ -13,7 +13,7 @@
                         perjalanan rehabilitasi dan pemulihan kesehatan.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#membership" class="btn btn-primary">Daftar Sekarang</a>
+                        <a href="{{ route('member.register') }}" class="btn btn-primary">Daftar Sekarang</a>
                         <a href="#benefits" class="btn btn-outline-primary">Lihat Keuntungan</a>
                     </div>
                 </div>
@@ -109,12 +109,12 @@
         <h2 class="section-title text-center">Cara Bergabung</h2>
         <div class="row">
             <!-- <div class="col-md-6 col-lg-3 mb-4">
-                <div class="step-card">
-                  <div class="step-number">1</div>
-                  <h3 class="h4">Pilih Keanggotaan</h3>
-                  <p>Pilih jenis keanggotaan yang sesuai dengan kebutuhan Anda.</p>
-                </div>
-              </div> -->
+                    <div class="step-card">
+                      <div class="step-number">1</div>
+                      <h3 class="h4">Pilih Keanggotaan</h3>
+                      <p>Pilih jenis keanggotaan yang sesuai dengan kebutuhan Anda.</p>
+                    </div>
+                  </div> -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="step-card">
                     <div class="step-number">1</div>
@@ -141,67 +141,67 @@
 
     <!-- Membership Options Section -->
     <!-- <section id="membership" class="container my-5">
-            <h2 class="section-title text-center">Pilihan Keanggotaan</h2>
-            <p class="text-center lead mb-5">
-              Pilih paket keanggotaan yang paling sesuai dengan kebutuhan Anda
-            </p>
+                <h2 class="section-title text-center">Pilihan Keanggotaan</h2>
+                <p class="text-center lead mb-5">
+                  Pilih paket keanggotaan yang paling sesuai dengan kebutuhan Anda
+                </p>
 
-            <div class="row">
-              <div class="col-md-6 col-lg-4 mb-4">
-                <div class="membership-card">
-                  <h3>Anggota Dasar</h3>
-                  <div class="price">Gratis</div>
-                  <p class="period">Selamanya</p>
-                  <ul class="feature-list">
-                    <li>Akses ke forum komunitas</li>
-                    <li>Materi edukasi dasar</li>
-                    <li>Partisipasi dalam diskusi</li>
-                    <li>Notifikasi kegiatan</li>
-                    <li class="text-muted"><s>Konsultasi dengan ahli</s></li>
-                    <li class="text-muted"><s>Program rehabilitasi personal</s></li>
-                    <li class="text-muted"><s>Tools evaluasi lengkap</s></li>
-                  </ul>
-                  <button class="btn btn-outline-primary w-100">Pilih Paket</button>
-                </div>
-              </div>
+                <div class="row">
+                  <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="membership-card">
+                      <h3>Anggota Dasar</h3>
+                      <div class="price">Gratis</div>
+                      <p class="period">Selamanya</p>
+                      <ul class="feature-list">
+                        <li>Akses ke forum komunitas</li>
+                        <li>Materi edukasi dasar</li>
+                        <li>Partisipasi dalam diskusi</li>
+                        <li>Notifikasi kegiatan</li>
+                        <li class="text-muted"><s>Konsultasi dengan ahli</s></li>
+                        <li class="text-muted"><s>Program rehabilitasi personal</s></li>
+                        <li class="text-muted"><s>Tools evaluasi lengkap</s></li>
+                      </ul>
+                      <button class="btn btn-outline-primary w-100">Pilih Paket</button>
+                    </div>
+                  </div>
 
-              <div class="col-md-6 col-lg-4 mb-4">
-                <div class="membership-card featured">
-                  <h3>Anggota Premium</h3>
-                  <div class="price">Rp 99.000</div>
-                  <p class="period">per bulan</p>
-                  <ul class="feature-list">
-                    <li>Semua fitur Anggota Dasar</li>
-                    <li>Konsultasi dengan ahli 2x/bulan</li>
-                    <li>Program rehabilitasi personal</li>
-                    <li>Akses tools evaluasi lengkap</li>
-                    <li>Video latihan eksklusif</li>
-                    <li>Dukungan prioritas</li>
-                    <li>Diskon produk kesehatan</li>
-                  </ul>
-                  <button class="btn btn-primary w-100">Pilih Paket</button>
-                </div>
-              </div>
+                  <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="membership-card featured">
+                      <h3>Anggota Premium</h3>
+                      <div class="price">Rp 99.000</div>
+                      <p class="period">per bulan</p>
+                      <ul class="feature-list">
+                        <li>Semua fitur Anggota Dasar</li>
+                        <li>Konsultasi dengan ahli 2x/bulan</li>
+                        <li>Program rehabilitasi personal</li>
+                        <li>Akses tools evaluasi lengkap</li>
+                        <li>Video latihan eksklusif</li>
+                        <li>Dukungan prioritas</li>
+                        <li>Diskon produk kesehatan</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Pilih Paket</button>
+                    </div>
+                  </div>
 
-              <div class="col-md-6 col-lg-4 mb-4">
-                <div class="membership-card">
-                  <h3>Keanggotaan Keluarga</h3>
-                  <div class="price">Rp 199.000</div>
-                  <p class="period">per bulan</p>
-                  <ul class="feature-list">
-                    <li>Semua fitur Anggota Premium</li>
-                    <li>Untuk 3 anggota keluarga</li>
-                    <li>Konsultasi dengan ahli 4x/bulan</li>
-                    <li>Program rehabilitasi keluarga</li>
-                    <li>Sesi grup khusus keluarga</li>
-                    <li>Dukungan lengkap untuk pendamping</li>
-                    <li>Diskon tambahan produk kesehatan</li>
-                  </ul>
-                  <button class="btn btn-outline-primary w-100">Pilih Paket</button>
+                  <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="membership-card">
+                      <h3>Keanggotaan Keluarga</h3>
+                      <div class="price">Rp 199.000</div>
+                      <p class="period">per bulan</p>
+                      <ul class="feature-list">
+                        <li>Semua fitur Anggota Premium</li>
+                        <li>Untuk 3 anggota keluarga</li>
+                        <li>Konsultasi dengan ahli 4x/bulan</li>
+                        <li>Program rehabilitasi keluarga</li>
+                        <li>Sesi grup khusus keluarga</li>
+                        <li>Dukungan lengkap untuk pendamping</li>
+                        <li>Diskon tambahan produk kesehatan</li>
+                      </ul>
+                      <button class="btn btn-outline-primary w-100">Pilih Paket</button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section> -->
+              </section> -->
 
     <!-- Registration Form Section -->
     <section class="container my-5">
