@@ -7,12 +7,17 @@ use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Models\Comment;
 use App\Models\Forum;
 use Filament\Forms;
+<<<<<<< HEAD
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+=======
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+>>>>>>> b3a9fbf81fd788b1b01e6bbac97f30275fa6b463
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
