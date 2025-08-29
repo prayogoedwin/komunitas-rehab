@@ -4,12 +4,12 @@
     <!-- Login Card -->
     <div class="login-container">
         <div class="login-card">
-            <h2>Login</h2>
+            <h2>Registrasi</h2>
 
             <!-- Social Login Button -->
-            <a href="{{ route('member.social.login', 'google') }}" class="btn btn-google">
-                <i class="fab fa-google"></i>Login dengan Google
-            </a>
+            {{-- <a href="{{ route('member.social.login', 'google') }}" class="btn btn-google">
+                <i class="fab fa-google"></i>Registrasi dengan Google
+            </a> --}}
 
             <div class="divider">
                 <span>atau masuk manual</span>
