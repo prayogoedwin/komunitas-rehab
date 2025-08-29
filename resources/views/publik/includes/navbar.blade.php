@@ -38,7 +38,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::guard('member')->user()->name }}
+                            Profile
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
                             <li>
@@ -60,6 +60,11 @@
                                 </form>
                             </li>
                         </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('member/login') ? 'active' : '' }}"
+                            href="{{ route('member.login') }}">Login</a>
                     </li>
                 @endif
             </ul>
