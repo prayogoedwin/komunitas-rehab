@@ -48,6 +48,14 @@
                     </span>
                 </div>
 
+                <div class="mb-3">
+                    <input type="name" class="form-control" placeholder="Profesi Anda" name="profesi" required />
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" class="form-control" placeholder="No Whatsapp" name="whatsapp" required />
+                </div>
+
                 <input type="hidden" name="recaptcha_token" id="recaptcha_token" />
 
                 <button type="submit" class="btn btn-login">Daftar</button>

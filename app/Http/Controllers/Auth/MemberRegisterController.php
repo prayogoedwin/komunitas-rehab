@@ -42,6 +42,7 @@ class MemberRegisterController extends Controller
                 'name' => 'required',
                 'email' => 'required|email|unique:members',
                 'password' => 'required|min:8',
+                'profesi' => 'required',
             ]);
         }
 
@@ -49,6 +50,7 @@ class MemberRegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profesi' => $request->profesi,
             'status' => 1
         ]);
 
