@@ -11,8 +11,7 @@
                         rehabilitasi mandiri yang lebih baik.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="btn btn-primary">Jelajahi Semua Proyek</a>
-                        <a href="#" class="btn btn-outline-primary">Ajukan Proyek Baru</a>
+                        <a href="#proyek" class="btn btn-primary">Jelajahi Semua Proyek</a>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
@@ -80,7 +79,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="proyek">
             <!-- Project Card 3 -->
             @foreach ($data as $item)
                 <div class="col-md-6 col-lg-4 mb-4">

@@ -10,8 +10,9 @@
                         Ruang aman dan inklusif untuk berbagi pengalaman, motivasi, dan
                         dukungan dalam perjalanan rehabilitasi.
                     </p>
-                    <a href="#" class="btn btn-primary me-2">Bergabung Diskusi</a>
-                    <a href="#" class="btn btn-outline-primary">Lihat Panduan Forum</a>
+                    <a href="#diskusi" class="btn btn-primary me-2">Bergabung Diskusi</a>
+                    <a href="{{ route('member.register') }}" class="btn btn-outline-primary px-4 py-2">Bergabung
+                        Sekarang</a>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -96,7 +97,7 @@
     </section>
 
     <!-- Recent Discussions Section -->
-    <section class="container my-5">
+    <section class="container my-5" id="diskusi">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title mb-0">Diskusi Terbaru</h2>
             <button class="btn btn-primary">
@@ -217,7 +218,7 @@
                 Dapatkan dukungan rehabilitasi yang Anda butuhkan dengan bergabung
                 bersama komunitas kami.
             </p>
-            <a href="#" class="btn btn-primary me-3">Dukungan</a>
+            <a href="{{ route('dukungan') }}" class="btn btn-primary me-3">Dukungan</a>
             <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
         </div>
     </section>

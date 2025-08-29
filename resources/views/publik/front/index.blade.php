@@ -13,8 +13,9 @@
                         daya, edukasi, dan komunitas yang peduli.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="btn btn-primary px-4 py-2">Dukungan</a>
-                        <a href="#" class="btn btn-outline-primary px-4 py-2">Bergabung Sekarang</a>
+                        <a href="{{ route('dukungan') }}" class="btn btn-primary px-4 py-2">Dukungan</a>
+                        <a href="{{ route('member.register') }}" class="btn btn-outline-primary px-4 py-2">Bergabung
+                            Sekarang</a>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
@@ -110,7 +111,7 @@
                 Bergabunglah dengan komunitas kami dan dapatkan dukungan yang Anda
                 butuhkan.
             </p>
-            <a href="#" class="btn btn-primary me-3">Dukungan</a>
+            <a href="{{ route('dukungan') }}" class="btn btn-primary me-3">Dukungan</a>
             <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
         </div>
     </section>

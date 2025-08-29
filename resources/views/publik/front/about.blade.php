@@ -192,7 +192,7 @@
                 Dapatkan dukungan rehabilitasi yang Anda butuhkan dengan bergabung
                 bersama komunitas kami.
             </p>
-            <a href="#" class="btn btn-primary me-3">Dukungan</a>
+            <a href="{{ route('dukungan') }}" class="btn btn-primary me-3">Dukungan</a>
             <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
         </div>
     </section>

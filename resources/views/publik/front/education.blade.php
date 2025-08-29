@@ -11,8 +11,8 @@
                         perjalanan rehabilitasi mandiri Anda.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="btn btn-primary">Jelajahi Semua Materi</a>
-                        <a href="#" class="btn btn-outline-primary">Lihat Kategori</a>
+                        <a href="#materi" class="btn btn-primary">Jelajahi Semua Materi</a>
+                        <a href="#kategori" class="btn btn-outline-primary">Lihat Kategori</a>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
@@ -24,7 +24,7 @@
     </section>
 
     <!-- Education Categories Section -->
-    <section class="container my-5">
+    <section class="container my-5" id="kategori">
         <h2 class="section-title text-center">Kategori Edukasi</h2>
         <div class="row">
             @foreach ($kategori as $item)
@@ -69,7 +69,7 @@
     </section>
 
     <!-- Education Filter Section -->
-    <section class="container my-5">
+    <section class="container my-5" id="materi">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title mb-0">Materi Edukasi</h2>
             <div class="d-flex">
