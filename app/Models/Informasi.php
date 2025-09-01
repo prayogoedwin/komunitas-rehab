@@ -15,13 +15,13 @@ class Informasi extends Model
     use LogsActivity;
 
     public function getActivitylogOptions(): LogOptions
-        {
-            return LogOptions::defaults()
-                 ->logAll() // Log semua atribut
-                ->logOnlyDirty() // Hanya log field yang berubah
-                ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
-                ->setDescriptionForEvent(fn(string $eventName) => "Informasi {$eventName}");
-        }
+    {
+        return LogOptions::defaults()
+            ->logAll() // Log semua atribut
+            ->logOnlyDirty() // Hanya log field yang berubah
+            ->dontSubmitEmptyLogs() // Skip jika tidak ada perubahan
+            ->setDescriptionForEvent(fn(string $eventName) => "Informasi {$eventName}");
+    }
 
 
     protected $fillable = [
@@ -37,11 +37,11 @@ class Informasi extends Model
     protected static function booted()
     {
         static::saved(function () {
-            Cache::forget('cara_main');
+            Cache::forget('informasi');
         });
 
         static::deleted(function () {
-            Cache::forget('cara_main');
+            Cache::forget('informasi');
         });
     }
 }

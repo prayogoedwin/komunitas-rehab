@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Informasi;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,8 @@ class DatabaseSeeder extends Seeder
             EdukasiSeeder::class,
             ProyekSeeder::class,
             ForumSeeder::class,
-            FaqSeeder::class
+            FaqSeeder::class,
+            InformasiSeeder::class
         ]);
 
         // Buat user Super Administrator

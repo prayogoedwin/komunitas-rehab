@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Edukasi;
 use App\Models\Faq;
 use App\Models\Forum;
+use App\Models\Informasi;
 use App\Models\KategoriMaster;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
@@ -128,6 +129,19 @@ class IndexController extends Controller
     public function dukungan()
     {
         return view('publik.front.dukungan');
+    }
+
+    public function informasi(Request $request)
+    {
+        $informasi = Cache::remember('informasi', 86400, function () {
+            return Informasi::where('slug', 'inforekdonasi')->first();
+        });
+        $action = Cache::remember('action', 86400, function () {
+            return Informasi::where('slug', 'wa-donasi')->first();
+        });
+        $donationAmount = $request->donationAmount;
+        $donationName = $request->nama;
+        return view('publik.front.informasi', compact('informasi', 'donationAmount', 'donationName', 'action'));
     }
 
     public function gabung()

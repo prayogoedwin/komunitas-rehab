@@ -276,20 +276,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ route('informasi') }}" method="GET" id="donationForm">
                         <div class="mb-4">
                             <h6 class="mb-3">Jenis Donasi</h6>
                             <div class="d-flex gap-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="donationType" id="oneTime"
-                                        value="one-time" checked />
+                                        value="donasi_sekali" checked />
                                     <label class="form-check-label" for="oneTime">
                                         Donasi Sekali
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="donationType" id="monthly"
-                                        value="monthly" />
+                                        value="donasi_bulanan" />
                                     <label class="form-check-label" for="monthly">
                                         Donasi Bulanan
                                     </label>
@@ -305,7 +305,7 @@
                                 <label class="btn btn-outline-primary" for="amount50">Rp 50.000</label>
 
                                 <input type="radio" class="btn-check" name="donationAmount" id="amount100"
-                                    autocomplete="off" value="100000" checked />
+                                    autocomplete="off" value="100000" />
                                 <label class="btn btn-outline-primary" for="amount100">Rp 100.000</label>
 
                                 <input type="radio" class="btn-check" name="donationAmount" id="amount250"
@@ -328,11 +328,11 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="donorName" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="donorName" required />
+                                <input type="text" class="form-control" id="donorName" name="nama" required />
                             </div>
                             <div class="col-md-6">
                                 <label for="donorEmail" class="form-label">Alamat Email</label>
-                                <input type="email" class="form-control" id="donorEmail" required />
+                                <input type="email" class="form-control" id="donorEmail" name="email" required />
                             </div>
                         </div>
 
@@ -352,7 +352,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Batal
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" form="donationForm">
                         Lanjutkan ke Pembayaran
                     </button>
                 </div>
@@ -360,3 +360,5 @@
         </div>
     </div>
 @endsection
+@push('js')
+@endpush
