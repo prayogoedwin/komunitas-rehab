@@ -65,7 +65,7 @@ class MemberLoginController extends Controller
             'password' => $request->password,
             'status' => 1,
         ])) {
-            return redirect()->intended('/index');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors(['email' => 'Kredensial tidak valid']);
