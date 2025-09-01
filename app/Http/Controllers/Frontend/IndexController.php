@@ -128,7 +128,10 @@ class IndexController extends Controller
 
     public function dukungan()
     {
-        return view('publik.front.dukungan');
+        $action = Cache::remember('action', 86400, function () {
+            return Informasi::where('slug', 'wa-donasi')->first();
+        });
+        return view('publik.front.dukungan', compact('action'));
     }
 
     public function informasi(Request $request)

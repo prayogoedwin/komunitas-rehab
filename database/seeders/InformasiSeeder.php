@@ -22,7 +22,7 @@ class InformasiSeeder extends Seeder
         Informasi::create([
             'slug' => 'wa-donasi',
             'nama' => '081234567890',
-            'description' => 'Saya telah melakukan donasi dengan jumlah sebesar'
+            'description' => 'Saya telah melakukan donasi dengan rincian'
         ]);
     }
 }

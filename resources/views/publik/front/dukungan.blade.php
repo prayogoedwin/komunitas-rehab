@@ -196,7 +196,8 @@
     </section>
 
     <!-- Article Modal -->
-    <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -206,7 +207,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="uploadArticleForm">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Nama Lengkap</label>
@@ -216,11 +217,6 @@
                                 <label for="email" class="form-label">Alamat Email</label>
                                 <input type="email" class="form-control" id="email" required />
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="affiliation" class="form-label">Afiliasi (Opsional)</label>
-                            <input type="text" class="form-control" id="affiliation"
-                                placeholder="Contoh: Fisioterapis, Pasien, Keluarga Pasien, dll." />
                         </div>
                         <div class="mb-3">
                             <label for="articleTitle" class="form-label">Judul Artikel</label>
@@ -259,7 +255,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Batal
                     </button>
-                    <button type="button" class="btn btn-primary">Kirim Artikel</button>
+                    <button type="button" class="btn btn-primary kirim">Kirim Artikel</button>
                 </div>
             </div>
         </div>
@@ -361,4 +357,44 @@
     </div>
 @endsection
 @push('js')
+    <script>
+        $(document).ready(function() {
+            // Saat modal ditutup (klik Batal atau X)
+            $('#articleModal').on('hidden.bs.modal', function() {
+                $('#uploadArticleForm')[0].reset();
+            });
+
+            $('.kirim').on('click', function() {
+                if (!$("#uploadArticleForm")[0].checkValidity()) {
+                    $("#uploadArticleForm")[0].reportValidity();
+                    return;
+                }
+
+                // Ambil data form
+                let name = $("#name").val();
+                let email = $("#email").val();
+                let title = $("#articleTitle").val();
+                let category = $("#articleCategory").val();
+                let content = $("#articleContent").val();
+                let references = $("#references").val();
+
+                let waNumber = "{{ preg_replace('/^0/', '62', $action->nama) }}";
+
+                let message = "Halo admin, saya ingin mengirim artikel\n\n" +
+                    "*Nama:* " + name + "\n" +
+                    "*Email:* " + email + "\n" +
+                    "*Judul Artikel:* " + title + "\n" +
+                    "*Kategori:* " + category + "\n" +
+                    "*Isi Artikel:*\n" + content + "\n\n" +
+                    (references ? "*Referensi:*\n" + references + "\n" : "");
+                let encodedMessage = encodeURIComponent(message);
+
+                // Redirect ke WhatsApp
+                window.open("https://wa.me/" + waNumber + "?text=" + encodedMessage, "_blank");
+
+                $('#articleModal').modal('hide');
+                $('#uploadArticleForm')[0].reset();
+            });
+        });
+    </script>
 @endpush
