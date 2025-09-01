@@ -23,7 +23,7 @@ class KategoriResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-      //setting letak grup menu
+    //setting letak grup menu
     protected static ?string $navigationGroup = 'Web Setting';
     protected static ?int $navigationSort = 5; // Urutan setelah Kategori
 
@@ -31,7 +31,12 @@ class KategoriResource extends Resource
     protected static ?string $modelLabel = 'Kategori';
     protected static ?string $pluralModelLabel = 'Kategori';
 
-     public static function canAccess(): bool
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view kategoris');
     }
@@ -73,8 +78,8 @@ class KategoriResource extends Resource
                 TextInput::make('nama')->required(),
                 TextInput::make('deskripsi')->required(),
                 Toggle::make('tambahan_pilihan')
-                 ->label('Multi Poin')
-                ->required()
+                    ->label('Multi Poin')
+                    ->required()
             ]);
     }
 
@@ -94,8 +99,8 @@ class KategoriResource extends Resource
                     ->label('Tambahan Pilihan')
                     ->searchable()
                     ->sortable()
-                    ->formatStateUsing(fn (int $state): string => $state ? 'ON' : 'OFF')
-                    ->color(fn (int $state): string => $state ? 'success' : 'danger'),
+                    ->formatStateUsing(fn(int $state): string => $state ? 'ON' : 'OFF')
+                    ->color(fn(int $state): string => $state ? 'success' : 'danger'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -105,7 +110,7 @@ class KategoriResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                    Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
