@@ -149,7 +149,10 @@ class IndexController extends Controller
 
     public function gabung()
     {
-        return view('publik.front.join');
+        $faqs = Cache::remember('faqs_data', 86400, function () {
+            return Faq::orderBy('created_at', 'desc')->get();
+        });
+        return view('publik.front.join', compact('faqs'));
     }
 
     public function faq()

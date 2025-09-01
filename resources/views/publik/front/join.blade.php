@@ -109,12 +109,12 @@
         <h2 class="section-title text-center">Cara Bergabung</h2>
         <div class="row">
             <!-- <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="step-card">
-                          <div class="step-number">1</div>
-                          <h3 class="h4">Pilih Keanggotaan</h3>
-                          <p>Pilih jenis keanggotaan yang sesuai dengan kebutuhan Anda.</p>
-                        </div>
-                      </div> -->
+                                                    <div class="step-card">
+                                                      <div class="step-number">1</div>
+                                                      <h3 class="h4">Pilih Keanggotaan</h3>
+                                                      <p>Pilih jenis keanggotaan yang sesuai dengan kebutuhan Anda.</p>
+                                                    </div>
+                                                  </div> -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="step-card">
                     <div class="step-number">1</div>
@@ -141,67 +141,67 @@
 
     <!-- Membership Options Section -->
     <!-- <section id="membership" class="container my-5">
-                    <h2 class="section-title text-center">Pilihan Keanggotaan</h2>
-                    <p class="text-center lead mb-5">
-                      Pilih paket keanggotaan yang paling sesuai dengan kebutuhan Anda
-                    </p>
+                                                <h2 class="section-title text-center">Pilihan Keanggotaan</h2>
+                                                <p class="text-center lead mb-5">
+                                                  Pilih paket keanggotaan yang paling sesuai dengan kebutuhan Anda
+                                                </p>
 
-                    <div class="row">
-                      <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="membership-card">
-                          <h3>Anggota Dasar</h3>
-                          <div class="price">Gratis</div>
-                          <p class="period">Selamanya</p>
-                          <ul class="feature-list">
-                            <li>Akses ke forum komunitas</li>
-                            <li>Materi edukasi dasar</li>
-                            <li>Partisipasi dalam diskusi</li>
-                            <li>Notifikasi kegiatan</li>
-                            <li class="text-muted"><s>Konsultasi dengan ahli</s></li>
-                            <li class="text-muted"><s>Program rehabilitasi personal</s></li>
-                            <li class="text-muted"><s>Tools evaluasi lengkap</s></li>
-                          </ul>
-                          <button class="btn btn-outline-primary w-100">Pilih Paket</button>
-                        </div>
-                      </div>
+                                                <div class="row">
+                                                  <div class="col-md-6 col-lg-4 mb-4">
+                                                    <div class="membership-card">
+                                                      <h3>Anggota Dasar</h3>
+                                                      <div class="price">Gratis</div>
+                                                      <p class="period">Selamanya</p>
+                                                      <ul class="feature-list">
+                                                        <li>Akses ke forum komunitas</li>
+                                                        <li>Materi edukasi dasar</li>
+                                                        <li>Partisipasi dalam diskusi</li>
+                                                        <li>Notifikasi kegiatan</li>
+                                                        <li class="text-muted"><s>Konsultasi dengan ahli</s></li>
+                                                        <li class="text-muted"><s>Program rehabilitasi personal</s></li>
+                                                        <li class="text-muted"><s>Tools evaluasi lengkap</s></li>
+                                                      </ul>
+                                                      <button class="btn btn-outline-primary w-100">Pilih Paket</button>
+                                                    </div>
+                                                  </div>
 
-                      <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="membership-card featured">
-                          <h3>Anggota Premium</h3>
-                          <div class="price">Rp 99.000</div>
-                          <p class="period">per bulan</p>
-                          <ul class="feature-list">
-                            <li>Semua fitur Anggota Dasar</li>
-                            <li>Konsultasi dengan ahli 2x/bulan</li>
-                            <li>Program rehabilitasi personal</li>
-                            <li>Akses tools evaluasi lengkap</li>
-                            <li>Video latihan eksklusif</li>
-                            <li>Dukungan prioritas</li>
-                            <li>Diskon produk kesehatan</li>
-                          </ul>
-                          <button class="btn btn-primary w-100">Pilih Paket</button>
-                        </div>
-                      </div>
+                                                  <div class="col-md-6 col-lg-4 mb-4">
+                                                    <div class="membership-card featured">
+                                                      <h3>Anggota Premium</h3>
+                                                      <div class="price">Rp 99.000</div>
+                                                      <p class="period">per bulan</p>
+                                                      <ul class="feature-list">
+                                                        <li>Semua fitur Anggota Dasar</li>
+                                                        <li>Konsultasi dengan ahli 2x/bulan</li>
+                                                        <li>Program rehabilitasi personal</li>
+                                                        <li>Akses tools evaluasi lengkap</li>
+                                                        <li>Video latihan eksklusif</li>
+                                                        <li>Dukungan prioritas</li>
+                                                        <li>Diskon produk kesehatan</li>
+                                                      </ul>
+                                                      <button class="btn btn-primary w-100">Pilih Paket</button>
+                                                    </div>
+                                                  </div>
 
-                      <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="membership-card">
-                          <h3>Keanggotaan Keluarga</h3>
-                          <div class="price">Rp 199.000</div>
-                          <p class="period">per bulan</p>
-                          <ul class="feature-list">
-                            <li>Semua fitur Anggota Premium</li>
-                            <li>Untuk 3 anggota keluarga</li>
-                            <li>Konsultasi dengan ahli 4x/bulan</li>
-                            <li>Program rehabilitasi keluarga</li>
-                            <li>Sesi grup khusus keluarga</li>
-                            <li>Dukungan lengkap untuk pendamping</li>
-                            <li>Diskon tambahan produk kesehatan</li>
-                          </ul>
-                          <button class="btn btn-outline-primary w-100">Pilih Paket</button>
-                        </div>
-                      </div>
-                    </div>
-                  </section> -->
+                                                  <div class="col-md-6 col-lg-4 mb-4">
+                                                    <div class="membership-card">
+                                                      <h3>Keanggotaan Keluarga</h3>
+                                                      <div class="price">Rp 199.000</div>
+                                                      <p class="period">per bulan</p>
+                                                      <ul class="feature-list">
+                                                        <li>Semua fitur Anggota Premium</li>
+                                                        <li>Untuk 3 anggota keluarga</li>
+                                                        <li>Konsultasi dengan ahli 4x/bulan</li>
+                                                        <li>Program rehabilitasi keluarga</li>
+                                                        <li>Sesi grup khusus keluarga</li>
+                                                        <li>Dukungan lengkap untuk pendamping</li>
+                                                        <li>Diskon tambahan produk kesehatan</li>
+                                                      </ul>
+                                                      <button class="btn btn-outline-primary w-100">Pilih Paket</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </section> -->
 
     <!-- Registration Form Section -->
     {{-- <section class="container my-5">
@@ -303,54 +303,24 @@
     <section class="container my-5">
         <h2 class="section-title text-center">Pertanyaan Umum</h2>
         <div class="accordion" id="faqAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                        Apakah keanggotaan gratis benar-benar gratis?
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Ya, keanggotaan dasar benar-benar gratis selamanya. Anda akan
-                        mendapatkan akses ke forum komunitas, materi edukasi dasar, dan
-                        dapat berpartisipasi dalam diskusi tanpa biaya apapun.
+            @foreach ($faqs as $key => $item)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ $key }}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ $key }}" aria-expanded="true"
+                            aria-controls="collapse{{ $key }}">
+                            {{ ucwords($item->nama) }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ $key }}"
+                        class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
+                        aria-labelledby="heading{{ $key }}" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            {!! $item->description !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Bagaimana cara pembayaran untuk keanggotaan premium?
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                    data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Pembayaran dapat dilakukan melalui transfer bank, kartu kredit,
-                        atau dompet digital. Pembayaran akan diperbarui secara otomatis
-                        setiap bulan untuk kemudahan Anda.
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Bisakah saya membatalkan keanggotaan premium kapan saja?
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                    data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Tentu saja. Anda dapat membatalkan keanggotaan premium kapan saja
-                        melalui pengaturan akun Anda. Pembayaran berikutnya tidak akan
-                        ditarik setelah pembatalan.
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 @endsection
