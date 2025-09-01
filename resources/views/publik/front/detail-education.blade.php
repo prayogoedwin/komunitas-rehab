@@ -4,9 +4,9 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Beranda</a></li>
                 <li class="breadcrumb-item"><a
-                        href="education.html">{{ Request::is('detail-edukasi/*') ? 'Edukasi' : 'Proyek' }}</a>
+                        href="{{ Request::is('detail-edukasi/*') ? route('edukasi') : route('proyek') }}">{{ Request::is('detail-edukasi/*') ? 'Edukasi' : 'Proyek' }}</a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">{{ ucwords($data->kategori->nama_kategori) }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
