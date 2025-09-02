@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Komunitas-Rehab</title>
+    <title>Komunitas Rehab - Website Resmi</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon_io/favicon.ico') }}">
     @include('publik.includes.style')
     @stack('css')
 </head>
