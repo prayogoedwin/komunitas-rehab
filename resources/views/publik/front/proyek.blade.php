@@ -23,7 +23,7 @@
     </section>
 
     <!-- Projects Impact Section -->
-    <section class="container my-5">
+    {{-- <section class="container my-5">
         <h2 class="section-title text-center">Dampak Proyek Kami</h2>
         <div class="row">
             <div class="col-md-3 col-6 mb-4">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Projects Filter Section -->
     <section class="container my-5">
