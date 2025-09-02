@@ -48,6 +48,7 @@ class ForumSeeder extends Seeder
 
             Forum::create([
                 'judul' => $judul,
+                'slug' => Str::slug($judul),
                 'kategori_id' => $faker->randomElement($kategoriIds),
                 'deskripsi' => $faker->sentence(10),
                 'created_at' => now(),

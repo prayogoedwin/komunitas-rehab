@@ -61,7 +61,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::get('edukasi', [IndexController::class, 'edukasi'])->name('edukasi');
     Route::get('detail-edukasi/{slug}', [IndexController::class, 'detailEdukasi'])->name('detail-edukasi');
     Route::get('detail-proyek/{slug}', [IndexController::class, 'detailProyek'])->name('detail-proyek');
-    Route::get('detail-forum/{forum}', [IndexController::class, 'detailForum'])->name('detail-forum');
+    Route::get('detail-forum/{slug}', [IndexController::class, 'detailForum'])->name('detail-forum');
     Route::get('proyek', [IndexController::class, 'proyek'])->name('proyek');
     Route::get('dukungan', [IndexController::class, 'dukungan'])->name('dukungan');
     Route::get('gabung', [IndexController::class, 'gabung'])->name('gabung');

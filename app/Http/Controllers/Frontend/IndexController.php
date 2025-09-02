@@ -62,8 +62,9 @@ class IndexController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function detailForum(Forum $forum)
+    public function detailForum($slug)
     {
+        $forum = Forum::where('slug', $slug)->firstOrFail();
         $comment = Cache::remember('comment', 86400, function () use ($forum) {
             return Comment::with('user')->where('forum_id', $forum->id)->where('is_show', 1)->orderBy('created_at', 'desc')->get();
         });

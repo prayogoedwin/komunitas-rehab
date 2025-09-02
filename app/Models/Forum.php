@@ -23,6 +23,7 @@ class Forum extends Model
 
     protected $fillable = [
         'judul',
+        'slug',
         'kategori_id',
         'deskripsi',
         'created_by',

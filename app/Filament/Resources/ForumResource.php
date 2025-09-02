@@ -36,7 +36,7 @@ class ForumResource extends Resource
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
                     ->required(),
-                TextInput::make('slug'),
+                TextInput::make('slug')->readOnly(),
                 Select::make('kategori_id')
                     ->label('Kategori Forum')
                     ->options(KategoriMaster::where('jenis_kategori', 'forum')->pluck('nama_kategori', 'id'))

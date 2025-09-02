@@ -5,7 +5,7 @@
                 alt="User" class="user-avatar me-3" />
             <div class="flex-grow-1">
                 <h4 class="h5">
-                    <a href="{{ route('detail-forum', $item->id) }}" style="text-decoration: none" class="forum-judul"
+                    <a href="{{ route('detail-forum', $item->slug) }}" style="text-decoration: none" class="forum-judul"
                         data-id="{{ $item->id }}">{{ $item->judul }}</a>
                 </h4>
                 <p class="text-muted">
