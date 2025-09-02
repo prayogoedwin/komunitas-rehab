@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('publik') }}" class="btn btn-outline-primary">
+                            <a href="{{ route('index') }}" class="btn btn-outline-primary">
                                 <i class="fas fa-arrow-left me-2"></i>Kembali ke Beranda
                             </a>
                             <button type="submit" class="btn btn-primary">
