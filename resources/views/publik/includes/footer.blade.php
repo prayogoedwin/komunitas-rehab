@@ -41,16 +41,16 @@
                 <div class="col-lg-4 col-md-4 mb-4">
                     <h5 class="mb-4">Kontak Kami</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i> Jl. Kesehatan No.
-                            123, Jakarta
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-phone me-2"></i> (021) 1234-5678
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-envelope me-2"></i> info@komunitasehab.id
-                        </li>
+                        @php
+                            $footer = Cache::remember('footer', 86400, function () {
+                                return App\Models\Informasi::where('slug', 'like', '%footer%')->get();
+                            });
+                        @endphp
+                        @foreach ($footer as $item)
+                            <li class="mb-2">
+                                <i class="{{ $item->nama }} me-2"></i> {{ $item->description }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

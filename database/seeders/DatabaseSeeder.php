@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             ProyekSeeder::class,
             ForumSeeder::class,
             FaqSeeder::class,
-            InformasiSeeder::class
+            InformasiSeeder::class,
+            FooterKontakSeeder::class
         ]);
 
         // Buat user Super Administrator
