@@ -211,7 +211,7 @@
         </div>
     </section>
 
-    <section class="py-5 mb-5" style="background-color: var(--secondary-color)">
+    {{-- <section class="py-5 mb-5" style="background-color: var(--secondary-color)">
         <div class="container text-center py-4">
             <h2 class="mb-4">Tertarik untuk Bergabung?</h2>
             <p class="lead mb-4">
@@ -221,7 +221,7 @@
             <a href="{{ route('dukungan') }}" class="btn btn-primary me-3">Dukungan</a>
             <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
         </div>
-    </section>
+    </section> --}}
 @endsection
 @push('js')
     <script>
