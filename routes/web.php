@@ -73,6 +73,7 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::post('/load-more-forum', [IndexController::class, 'loadMore'])->name('forum.loadMore');
     Route::post('/load-more-edukasi', [IndexController::class, 'loadMoreEdukasi'])->name('edukasi.loadMore');
     Route::post('/load-more-proyek', [IndexController::class, 'loadMoreProyek'])->name('proyek.loadMore');
+    Route::post('artikel', [IndexController::class, 'artikelStore'])->name('artikel.store');
 });
 
 Route::get('/maintenance', function () {

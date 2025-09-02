@@ -16,6 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class BeritaResource extends Resource
 {
@@ -23,15 +24,15 @@ class BeritaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-      //setting letak grup menu
+    //setting letak grup menu
     protected static ?string $navigationGroup = 'Web Setting';
     protected static ?int $navigationSort = 4; // Urutan setelah Kategori
 
     // Label
-    protected static ?string $modelLabel = 'Berita';
-    protected static ?string $pluralModelLabel = 'Berita';
+    protected static ?string $modelLabel = 'Sumbangan Berita';
+    protected static ?string $pluralModelLabel = 'Sumbangan Berita';
 
-      public static function canAccess(): bool
+    public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view beritas');
     }
@@ -77,7 +78,7 @@ class BeritaResource extends Resource
                     ->label('Cover Berita')
                     ->disk('public') // PASTIKAN INI ADA
                     ->image()
-                    ->directory('cover-berita') // Folder penyimpanan
+                    ->directory('berita') // Folder penyimpanan
                     ->preserveFilenames(false) // <-- Biar nama file diacak (hash)
                     ->maxSize(2048) // 2MB
                     ->imageResizeMode('cover')
@@ -85,7 +86,7 @@ class BeritaResource extends Resource
                     ->imageResizeTargetWidth('800')
                     ->imageResizeTargetHeight('600')
                     ->columnSpanFull()
-                    ->required(fn (string $context): bool => $context === 'create') // Hanya required saat create
+                    ->required(fn(string $context): bool => $context === 'create') // Hanya required saat create
                     ->required(),
             ]);
     }
@@ -98,6 +99,7 @@ class BeritaResource extends Resource
                     ->label('Judul Berita')
                     ->searchable()
                     ->sortable(),
+                ImageColumn::make('cover'),
                 TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime('d M Y H:i') // Format: 22 Jul 2025 14:30

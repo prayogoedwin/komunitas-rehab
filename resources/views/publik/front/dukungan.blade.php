@@ -208,40 +208,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="uploadArticleForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" required />
-                            </div>
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Alamat Email</label>
-                                <input type="email" class="form-control" id="email" required />
-                            </div>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover Artikel</label>
+                            <input type="file" class="form-control" name="cover" id="cover" accept="image/*"
+                                required />
                         </div>
                         <div class="mb-3">
-                            <label for="articleTitle" class="form-label">Judul Artikel</label>
-                            <input type="text" class="form-control" id="articleTitle" required />
+                            <label for="cover" class="form-label">Judul Artikel</label>
+                            <input type="text" class="form-control" name="judul" id="cover" required />
                         </div>
                         <div class="mb-3">
-                            <label for="articleCategory" class="form-label">Kategori Artikel</label>
-                            <select class="form-select" id="articleCategory" required>
-                                <option value="">Pilih Kategori</option>
-                                <option value="rehabilitasi">Rehabilitasi</option>
-                                <option value="gaya-hidup">Gaya Hidup Sehat</option>
-                                <option value="manajemen-nyeri">Manajemen Nyeri</option>
-                                <option value="motivasi">Motivasi</option>
-                                <option value="pengalaman">Pengalaman Pribadi</option>
-                                <option value="lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="articleContent" class="form-label">Isi Artikel</label>
-                            <textarea class="form-control" id="articleContent" rows="6" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="references" class="form-label">Referensi (Opsional)</label>
-                            <textarea class="form-control" id="references" rows="3"
-                                placeholder="Sertakan referensi jika Anda mengutip data medis atau penelitian"></textarea>
+                            <label for="deskripsi" class="form-label">Isi Artikel</label>
+                            <textarea class="form-control" name="deskripsi" id="deskripsi" rows="6" required></textarea>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" required />
@@ -359,6 +337,9 @@
 @push('js')
     <script>
         $(document).ready(function() {
+            $('#deskripsi').summernote({
+                height: 300
+            });
             // Saat modal ditutup (klik Batal atau X)
             $('#articleModal').on('hidden.bs.modal', function() {
                 $('#uploadArticleForm')[0].reset();
@@ -370,30 +351,25 @@
                     return;
                 }
 
-                // Ambil data form
-                let name = $("#name").val();
-                let email = $("#email").val();
-                let title = $("#articleTitle").val();
-                let category = $("#articleCategory").val();
-                let content = $("#articleContent").val();
-                let references = $("#references").val();
-
-                let waNumber = "{{ preg_replace('/^0/', '62', $action->nama) }}";
-
-                let message = "Halo admin, saya ingin mengirim artikel\n\n" +
-                    "*Nama:* " + name + "\n" +
-                    "*Email:* " + email + "\n" +
-                    "*Judul Artikel:* " + title + "\n" +
-                    "*Kategori:* " + category + "\n" +
-                    "*Isi Artikel:*\n" + content + "\n\n" +
-                    (references ? "*Referensi:*\n" + references + "\n" : "");
-                let encodedMessage = encodeURIComponent(message);
-
-                // Redirect ke WhatsApp
-                window.open("https://wa.me/" + waNumber + "?text=" + encodedMessage, "_blank");
-
-                $('#articleModal').modal('hide');
-                $('#uploadArticleForm')[0].reset();
+                var formData = new FormData($("#uploadArticleForm")[0]);
+                formData.append('_token', "{{ csrf_token() }}");
+                $.ajax({
+                    url: "{{ route('artikel.store') }}",
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#articleModal').modal('hide');
+                            $('#uploadArticleForm')[0].reset();
+                            location.reload();
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat mengunggah artikel.');
+                    }
+                });
             });
         });
     </script>

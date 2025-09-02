@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Berita;
 use App\Models\Comment;
 use App\Models\Edukasi;
 use App\Models\Faq;
@@ -13,6 +14,7 @@ use App\Models\Proyek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class IndexController extends Controller
 {
@@ -206,6 +208,23 @@ class IndexController extends Controller
             return Informasi::where('slug', 'wa-donasi')->first();
         });
         return view('publik.front.dukungan', compact('action'));
+    }
+
+    public function artikelStore(Request $request)
+    {
+        $file = $request->file('cover');
+
+        // generate nama acak, contoh: abc123xyz.jpg
+        $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+
+        // simpan ke storage/app/public/berita dengan nama acak
+        $coverPath = $file->storeAs('berita', $randomName, 'public');
+        Berita::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'cover' => $coverPath
+        ]);
+        return response()->json(['success' => true]);
     }
 
     public function informasi(Request $request)
