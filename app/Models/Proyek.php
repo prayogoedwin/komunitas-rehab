@@ -42,7 +42,7 @@ class Proyek extends Model
     protected static function booted()
     {
         static::saved(function ($model) {
-            Cache::forget('edukasi');
+            Cache::tags('proyek')->flush();
         });
 
         static::deleted(function ($model) {
@@ -51,7 +51,7 @@ class Proyek extends Model
             }
             $model->deleted_by = Auth::user()->id;
             $model->save();
-            Cache::forget('edukasi');
+            Cache::tags('proyek')->flush();
         });
     }
 

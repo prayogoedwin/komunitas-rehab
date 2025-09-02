@@ -135,11 +135,15 @@
         @endforeach
 
         <div class="text-center mt-4">
-            <a href="#" class="btn btn-outline-primary">Lihat Semua Diskusi</a>
+            <a href="javascript:void(0)" class="btn btn-outline-primary" id="loadMore">Lihat Semua Diskusi</a>
+            <div id="loading" style="display:none; margin-top:10px;">
+                <div class="spinner-border text-primary" role="status" style="width:2rem; height:2rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Member Features Section -->
     <section class="py-5 my-5" style="background-color: #f0f8ff">
         <div class="container">
             <h2 class="section-title text-center">Fitur Anggota Forum</h2>
@@ -207,7 +211,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="py-5 mb-5" style="background-color: var(--secondary-color)">
         <div class="container text-center py-4">
             <h2 class="mb-4">Tertarik untuk Bergabung?</h2>
@@ -238,6 +241,43 @@
                     // redirect setelah increment
                     window.location.href = url;
                 });
+            });
+        });
+
+        let offset = 5;
+        let isLoading = false;
+
+        $('#loadMore').click(function() {
+            if (isLoading) return;
+            isLoading = true;
+
+            $('#loading').show();
+            $('#loadMore').prop('disabled', true).text('Memuat...');
+
+            $.ajax({
+                url: "{{ route('forum.loadMore') }}",
+                type: "POST",
+                data: {
+                    offset: offset,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if ($.trim(response) !== '') {
+                        $('.forum-card:last').after(response);
+                        offset += 5;
+                        $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    } else {
+                        $('#loadMore').hide();
+                    }
+                    $('#loading').hide();
+                    isLoading = false;
+                },
+                error: function() {
+                    alert('Gagal memuat data');
+                    $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    $('#loading').hide();
+                    isLoading = false;
+                }
             });
         });
     </script>

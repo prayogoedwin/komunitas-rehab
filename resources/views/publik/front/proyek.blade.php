@@ -69,33 +69,39 @@
     <section class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title mb-0">Proyek Kami</h2>
-            <div class="d-flex">
-                <select class="form-select me-2" style="width: auto">
-                    <option selected>Urutkan</option>
-                    <option>Terbaru</option>
-                    <option>Populer</option>
-                    <option>A-Z</option>
+            <form method="GET" action="{{ route('proyek') }}" class="d-flex">
+                <select name="sort" class="form-select me-2" style="width: auto" onchange="this.form.submit()">
+                    <option value="" {{ request('sort') == '' ? 'selected' : '' }}>Urutkan</option>
+                    <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
+                    @foreach ($kategori as $item)
+                        <option value="{{ $item->id }}" {{ request('sort') == $item->id ? 'selected' : '' }}>
+                            {{ ucwords($item->nama_kategori) }}
+                        </option>
+                    @endforeach
                 </select>
-            </div>
+            </form>
         </div>
 
         <div class="row" id="proyek">
             <!-- Project Card 3 -->
             @foreach ($data as $item)
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 proyek">
                     <div class="project-card card h-100">
                         <div class="position-relative">
                             <img src="{{ Storage::url($item->cover) }}" class="card-img-top" alt="Latihan Pernapasan" />
                             @php
                                 if ($item->kategori->nama_kategori == 'berjalan') {
                                     $status = 'ongoing';
+                                    $label = 'berjalan';
                                 } elseif ($item->kategori->nama_kategori == 'akan datang') {
                                     $status = 'upcoming';
+                                    $label = 'akan datang';
                                 } else {
                                     $status = 'completed';
+                                    $label = 'selesai';
                                 }
                             @endphp
-                            <span class="card-status status-{{ $status }}">Berjalan</span>
+                            <span class="card-status status-{{ $status }}">{{ ucwords($label) }}</span>
                         </div>
                         <div class="card-body">
                             <h3 class="h5 card-title">
@@ -123,7 +129,52 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="#" class="btn btn-outline-primary">Muat Lebih Banyak</a>
+            <a href="javascript:void(0)" class="btn btn-outline-primary" id="loadMore">Muat Lebih Banyak</a>
+            <div id="loading" style="display:none; margin-top:10px;">
+                <div class="spinner-border text-primary" role="status" style="width:2rem; height:2rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
+@push('js')
+    <script>
+        let offset = 6;
+        let isLoading = false;
+
+        $('#loadMore').click(function() {
+            if (isLoading) return;
+            isLoading = true;
+
+            $('#loading').show();
+            $('#loadMore').prop('disabled', true).text('Memuat...');
+
+            $.ajax({
+                url: "{{ route('proyek.loadMore') }}",
+                type: "POST",
+                data: {
+                    offset: offset,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if ($.trim(response) !== '') {
+                        $('.proyek:last').after(response);
+                        offset += 5;
+                        $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    } else {
+                        $('#loadMore').hide();
+                    }
+                    $('#loading').hide();
+                    isLoading = false;
+                },
+                error: function() {
+                    alert('Gagal memuat data');
+                    $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    $('#loading').hide();
+                    isLoading = false;
+                }
+            });
+        });
+    </script>
+@endpush

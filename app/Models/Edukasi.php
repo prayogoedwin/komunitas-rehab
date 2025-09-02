@@ -39,14 +39,14 @@ class Edukasi extends Model
     protected static function booted()
     {
         static::saved(function ($model) {
-            Cache::forget('edukasi');
+            Cache::tags('edukasi')->flush();
         });
 
         static::deleted(function ($model) {
             if ($model->cover) {
                 Storage::disk('public')->delete($model->cover);
             }
-            Cache::forget('edukasi');
+            Cache::tags('edukasi')->flush();
         });
     }
 

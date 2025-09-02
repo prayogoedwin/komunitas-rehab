@@ -29,12 +29,27 @@ class IndexController extends Controller
     public function forum()
     {
         $data = Cache::remember('forum', 86400, function () {
-            return Forum::with('kategori', 'sender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->get();
+            return Forum::with('kategori', 'sender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->limit(4)->get();
         });
         $kategori = Cache::remember('kategori_forum', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'forum')->get();
         });
         return view('publik.front.forum', compact('data', 'kategori'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $offset = $request->offset ?? 0;
+        $limit = 5;
+
+        $data = Forum::with('sender', 'kategori')
+            ->where('verified_at', '!=', null)
+            ->withCount('comment')
+            ->orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take($limit)
+            ->get();
+        return view('publik.front.partials.card-forum', compact('data'))->render();
     }
 
     public function incrementView($id)
@@ -92,15 +107,45 @@ class IndexController extends Controller
         ]);
     }
 
-    public function edukasi()
+    public function edukasi(Request $request)
     {
-        $data = Cache::remember('edukasi', 86400, function () {
-            return Edukasi::with('kategori')->orderBy('created_at', 'desc')->get();
+        $sort = $request->get('sort');
+
+        $cacheKey = "edukasi_" . ($sort ?? 'default');
+        $data = Cache::tags('edukasi')->remember($cacheKey, 86400, function () use ($sort) {
+            $query = Edukasi::select('id', 'cover', 'judul', 'deskripsi_singkat', 'slug', 'kategori_id')
+                ->with('kategori');
+
+            if ($sort === 'latest') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'popular') {
+                $query->orderBy('views', 'desc');
+            }
+
+            return $query->limit(5)->get();
         });
         $kategori = Cache::remember('kategori_edukasi', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'edukasi')->get();
         });
         return view('publik.front.education', compact('data', 'kategori'));
+    }
+
+    public function loadMoreEdukasi(Request $request)
+    {
+        $offset = $request->offset ?? 0;
+        $limit = 5;
+
+        $data = Edukasi::select('id', 'cover', 'judul', 'deskripsi_singkat', 'slug', 'kategori_id')->with('kategori')
+            ->orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take($limit);
+        if ($request->sort == 'popular') {
+            $data = $data->orderBy('views', 'desc');
+        } elseif ($request->sort == 'latest') {
+            $data = $data->orderBy('created_at', 'desc');
+        }
+        $data = $data->get();
+        return view('publik.front.partials.card-education', compact('data'))->render();
     }
 
     public function detailEdukasi($slug)
@@ -109,15 +154,44 @@ class IndexController extends Controller
         return view('publik.front.detail-education', compact('data'));
     }
 
-    public function proyek()
+    public function proyek(Request $request)
     {
-        $data = Cache::remember('proyek', 86400, function () {
-            return Proyek::with('kategori')->orderBy('created_at', 'desc')->get();
+        $sort = $request->get('sort');
+        $cacheKey = "proyek_" . ($sort ?? 'default');
+
+        $data = Cache::tags('proyek')->remember($cacheKey, 86400, function () use ($sort) {
+            $query = Proyek::with('kategori');
+
+            if ($sort === 'latest') {
+                $query->orderBy('created_at', 'desc');
+            } elseif (is_numeric($sort)) {
+                $query->where('kategori_id', $sort);
+            }
+            return $query->limit(6)->get();
         });
         $kategori = Cache::remember('kategori_proyek', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'proyek')->get();
         });
         return view('publik.front.proyek', compact('data', 'kategori'));
+    }
+
+    public function loadMoreProyek(Request $request)
+    {
+        $offset = $request->offset ?? 0;
+        $limit = 6;
+
+        $data = Proyek::with('kategori')
+            ->orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take($limit);
+
+        if ($request->sort == 'latest') {
+            $data = $data->orderBy('created_at', 'desc');
+        } elseif (is_numeric($request->sort)) {
+            $data = $data->where('kategori_id', $request->sort);
+        }
+        $data = $data->get();
+        return view('publik.front.partials.card-proyek', compact('data'))->render();
     }
 
     public function detailProyek($slug)

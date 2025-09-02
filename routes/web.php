@@ -70,6 +70,9 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::post('/forum/{id}/like', [IndexController::class, 'like'])->name('forum.like');
 
     Route::get('/informasi', [IndexController::class, 'informasi'])->name('informasi');
+    Route::post('/load-more-forum', [IndexController::class, 'loadMore'])->name('forum.loadMore');
+    Route::post('/load-more-edukasi', [IndexController::class, 'loadMoreEdukasi'])->name('edukasi.loadMore');
+    Route::post('/load-more-proyek', [IndexController::class, 'loadMoreProyek'])->name('proyek.loadMore');
 });
 
 Route::get('/maintenance', function () {

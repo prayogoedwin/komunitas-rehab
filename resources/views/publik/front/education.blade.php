@@ -72,19 +72,18 @@
     <section class="container my-5" id="materi">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title mb-0">Materi Edukasi</h2>
-            <div class="d-flex">
-                <select class="form-select me-2" style="width: auto">
-                    <option selected>Urutkan</option>
-                    <option>Terbaru</option>
-                    <option>Terpopuler</option>
-                    <option>Rating Tertinggi</option>
+            <form method="GET" action="{{ route('edukasi') }}" class="d-flex">
+                <select name="sort" class="form-select me-2" style="width: auto" onchange="this.form.submit()">
+                    <option value="" {{ request('sort') == '' ? 'selected' : '' }}>Urutkan</option>
+                    <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
+                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler</option>
                 </select>
-            </div>
+            </form>
         </div>
 
         <div class="row">
             @foreach ($data as $item)
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 edukasi">
                     <div class="education-card card h-100">
                         <div class="position-relative">
                             <img src="{{ Storage::url($item->cover) }}" class="card-img-top"
@@ -98,10 +97,6 @@
                             <p class="card-text">
                                 {{ $item->deskripsi_singkat }}
                             </p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="card-duration"><i class="far fa-clock me-1"></i> 15 menit</span>
-                                <span class="card-duration"><i class="far fa-file me-1"></i> PDF</span>
-                            </div>
                         </div>
                         <div class="card-footer bg-transparent">
                             <a href="{{ route('detail-edukasi', $item->slug) }}" class="btn btn-primary w-100">Baca
@@ -113,7 +108,52 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="#" class="btn btn-outline-primary">Muat Lebih Banyak</a>
+            <a href="javascript:void(0)" class="btn btn-outline-primary" id="loadMore">Muat Lebih Banyak</a>
+            <div id="loading" style="display:none; margin-top:10px;">
+                <div class="spinner-border text-primary" role="status" style="width:2rem; height:2rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
+@push('js')
+    <script>
+        let offset = 5;
+        let isLoading = false;
+
+        $('#loadMore').click(function() {
+            if (isLoading) return;
+            isLoading = true;
+
+            $('#loading').show();
+            $('#loadMore').prop('disabled', true).text('Memuat...');
+
+            $.ajax({
+                url: "{{ route('edukasi.loadMore') }}",
+                type: "POST",
+                data: {
+                    offset: offset,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if ($.trim(response) !== '') {
+                        $('.edukasi:last').after(response);
+                        offset += 5;
+                        $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    } else {
+                        $('#loadMore').hide();
+                    }
+                    $('#loading').hide();
+                    isLoading = false;
+                },
+                error: function() {
+                    alert('Gagal memuat data');
+                    $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
+                    $('#loading').hide();
+                    isLoading = false;
+                }
+            });
+        });
+    </script>
+@endpush
