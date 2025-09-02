@@ -10,12 +10,12 @@
                         Platform komunitas untuk rehabilitasi dan dukungan kesehatan
                         secara holistik.
                     </p>
-                    <div class="mt-3">
+                    {{-- <div class="mt-3">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <h5 class="mb-4">Tautan Cepat</h5>
