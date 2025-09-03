@@ -57,7 +57,8 @@
             <hr class="mt-4 mb-4" />
             <div class="text-center">
                 <p class="small">
-                    &copy; <span id="year"></span> Komunitas Rehab. All rights reserved.
+                    Komunitas Rehab &copy; <span id="year"></span> All rights reserved. Built With ❤️ by
+                    GMT
                 </p>
             </div>
         </div>
