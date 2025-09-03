@@ -24,6 +24,10 @@ use App\Middleware\CheckMaintenanceMode;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/redis-test', function () {
+    \Illuminate\Support\Facades\Redis::set('foo', 'bar');
+    return \Illuminate\Support\Facades\Redis::get('foo');
+});
 
 Route::middleware(CheckMaintenanceMode::class)->group(function () {
 
