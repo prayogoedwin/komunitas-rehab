@@ -45,7 +45,12 @@
                         <h3>Masih ada pertanyaan?</h3>
                         <p>Jika Anda tidak menemukan jawaban yang Anda cari, jangan ragu untuk menghubungi tim dukungan
                             kami.</p>
-                        <a href="support.html" class="btn btn-primary mt-3">
+                        @php
+                            $no_hp = $wa->description;
+                            // ganti 081 dengan 62
+                            $waNumber = preg_replace('/^0/', '62', $no_hp);
+                        @endphp
+                        <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="btn btn-primary mt-3">
                             <i class="fas fa-envelope me-2"></i>Hubungi Dukungan
                         </a>
                     </div>

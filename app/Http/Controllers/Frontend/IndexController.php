@@ -252,6 +252,9 @@ class IndexController extends Controller
         $data = Cache::remember('faqs_data', 86400, function () {
             return Faq::orderBy('created_at', 'desc')->get();
         });
-        return view('publik.front.faq', compact('data'));
+        $wa = Cache::remember('wa_footer', 86400, function () {
+            return Informasi::where('slug', 'wa-footer')->first();
+        });
+        return view('publik.front.faq', compact('data', 'wa'));
     }
 }
