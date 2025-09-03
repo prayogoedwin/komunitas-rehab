@@ -121,8 +121,6 @@ class IndexController extends Controller
 
             if ($sort === 'latest') {
                 $query->orderBy('created_at', 'desc');
-            } elseif ($sort === 'popular') {
-                $query->orderBy('views', 'desc');
             }
 
             return $query->limit(5)->get();

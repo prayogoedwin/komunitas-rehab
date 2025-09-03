@@ -76,7 +76,6 @@
                 <select name="sort" class="form-select me-2" style="width: auto" onchange="this.form.submit()">
                     <option value="" {{ request('sort') == '' ? 'selected' : '' }}>Urutkan</option>
                     <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
-                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler</option>
                 </select>
             </form>
         </div>
