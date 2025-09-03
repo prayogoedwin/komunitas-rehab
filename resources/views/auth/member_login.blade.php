@@ -7,13 +7,13 @@
             <h2>Login</h2>
 
             <!-- Social Login Button -->
-            <a href="{{ route('member.social.login', 'google') }}" class="btn btn-google">
+            {{-- <a href="{{ route('member.social.login', 'google') }}" class="btn btn-google">
                 <i class="fab fa-google"></i>Login dengan Google
             </a>
 
             <div class="divider">
                 <span>atau masuk manual</span>
-            </div>
+            </div> --}}
 
             <!-- Login Form -->
             <form method="POST" action="{{ route('member.login.submit') }}">
