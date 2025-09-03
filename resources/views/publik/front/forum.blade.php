@@ -100,7 +100,7 @@
     <section class="container my-5" id="diskusi">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title mb-0">Diskusi Terbaru</h2>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" id="btnDiskusiBaru">
                 <i class="fas fa-plus me-1"></i> Diskusi Baru
             </button>
         </div>
@@ -121,7 +121,7 @@
                         </p>
                         <div class="d-flex flex-wrap align-items-center mt-3">
                             <span class="forum-stats me-3"><i class="fas fa-user me-1"></i>
-                                {{ $item->sender->name }}</span>
+                                {{ $item->sender_name }}</span>
                             <span class="forum-stats me-3"><i
                                     class="fas fa-clock me-1"></i>{{ $item->created_at->diffForHumans() }}</span>
                             <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i>
@@ -222,9 +222,64 @@
             <a href="#" class="btn btn-outline-dark">Hubungi Kami</a>
         </div>
     </section> --}}
+
+    <div class="modal fade" id="forumModal" tabindex="-1" aria-labelledby="forumModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forumModalLabel">
+                        Kirim Artikel Anda
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadForumForm">
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Judul</label>
+                            <input type="text" class="form-control" name="judul" id="cover" />
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Kategori</label>
+                            <select name="kategori" class="form-control" id="">
+                                <option value="" selected disabled>Pilih Kategori</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}">{{ ucwords($item->nama_kategori) }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Isi Artikel</label>
+                            <textarea class="form-control" name="deskripsi" rows="6"></textarea>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required />
+                            <label class="form-check-label" for="agreeTerms">Saya setuju dengan syarat dan ketentuan
+                                pengiriman
+                                artikel</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-primary kirim">Kirim Forum</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script>
+        $(document).ready(function() {
+            $('#forumModal').on('hidden.bs.modal', function() {
+                $('#uploadArticleForm')[0].reset();
+            });
+        });
         document.querySelectorAll('.forum-judul').forEach(el => {
             el.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -277,6 +332,46 @@
                     $('#loadMore').prop('disabled', false).text('Muat Lebih Banyak');
                     $('#loading').hide();
                     isLoading = false;
+                }
+            });
+        });
+
+        $('#btnDiskusiBaru').on('click', function() {
+            if (!window.memberAuth) {
+                window.location.href = "{{ route('member.login') }}";
+            } else {
+                $('#forumModal').modal('show');
+            }
+        });
+        $('.kirim').on('click', function() {
+            var formData = new FormData($("#uploadForumForm")[0]);
+            formData.append('_token', "{{ csrf_token() }}");
+
+            $("#uploadForumForm .form-control").removeClass("is-invalid");
+            $("#uploadForumForm .invalid-feedback").text("");
+
+            $.ajax({
+                url: "{{ route('forum.store') }}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.success) {
+                        $('#forumModal').modal('hide');
+                        $('#uploadForumForm')[0].reset();
+                        location.reload();
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        $.each(errors, function(field, messages) {
+                            let input = $(`[name="${field}"]`);
+                            input.addClass("is-invalid");
+                            input.next(".invalid-feedback").text(messages[0]);
+                        });
+                    }
                 }
             });
         });

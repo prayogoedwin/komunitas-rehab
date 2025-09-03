@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Forum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\TebakPertandingan;
@@ -58,7 +59,7 @@ class DashboardMember extends Controller
 
         return response()->json($varians);
     }
-    
+
 
     public function cekPoin(Request $request)
     {
@@ -87,23 +88,24 @@ class DashboardMember extends Controller
             return response()->json(['success' => false, 'message' => 'Maaf, poin Anda tidak cukup']);
         }
     }
-    
+
     public function riwayatPrediksi()
     {
         if (Auth::guard('member')->check()) {
             $memberId = Auth::guard('member')->id();
             $tebakans = TebakPertandingan::with('pertandingan')
-                        ->where('member_id', $memberId)
-                        ->orderBy('id', 'desc')
-                        ->limit(50)
-                        ->get();
+                ->where('member_id', $memberId)
+                ->orderBy('id', 'desc')
+                ->limit(50)
+                ->get();
 
             return view('member.riwayat-prediksi', compact('tebakans'));
         }
     }
 
 
-    public function riwayatTukarPoin(){
+    public function riwayatTukarPoin()
+    {
         if (Auth::guard('member')->check()) {
             $memberId = Auth::guard('member')->id();
             $orders = Order::where('member_id', $memberId)->orderBy('id', 'desc')->get();
@@ -111,7 +113,8 @@ class DashboardMember extends Controller
         }
     }
 
-    public function profilMember(){
+    public function profilMember()
+    {
         $expiration = env('REDIS_TIME', 86400);
 
         if (Auth::guard('member')->check()) {
@@ -119,8 +122,11 @@ class DashboardMember extends Controller
             $memberId = Auth::guard('member')->id();
 
             $profil = Member::where('id', $memberId)->first();
+            $data = Cache::remember('forum_member', 86400, function () {
+                return Forum::where('sender_id', Auth::guard('member')->id())->where('is_admin_sender', 0)->get();
+            });
 
-            return view('member.profil', compact('profil'));
+            return view('member.profil', compact('profil', 'data'));
         }
     }
 
@@ -140,7 +146,7 @@ class DashboardMember extends Controller
             ]);
         }
 
-        if (!$member->whatsapp ||$member->whatsapp == 0) {
+        if (!$member->whatsapp || $member->whatsapp == 0) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Whatsapp masih kosong / 0, mohon isi terlebih dahulu di halaman profil Anda.'
@@ -168,7 +174,7 @@ class DashboardMember extends Controller
             ]);
         }
 
-        $alamat = $member->alamat.' ('.$member->whatsapp.')';
+        $alamat = $member->alamat . ' (' . $member->whatsapp . ')';
 
         // Simpan Order
         Order::create([
@@ -195,7 +201,7 @@ class DashboardMember extends Controller
 
         Cache::forget('produk_varians_' . $produkVarian->produk_id);
 
-       
+
 
         return response()->json([
             'status' => 'success',
@@ -217,7 +223,7 @@ class DashboardMember extends Controller
         $member = Member::findOrFail($request->id);
 
         // Update hanya jika user sesuai dengan yang login
-        if ($member_auth->id != $request->id ) {
+        if ($member_auth->id != $request->id) {
             abort(403, 'Akses tidak sah');
         }
 
@@ -234,4 +240,4 @@ class DashboardMember extends Controller
 
         return redirect()->route('member.profil')->with('success', 'Profil berhasil diperbarui.');
     }
- }
+}

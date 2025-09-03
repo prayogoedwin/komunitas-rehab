@@ -10,7 +10,7 @@
                         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
                             alt="Ahmad S." class="user-avatar">
                         <div class="user-info">
-                            <div class="user-name">{{ $forum->sender->name }}</div>
+                            <div class="user-name">{{ $forum->sender_name }}</div>
                             <div class="discussion-date"><i class="far fa-clock me-1"></i>
                                 {{ $forum->created_at->diffForHumans() }}</div>
                         </div>
@@ -57,13 +57,13 @@
                 <div class="comments-section">
                     <div class="comments-header">
                         <h3>{{ $forum->comment()->count() }} Komentar</h3>
-                        <div class="sort-comments">
+                        {{-- <div class="sort-comments">
                             <select class="form-select form-select-sm" style="width: auto;">
                                 <option>Terbaru</option>
                                 <option>Terlama</option>
                                 <option>Populer</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Comment 1 -->

@@ -13,7 +13,7 @@
                 </p>
                 <div class="d-flex flex-wrap align-items-center mt-3">
                     <span class="forum-stats me-3"><i class="fas fa-user me-1"></i>
-                        {{ $item->sender->name }}</span>
+                        {{ $item->sender_name }}</span>
                     <span class="forum-stats me-3"><i
                             class="fas fa-clock me-1"></i>{{ $item->created_at->diffForHumans() }}</span>
                     <span class="forum-stats me-3"><i class="fas fa-comment me-1"></i>

@@ -32,7 +32,8 @@ class Forum extends Model
         'verified_at',
         'verified_by',
         'sender_id',
-        'viewers'
+        'viewers',
+        'is_admin_sender'
     ];
 
     public function kategori()
@@ -40,9 +41,24 @@ class Forum extends Model
         return $this->belongsTo(KategoriMaster::class);
     }
 
-    public function sender()
+    public function adminSender()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    // Relasi ke tabel members
+    public function memberSender()
+    {
+        return $this->belongsTo(Member::class, 'sender_id');
+    }
+
+    // Accessor untuk ambil nama pengirim
+    public function getSenderNameAttribute()
+    {
+        if ($this->is_admin_sender) {
+            return $this->adminSender ? $this->adminSender->name : 'Admin';
+        }
+        return $this->memberSender ? $this->memberSender->name : 'Member';
     }
 
     public function comment()

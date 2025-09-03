@@ -31,7 +31,7 @@ class IndexController extends Controller
     public function forum()
     {
         $data = Cache::remember('forum', 86400, function () {
-            return Forum::with('kategori', 'sender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->limit(4)->get();
+            return Forum::with('kategori', 'adminSender', 'memberSender')->where('verified_at', '!=', null)->orderBy('created_at', 'desc')->limit(4)->get();
         });
         $kategori = Cache::remember('kategori_forum', 86400, function () {
             return KategoriMaster::where('jenis_kategori', 'forum')->get();
@@ -44,7 +44,7 @@ class IndexController extends Controller
         $offset = $request->offset ?? 0;
         $limit = 5;
 
-        $data = Forum::with('sender', 'kategori')
+        $data = Forum::with('adminSender', 'memberSender', 'kategori')
             ->where('verified_at', '!=', null)
             ->withCount('comment')
             ->orderBy('created_at', 'desc')
@@ -52,6 +52,27 @@ class IndexController extends Controller
             ->take($limit)
             ->get();
         return view('publik.front.partials.card-forum', compact('data'))->render();
+    }
+
+    public function storeForum(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        Forum::create([
+            'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
+            'kategori_id' => $request->kategori,
+            'deskripsi' => $request->deskripsi,
+            'created_by' => Auth::guard('member')->id(),
+            'updated_by' => Auth::guard('member')->id(),
+            'sender_id' => Auth::guard('member')->id(),
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
     public function incrementView($id)

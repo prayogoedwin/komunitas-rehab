@@ -97,6 +97,11 @@ class Member extends Model implements Authenticatable
         return $this->email;
     }
 
+    public function forum()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
     public function comment()
     {
         return $this->hasMany(Comment::class);

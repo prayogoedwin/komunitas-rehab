@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use Filament\Forms\Set;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ForumResource extends Resource
 {
@@ -76,6 +77,10 @@ class ForumResource extends Resource
                             'verified_at' => now(),
                             'verified_by' => Auth::user()->id
                         ]);
+                        Cache::forget('forum_member');
+                    })
+                    ->hidden(function ($record) {
+                        return $record->verified_at !== null;
                     }),
 
             ])
