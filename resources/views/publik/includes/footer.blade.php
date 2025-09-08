@@ -58,7 +58,7 @@
             <div class="text-center">
                 <p class="small">
                     Komunitas Rehab &copy; <span id="year"></span> All rights reserved. Built With ❤️ by
-                    GMT
+                    <a href="https://gulabedmediatek.com" style="text-decoration: none">GMT</a>
                 </p>
             </div>
         </div>
