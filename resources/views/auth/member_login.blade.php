@@ -37,10 +37,11 @@
                     <input type="email" class="form-control" placeholder="Email Anda" name="email" required />
                 </div>
 
-                <div class="mb-3 password-toggle">
+                <div class="mb-3 password-toggle" style="position: relative;">
                     <input type="password" class="form-control" placeholder="Kata Sandi" name="password" id="password"
                         required />
-                    <span class="password-toggle-icon" id="togglePassword">
+                    <span class="password-toggle-icon" id="togglePassword"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
                         <i class="far fa-eye"></i>
                     </span>
                 </div>
@@ -68,6 +69,20 @@
             }).then(function(token) {
                 document.getElementById('recaptcha_token').value = token;
             });
+        });
+
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const icon = togglePassword.querySelector("i");
+
+        togglePassword.addEventListener("click", () => {
+            // toggle type
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+
+            // toggle icon
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
         });
     </script>
 @endpush

@@ -31,7 +31,12 @@
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Kata Sandi</label>
-                                <input type="password" class="form-control" name="password" id="password" required />
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="password" id="password" required />
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             {{-- <div class="mb-3">
@@ -93,6 +98,19 @@
                     $('#profesi_lainnya').removeAttr('required');
                 }
             });
+        });
+
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const icon = togglePassword.querySelector("i");
+
+        togglePassword.addEventListener("click", () => {
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+
+            // ganti ikon
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
         });
     </script>
 @endpush
