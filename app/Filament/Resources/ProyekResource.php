@@ -33,6 +33,7 @@ class ProyekResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    // permission
     public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view proyeks');

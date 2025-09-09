@@ -32,6 +32,7 @@ class CommentResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    // permission
     public static function canAccess(): bool
     {
         return auth()->check() && auth()->user()->can('view comments');
