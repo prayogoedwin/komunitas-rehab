@@ -11,10 +11,10 @@ use App\Filament\Resources\PermissionResource\Pages;
 class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
-   
-     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-     //setting letak grup menu
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    //setting letak grup menu
     protected static ?string $navigationGroup = 'Sistem';
     protected static ?int $navigationSort = 3; // Urutan setelah Kategori
 

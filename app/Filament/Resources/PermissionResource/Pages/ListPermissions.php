@@ -13,7 +13,24 @@ class ListPermissions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah Permission')
+                ->using(function (array $data) {
+                    $name = strtolower(trim($data['name']));
+                    $guard = $data['guard_name'] ?? 'web';
+                    $actions = ['view', 'create', 'edit', 'delete'];
+
+                    $lastCreated = null;
+
+                    foreach ($actions as $action) {
+                        $lastCreated = \Spatie\Permission\Models\Permission::firstOrCreate([
+                            'name' => "{$action} {$name}",
+                            'guard_name' => $guard,
+                        ]);
+                    }
+
+                    return $lastCreated; // Filament anggap ini record yang baru dibuat
+                }),
         ];
     }
 }
