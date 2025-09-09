@@ -29,6 +29,42 @@ class KategoriMasterResource extends Resource
     protected static ?string $modelLabel = 'Kategori Halaman';
     protected static ?string $pluralModelLabel = 'Kategori Halaman';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view kategori_masters');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view kategori_masters');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view kategori_masters');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create kategori_masters');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit kategori_masters');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete kategori_masters');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete kategori_masters');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
