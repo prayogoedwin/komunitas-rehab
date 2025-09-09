@@ -79,6 +79,9 @@ Route::middleware(CheckMaintenanceMode::class)->group(function () {
     Route::post('/load-more-proyek', [IndexController::class, 'loadMoreProyek'])->name('proyek.loadMore');
     Route::post('artikel', [IndexController::class, 'artikelStore'])->name('artikel.store');
     Route::post('forum', [IndexController::class, 'storeForum'])->name('forum.store');
+    Route::get('pemeriksaan-mandiri', function () {
+        return view('publik.front.mandiri');
+    })->name('pemeriksaan-mandiri');
 });
 
 Route::get('/maintenance', function () {

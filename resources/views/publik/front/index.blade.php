@@ -17,6 +17,8 @@
                         <a href="{{ route('member.register') }}" class="btn btn-outline-primary px-4 py-2">Bergabung
                             Sekarang</a>
                     </div>
+                    <a href="{{ route('pemeriksaan-mandiri') }}" class="mt-2 btn btn-outline-primary px-4 py-2">Pemeriksaan
+                        Mandiri</a>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <img src="{{ asset('_frontend/new') }}/img/hero-section.png" alt="Tim medis Komunitas Rehab"
