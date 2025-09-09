@@ -32,6 +32,41 @@ class CommentResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view comments');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view comments');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view comments');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create comments');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit comments');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete comments');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete comments');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

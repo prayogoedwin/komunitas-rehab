@@ -28,6 +28,41 @@ class ForumResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view forums');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view forums');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view forums');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create forums');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit forums');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete forums');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete forums');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

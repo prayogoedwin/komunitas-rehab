@@ -33,6 +33,41 @@ class ProyekResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->can('view proyeks');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('view proyeks');
+    }
+
+    public static function canView(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('view proyeks');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->check() && auth()->user()->can('create proyeks');
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('edit proyeks');
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->check() && auth()->user()->can('delete proyeks');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->check() && auth()->user()->can('delete proyeks');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
