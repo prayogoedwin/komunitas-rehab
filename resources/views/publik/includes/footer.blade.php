@@ -3,8 +3,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5 class="mb-4">
-                        <i class="fas fa-heartbeat me-2"></i>Komunitas Rehab
+                    <h5 class="mb-4 d-flex align-items-center">
+                        <img src="{{ asset('img/gym.png') }}" alt="Logo Komunitas Rehab" class="logo"
+                            width="40">Komunitas Rehab
                     </h5>
                     <p>
                         Platform komunitas untuk rehabilitasi dan dukungan kesehatan

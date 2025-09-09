@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-heartbeat me-2"></i>Komunitas Rehab
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('index') }}">
+            <img src="{{ asset('img/gym.png') }}" alt="Logo Komunitas Rehab" class="logo" width="40"> Komunitas Rehab
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
