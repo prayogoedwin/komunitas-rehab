@@ -87,7 +87,8 @@
                         <div class="position-relative">
                             <img src="{{ Storage::url($item->cover) }}" class="card-img-top"
                                 alt="Latihan untuk Nyeri Punggung" />
-                            <span class="card-category">{{ $item->kategori->nama_kategori }}</span>
+                            <span
+                                class="card-category">{{ $item->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}</span>
                         </div>
                         <div class="card-body">
                             <h3 class="h5 card-title">
