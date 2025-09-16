@@ -136,7 +136,17 @@ class IndexController extends Controller
         $sort = $request->get('sort');
 
         $cacheKey = "edukasi_" . ($sort ?? 'default');
-        $data = Cache::tags('edukasi')->remember($cacheKey, 86400, function () use ($sort) {
+        // $data = Cache::tags('edukasi')->remember($cacheKey, 86400, function () use ($sort) {
+        //     $query = Edukasi::select('id', 'cover', 'judul', 'deskripsi_singkat', 'slug', 'kategori_id')
+        //         ->with('kategori');
+
+        //     if ($sort === 'latest') {
+        //         $query->orderBy('created_at', 'desc');
+        //     }
+
+        //     return $query->limit(5)->get();
+        // });
+        $data = Cache::remember($cacheKey, 86400, function () use ($sort) {
             $query = Edukasi::select('id', 'cover', 'judul', 'deskripsi_singkat', 'slug', 'kategori_id')
                 ->with('kategori');
 
@@ -181,7 +191,17 @@ class IndexController extends Controller
         $sort = $request->get('sort');
         $cacheKey = "proyek_" . ($sort ?? 'default');
 
-        $data = Cache::tags('proyek')->remember($cacheKey, 86400, function () use ($sort) {
+        // $data = Cache::tags('proyek')->remember($cacheKey, 86400, function () use ($sort) {
+        //     $query = Proyek::with('kategori');
+
+        //     if ($sort === 'latest') {
+        //         $query->orderBy('created_at', 'desc');
+        //     } elseif (is_numeric($sort)) {
+        //         $query->where('kategori_id', $sort);
+        //     }
+        //     return $query->limit(6)->get();
+        // });
+        $data = Cache::remember($cacheKey, 86400, function () use ($sort) {
             $query = Proyek::with('kategori');
 
             if ($sort === 'latest') {
