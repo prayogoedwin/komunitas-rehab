@@ -31,7 +31,7 @@ class BackendPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->brandName(env('APP_NAME', 'LARAVEL-STARTER'))
+            ->brandName('Admin Komunitas Rehab')
             // ->brandLogo(asset('img/logo.png'))
             // ->brandLogoHeight('4rem') // Ubah sesuai kebutuhan (3rem, 4rem, dll)
             ->favicon(asset('img/favicon_io/favicon.ico'))
@@ -46,17 +46,17 @@ class BackendPanelProvider extends PanelProvider
                 \App\Filament\Widgets\WebInfoWidget::class,
                 \App\Filament\Widgets\MaintenanceToggle::class,
                 \App\Filament\Resources\ClearCacheWidgetResource\Widgets\ClearCacheWidget::class,
-              
+
             ])
             ->navigationGroups([
                 'Sistem', // Grup default Filament
                 'Pengguna', // Grup default Filament
                 'Web Setting', // Grup custom
-               
-               
+
+
                 // Urutan grup sesuai kebutuhan
             ])
-           
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
